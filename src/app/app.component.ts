@@ -6,6 +6,7 @@ import { FooterComponent } from './footer/footer.component';
 import { FactsComponent } from './landing/facts/facts.component';
 import { FaqComponent } from './landing/faq/faq.component';
 import { NewMoviesComponent } from './landing/new-movies/new-movies.component';
+import { HeroComponent } from './landing/hero/hero.component';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +21,7 @@ import { NewMoviesComponent } from './landing/new-movies/new-movies.component';
     FactsComponent,
     FaqComponent,
     NewMoviesComponent,
+    HeroComponent,
   ],
 })
 export class AppComponent {
