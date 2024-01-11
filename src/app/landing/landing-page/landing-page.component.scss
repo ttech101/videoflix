@@ -1,0 +1,101 @@
+.landing_background {
+  position: absolute;
+  left: 0;
+  right: 0;
+  background-image: url("/assets/img/landing_background.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+  -webkit-filter: blur(1px);
+  -moz-filter: blur(1px);
+  -o-filter: blur(1px);
+  -ms-filter: blur(1px);
+  filter: blur(1px) brightness(0.5);
+  opacity: 1;
+  z-index: -1;
+}
+
+.landing-login {
+  position: absolute;
+
+  top: 20px;
+  right: 30px;
+}
+.center_landing {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  color: white;
+  text-align: center;
+  gap: 10px;
+  h1,
+  h2 {
+    line-height: 120%;
+    display: flex;
+    gap: 10px;
+  }
+}
+
+.landing-form {
+  position: relative;
+  display: flex;
+  width: 500px;
+
+  button {
+    height: 56px;
+    width: 250px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
+
+.landing-full-width {
+  width: 100%;
+}
+
+.landing-arrow {
+  position: absolute;
+  font-size: 100px;
+  height: 100px;
+  width: 100px;
+  color: #c2185b;
+  bottom: 50px;
+  animation: moveUpDown 0.5s infinite alternate;
+  /* Die "alternate"-Option bewirkt, dass die Animation in beide Richtungen abläuft. */
+}
+
+.landing-arrow {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-bottom: -98px;
+  font-size: 100px;
+  height: 100px;
+  width: 100%;
+  color: #c2185b;
+  bottom: 100px;
+  animation: jump 4s ease-in-out infinite; /* Die Animation dauert nun 4 Sekunden insgesamt (2 Sekunden für den Sprung und 2 Sekunden für die Pause) */
+}
+
+@keyframes jump {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+
+  40% {
+    transform: translateY(-20px);
+  }
+
+  60% {
+    transform: translateY(-10px);
+  }
+}
