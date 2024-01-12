@@ -16,12 +16,18 @@
   position: relative;
   display: flex;
   justify-content: center;
-
   max-width: 500px;
   border-radius: 35px;
   padding: 25px;
+  span {
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }
-
+.email-change {
+  color: #c2185b;
+}
 .enter-passwort-form {
   padding: 16px;
 }

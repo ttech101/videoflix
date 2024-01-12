@@ -32,11 +32,29 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
   hide = true;
-  hide1 = true;
+  confirm_email: Boolean = false;
+  confirm_passwort: boolean = false;
   email!: string;
-  emailerror = new FormControl('', [Validators.required, Validators.email]);
-  passworterror1 = new FormControl('', [Validators.required, Validators.email]);
-  passworterror2 = new FormControl('', [Validators.required, Validators.email]);
+  password_correct: boolean = false;
+  password_incorrect: string = '';
+  emailerror = new FormControl('', [
+    Validators.required,
+    Validators.pattern(
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    ),
+  ]);
+  passwort1 = new FormControl('', [
+    Validators.required,
+    Validators.pattern(
+      /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&^_-]).{8,}/
+    ),
+  ]);
+  passwort2 = new FormControl('', [
+    Validators.required,
+    Validators.pattern(
+      /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&^_-]).{8,}/
+    ),
+  ]);
   formData: any;
 
   constructor(private router: Router, private dataService: DataService) {}
@@ -61,37 +79,58 @@ export class RegisterComponent implements OnInit {
       return 'You must enter a value';
     }
     // Überprüfe, ob die E-Mail-Adresse gültig ist
-    if (this.emailerror.hasError('email')) {
+    if (this.emailerror.hasError('pattern')) {
       return 'Not a valid email';
     }
+    this.confirm_email = true;
     return '';
   }
   getErrorMessagePasswort1() {
-    if (this.passworterror1.hasError('required')) {
-      return 'You must enter a value passwort';
+    if (this.passwort1.hasError('required')) {
+      return 'You must enter a value passwort ';
     }
     // Überprüfe, ob die E-Mail-Adresse gültig ist
-    if (this.passworterror1.hasError('passwort')) {
+    if (this.passwort1.hasError('pattern')) {
       return 'Not a valid passwort';
     }
     return '';
   }
 
   getErrorMessagePasswort2() {
-    if (this.passworterror2.hasError('required')) {
+    if (this.passwort2.hasError('required')) {
       return 'You must enter a value passwort';
     }
     // Überprüfe, ob die E-Mail-Adresse gültig ist
-    if (this.passworterror2.hasError('passwort')) {
+    if (this.passwort2.hasError('pattern')) {
       return 'Not a valid passwort';
     }
     return '';
   }
 
+  passwortConfirm() {
+    if (
+      this.passwort1.valid == true &&
+      this.passwort2.valid == true &&
+      this.passwort1.value == this.passwort2.value
+    ) {
+      this.password_incorrect = '';
+      return true;
+    }
+    if (
+      this.passwort1.valid == true &&
+      this.passwort2.valid == true &&
+      this.passwort1.value != this.passwort2.value
+    ) {
+      this.password_incorrect = 'Passwords are ok but don`t match';
+      return false;
+    } else {
+      return false;
+    }
+  }
+
   submitForm() {
-    console.log('hier?');
-    console.log(this.formData);
-    if (this.formData) {
+    this.password_correct = this.passwortConfirm();
+    if (this.emailerror.valid == true && this.password_correct == true) {
       this.router.navigate(['/completely']);
     }
   }

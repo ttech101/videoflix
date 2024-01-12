@@ -5,6 +5,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { Router } from '@angular/router';
+import { DataService } from '../../service/data.service';
 
 @Component({
   selector: 'app-enter-passwort',
@@ -22,4 +24,21 @@ import { MatInputModule } from '@angular/material/input';
 })
 export class EnterPasswortComponent {
   hide = true;
+  formData: any;
+  email!: string;
+
+  constructor(private router: Router, private dataService: DataService) {}
+
+  ngOnInit() {
+    const formData = this.dataService.getFormData();
+    this.formData = formData;
+    if (formData && formData.email) {
+      this.email = formData.email;
+    }
+  }
+
+  changeMail() {
+    this.dataService.setFormData({ email: this.email });
+    this.router.navigate(['/login']);
+  }
 }

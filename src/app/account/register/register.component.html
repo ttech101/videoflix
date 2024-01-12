@@ -24,35 +24,24 @@
                     @if (emailerror.invalid) {
                     <mat-error>{{getErrorMessageEmail()}}</mat-error>
                     }
-                </mat-form-field>
+                    @if (emailerror.valid) { <mat-icon matSuffix>check</mat-icon> }
 
+                </mat-form-field>
                 <mat-form-field>
                     <mat-label>Enter your password</mat-label>
-                    <input id="passwort1" matInput [type]="hide ? 'password' : 'text'" required
-                        [formControl]="passworterror1">
-                    @if (passworterror1.invalid) {
-                    <mat-error>{{getErrorMessagePasswort1()}}</mat-error>
-                    }
-                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                        [attr.aria-pressed]="hide">
-                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                    </button>
+                    <input matInput [type]="hide ? 'password' : 'text'" required [formControl]="passwort1">
+                    @if (passwort1.invalid) {<mat-error>{{getErrorMessagePasswort1()}}</mat-error>}
+                    @if (passwort1.valid) { <mat-icon matSuffix>check</mat-icon>}
+                    <mat-hint>{{password_incorrect}}</mat-hint>
                 </mat-form-field>
                 <mat-form-field>
                     <mat-label>Enter your password again</mat-label>
-                    <input id="passwort2" matInput [type]="hide1 ? 'password' : 'text'" required
-                        [formControl]="passworterror2">
-                    @if (passworterror2.invalid) {
-                    <mat-error>{{getErrorMessagePasswort2()}}</mat-error>
-                    }
-                    <button mat-icon-button matSuffix (click)="hide1 = !hide1" [attr.aria-label]="'Hide password'"
-                        [attr.aria-pressed]="hide1">
-                        <mat-icon>{{hide1 ? 'visibility_off2' : 'visibility2'}}</mat-icon>
-                    </button>
+                    <input matInput [type]="hide ? 'password' : 'text'" required [formControl]="passwort2">
+                    @if (passwort2.invalid) {<mat-error>{{getErrorMessagePasswort2()}}</mat-error>}
+                    @if (passwort2.valid) { <mat-icon matSuffix>check</mat-icon>}
+                    <mat-hint>{{password_incorrect}}</mat-hint>
                 </mat-form-field>
-
-
-                <p>Verwende mindestens sechs Zeichen (Groß- und Kleinschreibung beachten) mit mindestens einer Zahl oder
+                <p>Verwende mindestens acht Zeichen (Groß- und Kleinschreibung beachten) mit mindestens einer Zahl sowie
                     einem Sonderzeichen.</p>
                 <span>Videoflix verwendet deine Daten, um dein Erlebnis im Rahmen von Videoflix zu personalisieren und
                     zu

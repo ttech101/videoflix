@@ -6,8 +6,8 @@
             </mat-card-header>
             <mat-card-content>
                 <h1>Passwort eingeben</h1>
-                <h3>Logge dich mit deiner E-Mail-Adresse in dein Konto ein: (Hier Email) <a
-                        href="login">(bearbeiten)</a>
+                <h3>Logge dich mit deiner E-Mail-Adresse in dein Konto ein: <i class="email-change">{{email}}</i> <span
+                        (click)="changeMail()">(bearbeiten)</span>
                 </h3>
             </mat-card-content>
             <form class="enter-passwort-form">

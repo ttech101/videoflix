@@ -16,7 +16,8 @@
   <form class="landing-form" if="email.invalid" (ngSubmit)="submitForm()" method="GET">
     <mat-form-field>
       <mat-label>Enter your email</mat-label>
-      <input matInput placeholder="yourMail@example.com" [formControl]="email" required>
+      <input matInput placeholder="yourMail@example.com" [formControl]="email" required
+        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
       @if (email.invalid) {
       <mat-error>{{getErrorMessage()}}</mat-error>
       }

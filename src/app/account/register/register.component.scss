@@ -1,7 +1,7 @@
 .register-position {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Mindesthöhe des Containers auf 100% der Bildschirmhöhe setzen */
+  min-height: 100vh;
 }
 
 .register {
@@ -9,6 +9,9 @@
   justify-content: center;
   padding: 25px;
   max-width: 100%;
+  @media (max-width: 600px), (max-height: 600px) {
+    padding: 10px;
+  }
 }
 
 .register-card {
@@ -19,6 +22,9 @@
   max-width: 500px;
   border-radius: 35px;
   padding: 25px;
+  @media (max-width: 600px), (max-height: 600px) {
+    padding: 10px;
+  }
 }
 
 .register-form {
@@ -54,6 +60,10 @@ mat-card-content {
   }
 }
 
+mat-hint {
+  color: #ee433c;
+}
+
 .next-button {
   margin-top: 25px;
   width: 100%;
@@ -67,4 +77,8 @@ mat-card-content {
   &:hover {
     cursor: pointer;
   }
+}
+
+.mat-icon {
+  color: rgb(0, 207, 0);
 }
