@@ -1,0 +1,30 @@
+<div class="reset-passwort-position">
+    <div class="reset-passwort">
+        <mat-card class="reset-passwort-card">
+            <mat-card-header>
+                <mat-card-subtitle>Passwort zurücksetzen</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <h1>Gib deine E-mail-Adresse ein, um fortzufahren</h1>
+                <h3>Wir werden dir eine E-Mail zusenden in der weiter Anweisungen stehen. Bitte prüfe auch dein Spam Ordner im E-mail Postfach.
+                </h3>
+            </mat-card-content>
+            <form class="reset-passwort-form" (ngSubmit)="submitForm()">
+                <mat-form-field class="reset-passwort-full-width">
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput [formControl]="emailFormControl">
+                    @if (emailFormControl.hasError('pattern') && !emailFormControl.hasError('required')) {
+                    <mat-error>Please enter a valid email address</mat-error>
+                    }
+                    @if (emailFormControl.hasError('required')) {
+                    <mat-error>Email is <strong>required</strong></mat-error>
+                    }
+                </mat-form-field>
+                <button mat-fab extended color="primary">
+                    Passwort zurücksetzen
+                </button>
+            </form>
+        </mat-card>
+    </div>
+    <app-footer></app-footer>
+</div>

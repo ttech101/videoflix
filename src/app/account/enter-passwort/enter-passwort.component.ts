@@ -41,4 +41,9 @@ export class EnterPasswortComponent {
     this.dataService.setFormData({ email: this.email });
     this.router.navigate(['/login']);
   }
+
+  resetPasswort() {
+    this.dataService.setFormData({ email: this.email });
+    this.router.navigate(['/reset-passwort']);
+  }
 }

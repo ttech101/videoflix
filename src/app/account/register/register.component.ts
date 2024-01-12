@@ -31,6 +31,9 @@ import { Router } from '@angular/router';
   ],
 })
 export class RegisterComponent implements OnInit {
+  set_headline:string = '3. SCHRITT'
+  set_header:string = 'Bestätige deine E-Mail'
+  set_text:string = 'Bitte prüfe dein E-Mail Postfach und bestätige den darinenhaltenen Link.'
   hide = true;
   confirm_email: Boolean = false;
   confirm_passwort: boolean = false;
@@ -131,6 +134,7 @@ export class RegisterComponent implements OnInit {
   submitForm() {
     this.password_correct = this.passwortConfirm();
     if (this.emailerror.valid == true && this.password_correct == true) {
+      this.dataService.setFormData({ email: this.email , headline: this.set_headline, header: this.set_header, text: this.set_text });
       this.router.navigate(['/completely']);
     }
   }
