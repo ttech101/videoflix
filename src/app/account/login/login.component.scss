@@ -1,0 +1,50 @@
+.login-position {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Mindesthöhe des Containers auf 100% der Bildschirmhöhe setzen */
+}
+
+.login {
+  display: flex;
+  justify-content: center;
+  padding: 25px;
+  max-width: 100%;
+}
+
+.login-card {
+  flex: 1;
+  position: relative;
+  display: flex;
+  justify-content: center;
+
+  max-width: 500px;
+  border-radius: 35px;
+  padding: 25px;
+}
+
+.login-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 16px;
+  button {
+    margin-top: 50px;
+    width: 100%;
+  }
+  a {
+    width: 100%;
+  }
+}
+.login-full-width {
+  margin-top: 50px;
+  width: 100%;
+}
+
+h1 {
+  margin-top: 15px;
+}
+
+app-footer {
+  margin-top: auto;
+}

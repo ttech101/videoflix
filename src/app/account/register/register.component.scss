@@ -1,0 +1,70 @@
+.register-position {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Mindesthöhe des Containers auf 100% der Bildschirmhöhe setzen */
+}
+
+.register {
+  display: flex;
+  justify-content: center;
+  padding: 25px;
+  max-width: 100%;
+}
+
+.register-card {
+  flex: 1;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  max-width: 500px;
+  border-radius: 35px;
+  padding: 25px;
+}
+
+.register-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 16px;
+  p {
+    font-size: 12px;
+  }
+}
+.register-full-width {
+  margin-top: 50px;
+  width: 100%;
+}
+
+h1 {
+  margin-top: 15px;
+}
+
+app-footer {
+  margin-top: auto;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-card-content {
+  i {
+    color: #c2185b;
+  }
+}
+
+.next-button {
+  margin-top: 25px;
+  width: 100%;
+}
+
+.dn {
+  display: none;
+}
+
+.change-email {
+  &:hover {
+    cursor: pointer;
+  }
+}

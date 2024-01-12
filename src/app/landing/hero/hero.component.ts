@@ -9,6 +9,8 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { Router } from '@angular/router';
+import { DataService } from '../../service/data.service';
 
 @Component({
   selector: 'app-hero',
@@ -26,8 +28,20 @@ import {
   styleUrl: './hero.component.scss',
 })
 export class HeroComponent {
-  emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.email,
-  ]);
+  constructor(private router: Router, private dataService: DataService) {}
+  email = new FormControl('', [Validators.required, Validators.email]);
+
+  getErrorMessage() {
+    if (this.email.hasError('required')) {
+      return 'You must enter a value';
+    }
+    return this.email.hasError('email') ? 'Not a valid email' : '';
+  }
+  submitForm() {
+    if (this.email.status == 'VALID') {
+      // Daten an den Service übergeben
+      this.dataService.setFormData({ email: this.email.value });
+      this.router.navigate(['/register']);
+    }
+  }
 }

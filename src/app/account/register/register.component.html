@@ -1,0 +1,74 @@
+<div class="register-position">
+    <div class="register">
+        <mat-card class="register-card">
+            <mat-card-header>
+                <mat-card-subtitle>2. SCHRITT</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <h1>Erstelle ein Konto, um fortzufahren</h1>
+                <h3>Mit dieser Kombination aus E-Mail-Adresse und Passwort kannst du dich bei Videoflix einloggen.
+                </h3>
+                <span id="email-input-none">Gib ein Passwort ein, um ein Konto für <i>{{email}}</i> zu erstellen
+                    <a class="change-email" (click)="changeEmail()">
+                        (bearbeiten)</a>
+                </span>
+            </mat-card-content>
+            <form class="register-form" (ngSubmit)="submitForm()">
+                <mat-form-field>
+                    <mat-label>Your Name</mat-label>
+                    <input matInput>
+                </mat-form-field>
+                <mat-form-field id="email-input" class="dn">
+                    <mat-label>Enter your email</mat-label>
+                    <input matInput placeholder="yourMail@example.com" [formControl]="emailerror" required>
+                    @if (emailerror.invalid) {
+                    <mat-error>{{getErrorMessageEmail()}}</mat-error>
+                    }
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Enter your password</mat-label>
+                    <input id="passwort1" matInput [type]="hide ? 'password' : 'text'" required
+                        [formControl]="passworterror1">
+                    @if (passworterror1.invalid) {
+                    <mat-error>{{getErrorMessagePasswort1()}}</mat-error>
+                    }
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Enter your password again</mat-label>
+                    <input id="passwort2" matInput [type]="hide1 ? 'password' : 'text'" required
+                        [formControl]="passworterror2">
+                    @if (passworterror2.invalid) {
+                    <mat-error>{{getErrorMessagePasswort2()}}</mat-error>
+                    }
+                    <button mat-icon-button matSuffix (click)="hide1 = !hide1" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide1">
+                        <mat-icon>{{hide1 ? 'visibility_off2' : 'visibility2'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+
+
+                <p>Verwende mindestens sechs Zeichen (Groß- und Kleinschreibung beachten) mit mindestens einer Zahl oder
+                    einem Sonderzeichen.</p>
+                <span>Videoflix verwendet deine Daten, um dein Erlebnis im Rahmen von Videoflix zu personalisieren und
+                    zu
+                    verbessern. Du kannst deine
+                    Kommunikationseinstellungen jederzeit ändern. Wir können deine Daten wie in unserer
+                    <i><a href="">Datenschutzerklärung</a></i> beschrieben verwenden. Indem du auf „Weiter“ klickst,
+                    bestätigst
+                    du, dass du
+                    unsere <i><a href="">Datenschutzerklärung</a></i> und <i><a href="">Cookie-Richtlinie</a></i>
+                    gelesen hast.
+                </span>
+                <button class="next-button" mat-fab extended color="primary">
+                    Weiter
+                </button>
+            </form>
+        </mat-card>
+    </div>
+    <app-footer></app-footer>
+</div>

@@ -1,10 +1,9 @@
 <div class="landing_background"></div>
 
 <div class="center_landing">
-  <button mat-raised-button color="accent" class="landing-login">
-    EINLOGGEN
-  </button>
-
+  <a href="login"><button mat-raised-button color="accent" class="landing-login">
+      EINLOGGEN
+    </button></a>
   <h1 style="font-size: 38px">
     Genieße brandneue Originale, Blockbuster, Serien mit Suchtfaktor und vieles
     mehr im Streaming
@@ -13,25 +12,30 @@
     Um die Vielfalt von Videoflix vollständig zu erkunden oder neu zu beginnen,
     trage bitte deine E-Mail-Adresse ein.
   </h2>
-  <form class="landing-form">
-    <mat-form-field class="landing-full-width">
-      <input matInput placeholder="E-Mail" />
+
+  <form class="landing-form" if="email.invalid" (ngSubmit)="submitForm()" method="GET">
+    <mat-form-field>
+      <mat-label>Enter your email</mat-label>
+      <input matInput placeholder="yourMail@example.com" [formControl]="email" required>
+      @if (email.invalid) {
+      <mat-error>{{getErrorMessage()}}</mat-error>
+      }
     </mat-form-field>
     <button mat-raised-button color="primary">Jetzt Registrieren</button>
   </form>
+
+
   <div class="landing-buttons">
     <button mat-raised-button color="accent" class="landing-login-guest">
       Gast Login
     </button>
-    <button mat-raised-button color="accent" class="landing-login-smart">
-      EINLOGGEN
-    </button>
+    <a href="login"><button mat-raised-button color="accent" class="landing-login-smart">
+        EINLOGGEN
+      </button></a>
   </div>
   <h2>
     Ergreife noch heute diese großartige Gelegenheit und sichere dir jetzt unser
     exklusives kostenloses Angebot.
   </h2>
 </div>
-<a href="#new-movies"
-  ><mat-icon class="landing-arrow" fontIcon="keyboard_arrow_down"></mat-icon
-></a>
+<a href="#new-movies"><mat-icon class="landing-arrow" fontIcon="keyboard_arrow_down"></mat-icon></a>

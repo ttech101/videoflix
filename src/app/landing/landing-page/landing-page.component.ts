@@ -13,6 +13,7 @@ import { NewMoviesComponent } from '../new-movies/new-movies.component';
 import { FactsComponent } from '../facts/facts.component';
 import { HeroComponent } from '../hero/hero.component';
 import { FaqComponent } from '../faq/faq.component';
+import { FooterComponent } from '../../footer/footer.component';
 
 @Component({
   selector: 'app-landing-page',
@@ -31,6 +32,7 @@ import { FaqComponent } from '../faq/faq.component';
     FactsComponent,
     HeroComponent,
     FaqComponent,
+    FooterComponent,
   ],
 })
 export class LandingPageComponent {

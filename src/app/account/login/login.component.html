@@ -1,0 +1,31 @@
+<div class="login-position">
+    <div class="login">
+        <mat-card class="login-card">
+            <mat-card-header>
+                <mat-card-subtitle>1. SCHRITT</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <h1>Gib deine E-mail-Adresse ein, um fortzufahren</h1>
+                <h3>Logge dich in dein Konto ein. Falls du noch kein Konto hast, wirst du aufgefordert, eines zu
+                    erstellen.
+                </h3>
+            </mat-card-content>
+            <form class="login-form">
+                <mat-form-field class="login-full-width">
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput [formControl]="emailFormControl">
+                    @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
+                    <mat-error>Please enter a valid email address</mat-error>
+                    }
+                    @if (emailFormControl.hasError('required')) {
+                    <mat-error>Email is <strong>required</strong></mat-error>
+                    }
+                </mat-form-field>
+                <button mat-fab extended color="primary">
+                    <a href="enter-passwort">Weiter</a>
+                </button>
+            </form>
+        </mat-card>
+    </div>
+    <app-footer></app-footer>
+</div>

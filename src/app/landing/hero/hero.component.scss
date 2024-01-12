@@ -20,21 +20,20 @@
   position: absolute;
   top: 20px;
   right: 30px;
-  @media (max-width: 600px), (max-height: 600px){
+  @media (max-width: 600px), (max-height: 600px) {
     display: none;
   }
 }
-  
+
 .landing-login-smart {
-  display:none;
-  @media (max-width: 600px), (max-height: 600px){
+  display: none;
+  @media (max-width: 600px), (max-height: 600px) {
     display: block;
   }
-
 }
 
-.landing-buttons{
-  @media (max-width: 600px), (max-height: 600px){
+.landing-buttons {
+  @media (max-width: 600px), (max-height: 600px) {
     width: 100%;
     position: relative;
     display: flex;
@@ -42,7 +41,6 @@
     align-items: center;
   }
 }
-
 
 .center_landing {
   position: relative;
@@ -121,7 +119,7 @@
   bottom: 100px;
   animation: jump 4s ease-in-out infinite; /* Die Animation dauert nun 4 Sekunden insgesamt (2 Sekunden für den Sprung und 2 Sekunden für die Pause) */
 
-  @media (max-width: 600px), (max-height: 600px){
+  @media (max-width: 600px), (max-height: 600px) {
     justify-content: end;
     opacity: 0.5;
   }
@@ -143,4 +141,8 @@
   60% {
     transform: translateY(-10px);
   }
+}
+
+mat-form-field {
+  width: 100%;
 }

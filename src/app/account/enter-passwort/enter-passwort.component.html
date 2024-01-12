@@ -1,0 +1,32 @@
+<div class="enter-passwort-position">
+    <div class="enter-passwort">
+        <mat-card class="enter-passwort-card">
+            <mat-card-header>
+                <mat-card-subtitle>2. SCHRITT</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <h1>Passwort eingeben</h1>
+                <h3>Logge dich mit deiner E-Mail-Adresse in dein Konto ein: (Hier Email) <a
+                        href="login">(bearbeiten)</a>
+                </h3>
+            </mat-card-content>
+            <form class="enter-passwort-form">
+                <mat-form-field>
+                    <mat-label>Enter your password</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+                <p><i>(Groß- und Kleinschreibung beachten)</i></p>
+                <button class="button-login" mat-fab extended color="primary">
+                    Einloggen
+                </button>
+            </form>
+            <a class="reset-passwort" href="">Probleme beim Einloggen? Setze hier dein Passwort zurück</a>
+        </mat-card>
+
+    </div>
+    <app-footer></app-footer>
+</div>
