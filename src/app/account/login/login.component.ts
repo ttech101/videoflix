@@ -10,7 +10,7 @@ import {
 } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { FooterComponent } from '../../footer/footer.component';
+import { FooterComponent } from '../../templates/footer/footer.component';
 import { Router } from '@angular/router';
 import { DataService } from '../../service/data.service';
 

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import { FooterComponent } from '../../footer/footer.component';
+import { FooterComponent } from '../../templates/footer/footer.component';
 import { Router } from '@angular/router';
 import { DataService } from '../../service/data.service';
 import {
@@ -27,9 +27,10 @@ import {
   ],
 })
 export class RestPasswortComponent {
-  set_headline:string = ''
-  set_header:string = 'Bestätigungs E-Mail gesendet'
-  set_text:string = 'Bitte prüfe dein E-Mail Postfach. Der Link zum Passwort zurücksetzen wurde gesendet.'
+  set_headline: string = '';
+  set_header: string = 'Bestätigungs E-Mail gesendet';
+  set_text: string =
+    'Bitte prüfe dein E-Mail Postfach. Der Link zum Passwort zurücksetzen wurde gesendet.';
   formData: any;
   email!: string | any;
   emailFormControl = new FormControl('', [
@@ -52,7 +53,13 @@ export class RestPasswortComponent {
 
   submitForm() {
     if (this.emailFormControl.valid) {
-      this.dataService.setFormData({ email: this.emailFormControl.value , headline: this.set_headline, header: this.set_header, text: this.set_text });
-      this.router.navigate(['/completely']);}
+      this.dataService.setFormData({
+        email: this.emailFormControl.value,
+        headline: this.set_headline,
+        header: this.set_header,
+        text: this.set_text,
+      });
+      this.router.navigate(['/completely']);
+    }
   }
 }

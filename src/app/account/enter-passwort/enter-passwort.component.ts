@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FooterComponent } from '../../footer/footer.component';
+import { FooterComponent } from '../../templates/footer/footer.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
