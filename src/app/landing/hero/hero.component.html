@@ -27,12 +27,12 @@
 
 
   <div class="landing-buttons">
-    <button mat-raised-button color="accent" class="landing-login-guest">
+    <button (click)="loginGuest()" mat-raised-button color="accent" class="landing-login-guest">
       Gast Login
     </button>
-    <a href="login"><button mat-raised-button color="accent" class="landing-login-smart">
-        EINLOGGEN
-      </button></a>
+    <button (click)="loginUser()" mat-raised-button color="accent" class="landing-login-smart">
+      EINLOGGEN
+    </button>
   </div>
   <h2>
     Ergreife noch heute diese großartige Gelegenheit und sichere dir jetzt unser

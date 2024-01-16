@@ -1,0 +1,39 @@
+<app-header></app-header>
+<div class="single-view-img">
+    <img src="{{background_image}}" alt="">
+
+    <div class="single-view-content">
+
+        <h1>{{title}}</h1>
+
+        <div class="small-info">
+            <mat-chip>
+                {{age_rating}}
+            </mat-chip>
+            <p>{{date}}</p>
+            <p>&middot;</p>
+            <p>{{film_length}}</p>
+        </div>
+        <p><i>{{genre}}</i></p>
+        <div class="button">
+            <button mat-fab extended color="accent">
+                <mat-icon>play_circle</mat-icon>
+                Abspielen
+            </button>
+            <button mat-fab matTooltip="Primary" color="primary" aria-label="Example fab with a heart icon">
+                <mat-icon>add</mat-icon>
+            </button>
+            <button class="info-button" mat-fab matTooltip="Accent" color="accent"
+                aria-label="Example fab with a heart icon" (click)="openDialogDescription()">
+                <mat-icon>info</mat-icon>
+            </button>
+        </div>
+        <span>{{description}}</span>
+
+    </div>
+</div>
+<div class="category-background">
+    <app-category-for-you></app-category-for-you>
+</div>
+
+<app-footer></app-footer>

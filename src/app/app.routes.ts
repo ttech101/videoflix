@@ -13,6 +13,8 @@ import { WatchlistComponent } from './content/watchlist/watchlist.component';
 import { ImprintComponent } from './policy/imprint/imprint.component';
 import { PrivacyPolicyComponent } from './policy/privacy-policy/privacy-policy.component';
 import { CookiePolicyComponent } from './policy/cookie-policy/cookie-policy.component';
+import { UploadComponent } from './storage/upload/upload.component';
+import { SingleViewComponent } from './content/single-view/single-view.component';
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -29,4 +31,6 @@ export const routes: Routes = [
   { path: 'imprint', component: ImprintComponent },
   { path: 'privacy-policy', component: PrivacyPolicyComponent },
   { path: 'cookie-policy', component: CookiePolicyComponent },
+  { path: 'upload', component: UploadComponent },
+  { path: 'single-view', component: SingleViewComponent },
 ];

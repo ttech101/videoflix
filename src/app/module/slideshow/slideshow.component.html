@@ -1,29 +1,29 @@
 <div class="slideshow">
-    <c-carousel [dark]="false" [wrap]="true" [touch]="true" [interval]=5000>
+    <c-carousel [dark]="false" [wrap]="false" [touch]="true" [interval]=500000 (itemChange)="onItemChange($event)">
         <c-carousel-indicators></c-carousel-indicators>
-
 
         <div class="position-carousel">
             <c-carousel-inner class="left">
                 <c-carousel-item *ngFor="let slide of slides; let i = index;">
                     <img [src]="slides[(i - 1 + slides.length) % slides.length]?.src"
                         alt="{{slides[(i - 1 + slides.length) % slides.length]?.title}}"
-                        class="d-block w-100 img-carousel" loading="lazy" />
+                        class="d-block w-100 img-carousel" loading="eager" />
                 </c-carousel-item>
             </c-carousel-inner>
 
             <c-carousel-control class="previous" [routerLink] caption="Previous" direction="prev"></c-carousel-control>
 
             <c-carousel-inner class="center">
-                <c-carousel-item *ngFor="let slide of slides; let i = index;" (click)="openMovie(slides[i].url)">
-                    <img [src]="slide.src" alt="{{slide.title}}" class="d-block w-100 img-carousel" loading="lazy" />
+                <c-carousel-item *ngFor="let slide of slides; let i = index;" (click)="openMovie()">
+
+                    <img [src]="slide.src" alt="{{slide.title}}" class="d-block w-100 img-carousel" loading="eager" />
                     <c-carousel-caption class="d-none d-md-block">
                         <h3>{{slide.title}}</h3>
                         <p>{{slide.subtitle}}</p>
-                        <p>{{slide.url}}</p>
+
                     </c-carousel-caption>
-                    <div></div>
                 </c-carousel-item>
+
             </c-carousel-inner>
 
             <c-carousel-control class="next" [routerLink] caption="Next" direction="next"></c-carousel-control>
@@ -31,7 +31,7 @@
             <c-carousel-inner class="right">
                 <c-carousel-item *ngFor="let slide of slides; let i = index;">
                     <img [src]="slides[(i + 1) % slides.length]?.src" alt="{{slides[(i + 1) % slides.length]?.title}}"
-                        class="d-block w-100 img-carousel" loading="lazy" />
+                        class="d-block w-100 img-carousel" loading="eager" />
                 </c-carousel-item>
             </c-carousel-inner>
         </div>

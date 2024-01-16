@@ -53,4 +53,12 @@ export class HeroComponent {
       this.router.navigate(['/register']);
     }
   }
+
+  loginGuest() {
+    this.router.navigate(['/home']);
+  }
+
+  loginUser() {
+    this.router.navigate(['/login']);
+  }
 }

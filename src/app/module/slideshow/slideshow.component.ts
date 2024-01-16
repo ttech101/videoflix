@@ -2,11 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { CarouselModule } from '@coreui/angular';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-slideshow',
   standalone: true,
-  imports: [CarouselModule, RouterModule, CommonModule],
+  imports: [
+    CarouselModule,
+    RouterModule,
+    CommonModule,
+    MatButtonModule,
+    MatIconModule,
+  ],
   templateUrl: './slideshow.component.html',
   styleUrl: './slideshow.component.scss',
 })
@@ -18,6 +26,8 @@ export class SlideshowComponent implements OnInit {
     subtitle: '',
     url: '',
   });
+  showIndicator!: number;
+  url!: string;
 
   constructor(private router: Router) {}
 
@@ -46,8 +56,12 @@ export class SlideshowComponent implements OnInit {
     };
   }
 
-  openMovie(url: any) {
-    console.log(url);
-    // this.router.navigate([]);
+  openMovie() {
+    this.url = this.slides[this.showIndicator].url;
+    this.router.navigate([this.url]);
+  }
+
+  onItemChange(event: any) {
+    this.showIndicator = event;
   }
 }

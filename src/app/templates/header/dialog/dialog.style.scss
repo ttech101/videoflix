@@ -1,0 +1,35 @@
+.border-dialog {
+  padding: 15px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+mat-form-field {
+  width: 100%;
+}
+.profil-h2 {
+  text-align: left;
+  width: 100%;
+}
+mat-chip-listbox {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+}
+mat-card-content {
+  width: 100%;
+}
+mat-slide-toggle {
+  margin-bottom: 10px;
+}
+.profil-slider {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 100%;
+}

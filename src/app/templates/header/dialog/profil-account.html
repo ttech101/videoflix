@@ -1,0 +1,67 @@
+<div class="profil-account">
+    <h1 mat-dialog-title>Profil</h1>
+    <div mat-dialog-content>
+        Das ist dein Profil. Ändere hier die Einstellungen.
+    </div>
+    <div mat-dialog-content>
+        <div class="border-dialog">
+
+            <form class="profil-form">
+                <h2 class="profil-h2">Profil Name</h2>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Profil Name</mat-label>
+                    <input matInput placeholder="Gebe dein Profilnamen ein" value="ttech">
+                </mat-form-field>
+
+                <h2 class="profil-h2">Optionen</h2>
+                <mat-card-content>
+                    <section class="profil-slider">
+                        <mat-slide-toggle class="example-margin" [color]="color" [checked]="checked"
+                            [disabled]="disabled">
+                            Automatische Wiedergabe
+                        </mat-slide-toggle>
+                    </section>
+                </mat-card-content>
+                <h2 class="profil-h2">Sprache</h2>
+                <mat-form-field>
+                    <mat-label>Sprache</mat-label>
+                    <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl"
+                        [matAutocomplete]="auto">
+                    <mat-autocomplete #auto="matAutocomplete">
+                        @for (option of options; track option) {
+                        <mat-option [value]="option">{{option}}</mat-option>
+                        }
+                    </mat-autocomplete>
+                </mat-form-field>
+
+
+
+                <h2 class="profil-h2">Freigabe</h2>
+                <mat-chip-listbox aria-label="Fish selection">
+                    <mat-chip-option>Keine Altersfreigabe</mat-chip-option>
+                    <mat-chip-option>Altersfreigabe ab 6</mat-chip-option>
+                    <mat-chip-option>Altersfreigabe ab 12</mat-chip-option>
+                    <mat-chip-option>Altersfreigabe ab 18</mat-chip-option>
+                </mat-chip-listbox>
+
+
+
+
+
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div mat-dialog-actions align="center">
+        <button mat-button mat-dialog-close>Schließen</button>
+        <button mat-button>Speichern</button>
+    </div>
+</div>

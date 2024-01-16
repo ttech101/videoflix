@@ -7,19 +7,19 @@
             <mat-icon>home</mat-icon>
             STARTSEITE
         </a>
-        <a mat-button href="home">
+        <a mat-button href="serch">
             <mat-icon>search</mat-icon>
             SUCHEN
         </a>
-        <a mat-button href="home">
+        <a mat-button href="watchlist">
             <mat-icon>add</mat-icon>
             MEINE LISTE
         </a>
-        <a mat-button href="home">
+        <a mat-button href="movies">
             <mat-icon>movie</mat-icon>
             FILME
         </a>
-        <a mat-button href="home">
+        <a mat-button href="series">
             <mat-icon>smart_display</mat-icon>
             SERIEN
         </a>
@@ -29,36 +29,40 @@
             <mat-icon>menu</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-            <button mat-menu-item>
+            <button (click)="btnUpload('home')" mat-menu-item>
                 <mat-icon>home</mat-icon>
                 <span>STARTSEITE</span>
             </button>
-            <button mat-menu-item>
+            <button (click)="btnUpload('serch')" mat-menu-item>
                 <mat-icon>search</mat-icon>
                 <span>SUCHEN</span>
             </button>
-            <button mat-menu-item>
+            <button (click)="btnUpload('watchlist')" mat-menu-item>
                 <mat-icon>add</mat-icon>
                 <span>MEINE LISTE</span>
             </button>
-            <button mat-menu-item>
+            <button (click)="btnUpload('movies')" mat-menu-item>
                 <mat-icon>movie</mat-icon>
                 <span>FILME</span>
             </button>
-            <button mat-menu-item>
+            <button (click)="btnUpload('series')" mat-menu-item>
                 <mat-icon>smart_display</mat-icon>
                 <span>SERIEN</span>
             </button>
         </mat-menu>
     </div>
     <div class="profil">
+        <button (click)="btnUpload('upload')" mat-stroked-button>Upload</button>
         <span>ttech</span>
         <img src="/assets/img/woman-995164_640.png" alt="" [matMenuTriggerFor]="menu_profile">
         <mat-menu #menu_profile="matMenu">
-            <button mat-menu-item>Profil bearbeiten</button>
-            <button mat-menu-item>Konto</button>
-            <button mat-menu-item>Hilfe-Center</button>
-            <button mat-menu-item>Logout</button>
+            <div class="profil-name">
+                <p><b>ttech</b></p>
+            </div>
+            <button mat-menu-item (click)="openDialogProfil('0ms', '0ms')"> Profil bearbeiten</button>
+            <button mat-menu-item (click)="openDialogKonto('0ms', '0ms')">Konto</button>
+            <button mat-menu-item (click)="menuLogout()">Logout</button>
+            <button mat-menu-item (click)="openDialogDelete('0ms', '0ms')">Konto Löschen</button>
         </mat-menu>
     </div>
 

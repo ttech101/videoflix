@@ -1,0 +1,122 @@
+<app-header></app-header>
+
+<div class="content">
+    <form>
+        <h2>Upload</h2>
+        <mat-form-field class="full-width">
+            <mat-label>Film Name</mat-label>
+            <input matInput>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-label>Beschreibung Kurz</mat-label>
+            <input matInput>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-label>Beschreibung lang</mat-label>
+            <textarea matInput></textarea>
+        </mat-form-field>
+
+        <div class="date">
+            <mat-form-field class="full-width">
+                <mat-label>Author</mat-label>
+                <input matInput>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Veröffentlichung</mat-label>
+                <input matInput [matDatepicker]="picker">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <mat-card class="result">
+            <mat-card-content>
+                <h3>Optionen</h3>
+                <section class="section-option">
+                    <mat-form-field class="full-width">
+                        <mat-label>Video länge (min.)</mat-label>
+                        <input type="time" matInput>
+                    </mat-form-field>
+
+                </section>
+
+            </mat-card-content>
+            <mat-card-content>
+                <h3 class="upload-h3">Film Typ</h3>
+                <section class="example-section">
+                    <mat-checkbox class="example-margin" [(ngModel)]="checked" name="first">Spielfilm /
+                        Kurzfilm</mat-checkbox>
+                    <mat-checkbox class="example-margin" [(ngModel)]="indeterminate" name="first">Serie</mat-checkbox>
+                </section>
+            </mat-card-content>
+            <mat-card-content>
+                <h3 class="upload-h3">Genre</h3>
+                <section class="example-section">
+                    <mat-checkbox class="example-margin" [(ngModel)]="checked" name="first">Natur</mat-checkbox>
+                    <mat-checkbox class="example-margin" [(ngModel)]="indeterminate"
+                        name="first">Lustiges</mat-checkbox>
+                    <mat-checkbox class="example-margin" [(ngModel)]="checked" name="first">Wissen</mat-checkbox>
+                    <mat-checkbox class="example-margin" [(ngModel)]="checked" name="first">Sonstiges</mat-checkbox>
+                </section>
+            </mat-card-content>
+            <mat-card-content>
+                <h3 class="upload-h3">Freigabe</h3>
+                <mat-chip-listbox aria-label="Fish selection">
+                    <mat-chip-option>Keine Altersfreigabe</mat-chip-option>
+                    <mat-chip-option>Altersfreigabe ab 6</mat-chip-option>
+                    <mat-chip-option>Altersfreigabe ab 12</mat-chip-option>
+                    <mat-chip-option>Altersfreigabe ab 18</mat-chip-option>
+                </mat-chip-listbox>
+            </mat-card-content></mat-card>
+        <mat-card class="result">
+            <mat-card-content class="upload-thumbnail">
+                <h3 class="upload-h3">Video</h3>
+                <input style="display: none;" type="file" class="file-input" [accept]="requiredFileType"
+                    (change)="onFileSelected($event)" #fileUpload>
+                <div class="file-upload">
+                    <button mat-raised-button color="primary" class="upload-btn" (click)="fileUpload.click()">Upload
+                        Thumbnail
+                        <mat-icon>attach_file</mat-icon>
+                    </button>
+                    {{fileName || "No file uploaded yet."}}
+                </div>
+                <div class="progress dn" id="thumbnail-progress">
+                    <mat-progress-bar class="progress-bar" mode="determinate" [value]="uploadProgress"
+                        *ngIf="uploadProgress">
+                    </mat-progress-bar>
+                    <mat-icon class="cancel-upload" (click)="cancelUpload()"
+                        *ngIf="uploadProgress">delete_forever</mat-icon>
+                </div>
+            </mat-card-content>
+            <mat-card-content class="upload-thumbnail">
+                <input style="display: none;" type="file" class="file-input" [accept]="requiredFileType"
+                    (change)="onFileSelected($event)" #fileUpload>
+                <div class="file-upload">
+                    <button mat-raised-button color="primary" class="upload-btn" (click)="fileUpload.click()">Upload
+                        Video
+                        <mat-icon>attach_file</mat-icon>
+                    </button>
+                    {{fileName || "No file uploaded yet."}}
+                </div>
+                <div class="progress dn" id="video-progress">
+                    <mat-progress-bar class="progress-bar" mode="determinate" [value]="uploadProgress"
+                        *ngIf="uploadProgress">
+                    </mat-progress-bar>
+                    <mat-icon class="cancel-upload" (click)="cancelUpload()"
+                        *ngIf="uploadProgress">delete_forever</mat-icon>
+                </div>
+            </mat-card-content>
+        </mat-card>
+        <div class="button-row">
+            <mat-slide-toggle [color]="color" [checked]="checked" [disabled]="disabled">
+                Video für alle sichtbar?
+            </mat-slide-toggle>
+            <button mat-fab extended color="primary">
+                <mat-icon>upload</mat-icon>
+                Veröffentlichen
+            </button>
+        </div>
+    </form>
+</div>
+
+<app-footer></app-footer>
