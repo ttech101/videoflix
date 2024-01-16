@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { DataService } from '../../service/data.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-enter-passwort',
@@ -27,7 +28,11 @@ export class EnterPasswortComponent {
   formData: any;
   email!: string;
 
-  constructor(private router: Router, private dataService: DataService) {}
+  constructor(
+    private router: Router,
+    private dataService: DataService,
+    private location: Location
+  ) {}
 
   ngOnInit() {
     const formData = this.dataService.getFormData();
@@ -45,5 +50,9 @@ export class EnterPasswortComponent {
   resetPasswort() {
     this.dataService.setFormData({ email: this.email });
     this.router.navigate(['/reset-passwort']);
+  }
+
+  goBack() {
+    this.location.back();
   }
 }

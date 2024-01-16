@@ -15,6 +15,7 @@ import { PrivacyPolicyComponent } from './policy/privacy-policy/privacy-policy.c
 import { CookiePolicyComponent } from './policy/cookie-policy/cookie-policy.component';
 import { UploadComponent } from './storage/upload/upload.component';
 import { SingleViewComponent } from './content/single-view/single-view.component';
+import { LandingResetPasswordComponent } from './account/landing-reset-password/landing-reset-password.component';
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -33,4 +34,5 @@ export const routes: Routes = [
   { path: 'cookie-policy', component: CookiePolicyComponent },
   { path: 'upload', component: UploadComponent },
   { path: 'single-view', component: SingleViewComponent },
+  { path: 'landing-reset-passwort', component: LandingResetPasswordComponent },
 ];

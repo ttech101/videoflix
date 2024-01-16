@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-category-for-you',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
   templateUrl: './category-for-you.component.html',
   styleUrl: '../content-box.scss',
 })
-export class CategoryForYouComponent {}
+export class CategoryForYouComponent {
+  constructor(private router: Router) {}
+
+  showMovie(url: string) {
+    this.router.navigateByUrl('/' + url);
+  }
+}

@@ -23,7 +23,11 @@
                 <button class="button-login" mat-fab extended color="primary">
                     Einloggen
                 </button>
+
             </form>
+            <button style="margin-left: 16px;margin-right: 16px;" (click)="goBack()" mat-fab extended color="">
+                zurück
+            </button>
             <span class="reset-passwort" (click)="resetPasswort()">Probleme beim Einloggen? Setze hier dein Passwort
                 zurück</span>
         </mat-card>

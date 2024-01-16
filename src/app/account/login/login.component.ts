@@ -13,6 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FooterComponent } from '../../templates/footer/footer.component';
 import { Router } from '@angular/router';
 import { DataService } from '../../service/data.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -40,7 +41,11 @@ export class LoginComponent {
   formData: any;
   email!: string | any;
 
-  constructor(private router: Router, private dataService: DataService) {}
+  constructor(
+    private router: Router,
+    private dataService: DataService,
+    private location: Location
+  ) {}
 
   ngOnInit() {
     const formData = this.dataService.getFormData();
@@ -56,5 +61,9 @@ export class LoginComponent {
       this.dataService.setFormData({ email: this.emailFormControl.value });
       this.router.navigate(['/enter-passwort']);
     }
+  }
+
+  goBack() {
+    this.location.back();
   }
 }
