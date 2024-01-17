@@ -8,6 +8,14 @@ import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { DataService } from '../../service/data.service';
 import { Location } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import {
+  FormControl,
+  Validators,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-enter-passwort',
@@ -21,17 +29,29 @@ import { Location } from '@angular/common';
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
+  providers: [AuthService],
 })
 export class EnterPasswortComponent {
   hide = true;
   formData: any;
   email!: string;
+  password: string = '';
+  passwordForm = new FormControl('', [
+    Validators.required,
+    Validators.pattern(
+      /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&^_-]).{8,}/
+    ),
+  ]);
 
   constructor(
     private router: Router,
     private dataService: DataService,
-    private location: Location
+    private location: Location,
+    private as: AuthService
   ) {}
 
   ngOnInit() {
@@ -54,5 +74,20 @@ export class EnterPasswortComponent {
 
   goBack() {
     this.location.back();
+  }
+
+  async login() {
+    let password = this.passwordForm.value;
+    try {
+      let resp: any = await this.as.loginWithEmailAndPassword(
+        this.email,
+        password
+      );
+      localStorage.setItem('authToken', resp.token);
+      localStorage.setItem('name', resp.name);
+      this.router.navigateByUrl('/home');
+    } catch (e) {
+      console.log(e);
+    }
   }
 }

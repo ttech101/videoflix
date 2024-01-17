@@ -10,10 +10,10 @@
                         (click)="changeMail()">(bearbeiten)</span>
                 </h3>
             </mat-card-content>
-            <form class="enter-passwort-form">
+            <form class="enter-passwort-form" (ngSubmit)="login()">
                 <mat-form-field>
                     <mat-label>Enter your password</mat-label>
-                    <input matInput [type]="hide ? 'password' : 'text'">
+                    <input [formControl]="passwordForm" matInput [type]="hide ? 'password' : 'text'">
                     <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                         [attr.aria-pressed]="hide">
                         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -23,7 +23,6 @@
                 <button class="button-login" mat-fab extended color="primary">
                     Einloggen
                 </button>
-
             </form>
             <button style="margin-left: 16px;margin-right: 16px;" (click)="goBack()" mat-fab extended color="">
                 zurück
