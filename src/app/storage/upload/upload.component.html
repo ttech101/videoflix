@@ -69,16 +69,15 @@
                 </mat-chip-listbox>
             </mat-card-content></mat-card>
         <mat-card class="result">
-            <mat-card-content class="upload-thumbnail">
+            <mat-card-content class="upload-button">
                 <h3 class="upload-h3">Video</h3>
                 <input style="display: none;" type="file" class="file-input" [accept]="requiredFileType"
                     (change)="onFileSelected($event)" #fileUpload>
                 <div class="file-upload">
-                    <button mat-raised-button color="primary" class="upload-btn" (click)="fileUpload.click()">Upload
-                        Thumbnail
+                    <button mat-raised-button color="primary" class="upload-btn" (click)="fileUpload.click()">Cover
                         <mat-icon>attach_file</mat-icon>
                     </button>
-                    {{fileName || "No file uploaded yet."}}
+                    <p>{{fileName || "No file uploaded yet."}}</p>
                 </div>
                 <div class="progress dn" id="thumbnail-progress">
                     <mat-progress-bar class="progress-bar" mode="determinate" [value]="uploadProgress"
@@ -88,15 +87,33 @@
                         *ngIf="uploadProgress">delete_forever</mat-icon>
                 </div>
             </mat-card-content>
-            <mat-card-content class="upload-thumbnail">
+            <mat-card-content class="upload-button">
                 <input style="display: none;" type="file" class="file-input" [accept]="requiredFileType"
                     (change)="onFileSelected($event)" #fileUpload>
                 <div class="file-upload">
-                    <button mat-raised-button color="primary" class="upload-btn" (click)="fileUpload.click()">Upload
-                        Video
+                    <button mat-raised-button color="primary" class="upload-btn" (click)="fileUpload.click()">Big
+                        picture
                         <mat-icon>attach_file</mat-icon>
                     </button>
-                    {{fileName || "No file uploaded yet."}}
+                    <p>{{fileName || "No file uploaded yet."}}</p>
+                </div>
+                <div class="progress dn" id="video-progress">
+                    <mat-progress-bar class="progress-bar" mode="determinate" [value]="uploadProgress"
+                        *ngIf="uploadProgress">
+                    </mat-progress-bar>
+                    <mat-icon class="cancel-upload" (click)="cancelUpload()"
+                        *ngIf="uploadProgress">delete_forever</mat-icon>
+                </div>
+            </mat-card-content>
+
+            <mat-card-content class="upload-button">
+                <input style="display: none;" type="file" class="file-input" [accept]="requiredFileType"
+                    (change)="onFileSelected($event)" #fileUpload>
+                <div class="file-upload">
+                    <button mat-raised-button color="primary" class="upload-btn" (click)="fileUpload.click()">Video
+                        <mat-icon>attach_file</mat-icon>
+                    </button>
+                    <p>{{fileName || "No file uploaded yet."}}</p>
                 </div>
                 <div class="progress dn" id="video-progress">
                     <mat-progress-bar class="progress-bar" mode="determinate" [value]="uploadProgress"

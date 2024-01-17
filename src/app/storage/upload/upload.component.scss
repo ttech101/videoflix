@@ -91,8 +91,9 @@ mat-card {
   margin-bottom: 22px;
 }
 
-.upload-thumbnail {
+.upload-button {
   button {
+    width: 200px;
     margin-top: 15px;
     margin-bottom: 15px;
   }
@@ -100,4 +101,14 @@ mat-card {
 
 .dn {
   display: none;
+}
+
+.file-upload {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  p {
+    margin: 0;
+    margin-left: 20px;
+  }
 }

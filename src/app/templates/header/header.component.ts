@@ -19,6 +19,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { ThemePalette } from '@angular/material/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'app-header',
@@ -99,6 +100,7 @@ export class DialogAnimationsDeleteDialog {
     MatSlideToggleModule,
     MatCardModule,
     MatAutocompleteModule,
+    MatDividerModule,
   ],
   styleUrl: './dialog/dialog.style.scss',
 })
@@ -125,6 +127,7 @@ export class DialogAnimationsProfilDialog {
     ReactiveFormsModule,
     MatInputModule,
     MatIconModule,
+    MatDividerModule,
   ],
   styleUrl: './dialog/dialog.style.scss',
 })
