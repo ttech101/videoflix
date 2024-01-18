@@ -20,6 +20,7 @@ import { MatCardModule } from '@angular/material/card';
 import { ThemePalette } from '@angular/material/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDividerModule } from '@angular/material/divider';
+import { DataService } from '../../service/data.service';
 
 @Component({
   selector: 'app-header',
@@ -29,7 +30,13 @@ import { MatDividerModule } from '@angular/material/divider';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-  constructor(private router: Router, public dialog: MatDialog) {}
+  constructor(
+    private router: Router,
+    public dialog: MatDialog,
+    private dataService: DataService
+  ) {}
+  name: string | any = this.dataService.getUser();
+
   btnUpload(url: string) {
     this.router.navigateByUrl('/' + url);
   }
@@ -63,6 +70,7 @@ export class HeaderComponent {
     });
   }
   menuLogout() {
+    localStorage.clear();
     this.router.navigateByUrl('/');
   }
 }

@@ -53,11 +53,11 @@
     </div>
     <div class="profil">
         <button (click)="btnUpload('upload')" mat-stroked-button>Upload</button>
-        <span>ttech</span>
+        <span>{{name}}</span>
         <img src="/assets/img/woman-995164_640.png" alt="" [matMenuTriggerFor]="menu_profile">
         <mat-menu #menu_profile="matMenu">
             <div class="profil-name">
-                <p><b>ttech</b></p>
+                <p><b>{{name}}</b></p>
             </div>
             <button mat-menu-item (click)="openDialogProfil('0ms', '0ms')"> Profil bearbeiten</button>
             <button mat-menu-item (click)="openDialogKonto('0ms', '0ms')">Konto</button>

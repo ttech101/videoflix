@@ -26,10 +26,16 @@ export class AuthService {
   ) {
     const url = environment.apiUrl + '/register/';
     var formdata = new FormData();
-    formdata.append('username', username);
+    formdata.append('first_name', username);
+    formdata.append('username', email);
     formdata.append('password1', password1);
     formdata.append('password2', password2);
     formdata.append('email', email);
     return lastValueFrom(this.http.post(url, formdata));
+  }
+
+  public checkToken(token: string | any) {
+    const url = environment.apiUrl + '/check_token/';
+    return lastValueFrom(this.http.get(url + '?token=' + token));
   }
 }

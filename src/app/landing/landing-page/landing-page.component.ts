@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,6 +14,9 @@ import { FactsComponent } from '../facts/facts.component';
 import { HeroComponent } from '../hero/hero.component';
 import { FaqComponent } from '../faq/faq.component';
 import { FooterComponent } from '../../templates/footer/footer.component';
+import { Router } from '@angular/router';
+import { AuthService } from '../../service/auth.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-landing-page',

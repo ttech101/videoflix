@@ -6,6 +6,10 @@ import { Injectable } from '@angular/core';
 export class DataService {
   private formData: any;
 
+  getUser() {
+    return localStorage.getItem('name');
+  }
+
   setFormData(data: any) {
     this.formData = data;
   }
