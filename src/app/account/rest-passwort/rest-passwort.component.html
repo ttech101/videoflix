@@ -21,10 +21,14 @@
                     <mat-error>Email is <strong>required</strong></mat-error>
                     }
                 </mat-form-field>
+                <mat-error>{{error_message}}</mat-error>
                 <button mat-fab extended color="primary">
                     Passwort zurücksetzen
                 </button>
             </form>
+            <button style="margin: 16px;" mat-fab extended color="" (click)="goBack()">
+                Zurück
+            </button>
         </mat-card>
     </div>
     <app-footer></app-footer>

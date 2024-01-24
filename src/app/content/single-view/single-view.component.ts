@@ -1,6 +1,5 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { HeaderComponent } from '../../templates/header/header.component';
-import { CategoryForYouComponent } from '../../module/category/category-for-you/category-for-you.component';
 import { FooterComponent } from '../../templates/footer/footer.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,6 +12,8 @@ import {
   MatDialogContent,
   MatDialogTitle,
 } from '@angular/material/dialog';
+import { NewMoviesComponent } from '../../landing/new-movies/new-movies.component';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-single-view',
@@ -21,14 +22,15 @@ import {
   styleUrl: './single-view.component.scss',
   imports: [
     HeaderComponent,
-    CategoryForYouComponent,
     FooterComponent,
     MatChipsModule,
     MatIconModule,
     MatButtonModule,
+    NewMoviesComponent,
   ],
 })
-export class SingleViewComponent {
+export class SingleViewComponent implements OnInit {
+  data: any = [];
   title: string = 'Vaiana';
   description: string =
     'Vaiana, ein abenteuerlustiges Mädchen, bricht auf zu einer mutigen Mission, um ihr Volk zu retten. Unterwegs begegnet sie dem einst mächtigen Halbgott Maui. Gemeinsam überqueren sie das Meer auf einer Reise voller Spaß und Action.';
@@ -44,12 +46,20 @@ export class SingleViewComponent {
   thumbnail_image: string = '/assets/img/test_poster/badging.jpeg';
   age_rating: number = 0;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private as: AuthService) {}
+
+  async ngOnInit() {
+    let paramsUrl = new URLSearchParams(document.location.search);
+    let key: string | any = paramsUrl.get('select');
+    let datas: any = await this.as.loadMovies(key);
+    this.data = datas[0];
+  }
 
   openDialogDescription() {
     const dialogRef = this.dialog.open(DialogElementsDescriptionDialog, {
       data: {
-        descriptionLong: this.description_long,
+        descriptionLong: this.data.description,
+        author: this.data.author,
       },
     });
 
@@ -75,6 +85,7 @@ export class SingleViewComponent {
 })
 export class DialogElementsDescriptionDialog {
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { descriptionLong: string }
+    @Inject(MAT_DIALOG_DATA)
+    public data: { descriptionLong: string; author: string }
   ) {}
 }

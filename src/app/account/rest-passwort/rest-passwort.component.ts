@@ -11,6 +11,8 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { Location } from '@angular/common';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-rest-passwort',
@@ -32,6 +34,7 @@ export class RestPasswortComponent {
   set_text: string =
     'Bitte prüfe dein E-Mail Postfach. Der Link zum Passwort zurücksetzen wurde gesendet.';
   formData: any;
+  error_message: string = '';
   email!: string | any;
   emailFormControl = new FormControl('', [
     Validators.required,
@@ -40,7 +43,12 @@ export class RestPasswortComponent {
     ),
   ]);
 
-  constructor(private router: Router, private dataService: DataService) {}
+  constructor(
+    private router: Router,
+    private dataService: DataService,
+    private location: Location,
+    private as: AuthService
+  ) {}
 
   ngOnInit() {
     const formData = this.dataService.getFormData();
@@ -51,7 +59,7 @@ export class RestPasswortComponent {
     }
   }
 
-  submitForm() {
+  async submitForm() {
     if (this.emailFormControl.valid) {
       this.dataService.setFormData({
         email: this.emailFormControl.value,
@@ -59,7 +67,16 @@ export class RestPasswortComponent {
         header: this.set_header,
         text: this.set_text,
       });
-      this.router.navigate(['/completely']);
+      let email: string | any = this.emailFormControl.value;
+      try {
+        await this.as.resetPassword(email);
+      } catch (e: any) {
+        this.error_message = e.error.error;
+        console.log(this.error_message);
+      }
     }
+  }
+  goBack() {
+    this.location.back();
   }
 }

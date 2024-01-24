@@ -1,20 +1,21 @@
 <app-header></app-header>
 <div class="single-view-img">
-    <img src="{{background_image}}" alt="">
+    <img src="{{data.big_picture}}" alt="">
 
     <div class="single-view-content">
 
-        <h1>{{title}}</h1>
+        <h1>{{data.movie_name}}</h1>
 
         <div class="small-info">
             <mat-chip>
-                {{age_rating}}
+                {{data.age_rating}}
             </mat-chip>
             <p>{{date}}</p>
             <p>&middot;</p>
-            <p>{{film_length}}</p>
+            <p>{{data.video_length}}</p>
+            <p>&middot;</p>
+            <p><i>{{data.genre}}</i></p>
         </div>
-        <p><i>{{genre}}</i></p>
         <div class="button">
             <button mat-fab extended color="accent">
                 <mat-icon>play_circle</mat-icon>
@@ -28,12 +29,12 @@
                 <mat-icon>info</mat-icon>
             </button>
         </div>
-        <span>{{description}}</span>
+        <span>{{data.description_short}}</span>
 
     </div>
 </div>
 <div class="category-background">
-    <app-category-for-you></app-category-for-you>
+    <app-new-movies></app-new-movies>
 </div>
 
 <app-footer></app-footer>

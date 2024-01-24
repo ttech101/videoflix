@@ -7,12 +7,14 @@
   align-items: center;
   flex-direction: column;
   background-color: #262626;
+  color: #a6a6a8;
+  margin-top: auto; /* Stellt sicher, dass der Footer am unteren Rand bleibt */
 
   p {
     text-align: center;
-    color: #a6a6a8;
     margin-top: 20px;
   }
+
   img {
     height: 50px;
   }

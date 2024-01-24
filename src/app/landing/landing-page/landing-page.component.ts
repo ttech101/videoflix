@@ -38,9 +38,18 @@ import { HttpClientModule } from '@angular/common/http';
     FooterComponent,
   ],
 })
-export class LandingPageComponent {
+export class LandingPageComponent implements OnInit {
   emailFormControl = new FormControl('', [
     Validators.required,
     Validators.email,
   ]);
+  constructor(private router: Router) {}
+
+  ngOnInit() {
+    setTimeout(() => {
+      if (sessionStorage.getItem('account') == 'true') {
+        this.router.navigate(['/home']);
+      }
+    }, 1000);
+  }
 }

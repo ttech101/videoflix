@@ -8,7 +8,8 @@ import { FaqComponent } from './landing/faq/faq.component';
 import { NewMoviesComponent } from './landing/new-movies/new-movies.component';
 import { HeroComponent } from './landing/hero/hero.component';
 import { AuthService } from './service/auth.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthInterceptorService } from './service/auth-interceptor.service';
 
 @Component({
   selector: 'app-root',
@@ -34,17 +35,15 @@ export class AppComponent implements OnInit {
   constructor(private router: Router, private as: AuthService) {}
 
   async ngOnInit() {
-    console.log('test123');
     if (localStorage.getItem('authToken')) {
-      console.log('irgend ein Token vorhanden');
       let resp: any = await this.as.checkToken(
         localStorage.getItem('authToken')
       );
       if (resp.status) {
-        this.router.navigate(['/home']);
+        sessionStorage.setItem('account', 'true');
+      } else {
+        sessionStorage.setItem('account', 'false');
       }
-    } else {
-      console.log('Kein Token vorhanden');
     }
   }
 }

@@ -1,6 +1,9 @@
 <div class="dialog-box">
     <h2 mat-dialog-title>Beschreibung</h2>
     <p mat-dialog-content>{{data.descriptionLong}}</p>
+    <div class="dialog-box-author">
+        <p>Author:&nbsp; </p><i> {{data.author}}</i>
+    </div>
     <div mat-dialog-actions align="end">
         <button mat-button mat-dialog-close>Close</button>
     </div>

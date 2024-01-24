@@ -80,4 +80,11 @@ app-category-for-you {
 
 .dialog-box {
   padding: 25px;
+  i {
+    color: white;
+  }
+}
+.dialog-box-author {
+  display: flex;
+  padding-left: 30px;
 }

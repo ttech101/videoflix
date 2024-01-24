@@ -16,6 +16,11 @@ import { CookiePolicyComponent } from './policy/cookie-policy/cookie-policy.comp
 import { UploadComponent } from './storage/upload/upload.component';
 import { SingleViewComponent } from './content/single-view/single-view.component';
 import { LandingResetPasswordComponent } from './account/landing-reset-password/landing-reset-password.component';
+import { authGuard } from './service/auth.guard';
+import { MyComponent } from './content/my/my.component';
+import { NatureComponent } from './content/nature/nature.component';
+import { FunnyComponent } from './content/funny/funny.component';
+import { KnowledgeComponent } from './content/knowledge/knowledge.component';
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -24,15 +29,49 @@ export const routes: Routes = [
   { path: 'completely', component: CompletelyComponent },
   { path: 'enter-passwort', component: EnterPasswortComponent },
   { path: 'reset-passwort', component: RestPasswortComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'series', component: SeriesComponent },
-  { path: 'movies', component: MoviesComponent },
-  { path: 'serch', component: SerchComponent },
-  { path: 'watchlist', component: WatchlistComponent },
+  { path: 'landing-reset-password', component: LandingResetPasswordComponent },
+  {
+    path: 'watchlist',
+    component: WatchlistComponent,
+    canActivate: [authGuard],
+  },
   { path: 'imprint', component: ImprintComponent },
-  { path: 'privacy-policy', component: PrivacyPolicyComponent },
-  { path: 'cookie-policy', component: CookiePolicyComponent },
-  { path: 'upload', component: UploadComponent },
-  { path: 'single-view', component: SingleViewComponent },
-  { path: 'landing-reset-passwort', component: LandingResetPasswordComponent },
+  {
+    path: 'privacy-policy',
+    component: PrivacyPolicyComponent,
+  },
+  {
+    path: 'cookie-policy',
+    component: CookiePolicyComponent,
+  },
+  { path: 'home', component: HomeComponent, canActivate: [authGuard] },
+  { path: 'series', component: SeriesComponent, canActivate: [authGuard] },
+  { path: 'movies', component: MoviesComponent, canActivate: [authGuard] },
+  { path: 'serch', component: SerchComponent, canActivate: [authGuard] },
+  { path: 'upload', component: UploadComponent, canActivate: [authGuard] },
+  {
+    path: 'single-view',
+    component: SingleViewComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'my',
+    component: MyComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'nature',
+    component: NatureComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'funny',
+    component: FunnyComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'knowledge',
+    component: KnowledgeComponent,
+    canActivate: [authGuard],
+  },
 ];

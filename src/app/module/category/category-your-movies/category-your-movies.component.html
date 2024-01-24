@@ -2,12 +2,10 @@
     <p>Deine Filme</p>
     <div class="content-boxing ">
         <div class="content-draggable" id="content-box">
-            <div class="content-box">
-                <a href=""><img src="assets/img/test_poster/badging.jpeg" alt=""></a>
+            <div *ngFor="let single of data" class="content-box">
+                <a href="/single-view/?select={{single.random_key}}"><img src="{{single.cover}}" alt=""></a>
             </div>
-            <div class="content-box">
-                <a href=""><img src="assets/img/test_poster/badging.jpeg" alt=""></a>
-            </div>
+
         </div>
     </div>
 </div>

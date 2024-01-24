@@ -16,6 +16,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { AuthService } from '../../service/auth.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-enter-passwort',
@@ -40,12 +41,7 @@ export class EnterPasswortComponent {
   formData: any;
   email!: string;
   password: string = '';
-  passwordForm = new FormControl('', [
-    Validators.required,
-    Validators.pattern(
-      /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&^_-]).{8,}/
-    ),
-  ]);
+  passwordForm = new FormControl('', [Validators.required]);
 
   constructor(
     private router: Router,
@@ -85,6 +81,8 @@ export class EnterPasswortComponent {
       );
       localStorage.setItem('authToken', resp.token);
       localStorage.setItem('name', resp.name);
+      sessionStorage.setItem('account', 'true');
+      localStorage.setItem('avatar', environment.apiUrl + resp.avatar_path);
       this.router.navigateByUrl('/home');
     } catch (e) {
       console.log(e);

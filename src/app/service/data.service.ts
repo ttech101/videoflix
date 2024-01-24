@@ -5,6 +5,9 @@ import { Injectable } from '@angular/core';
 })
 export class DataService {
   private formData: any;
+  name: string = '';
+  avatar: string = '';
+  save_profil: boolean = false;
 
   getUser() {
     return localStorage.getItem('name');
@@ -16,5 +19,13 @@ export class DataService {
 
   getFormData() {
     return this.formData;
+  }
+
+  trueOrFalse(a: boolean) {
+    if (a) {
+      return 'True';
+    } else {
+      return 'False';
+    }
   }
 }

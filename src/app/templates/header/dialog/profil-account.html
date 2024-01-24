@@ -1,21 +1,28 @@
 <div class="profil-account">
-    <h2 mat-dialog-title>Profil</h2>
-    <div mat-dialog-content>
-        Das ist dein Profil. Ändere hier die Einstellungen.
+    <div class="headline-profil">
+        <div mat-dialog-content>
+            <h2 mat-dialog-title>Profil</h2>
+            Das ist dein Profil. Ändere hier die Einstellungen.
+        </div>
+
+
+        <img (click)="fileUpload.click()" src="{{avatar_path}}" alt="profil_img">
     </div>
+
     <div mat-dialog-content>
         <div class="border-dialog">
             <form class="profil-form">
                 <h3 class="profil-h3">Profil Name</h3>
                 <mat-form-field class="example-full-width">
                     <mat-label>Profil Name</mat-label>
-                    <input matInput placeholder="Gebe dein Profilnamen ein" value="ttech">
+                    <input matInput placeholder="Gebe dein Profilnamen ein" value="{{name}}" [(ngModel)]="name"
+                        name="name">
                 </mat-form-field>
                 <h3 class="profil-h3">Optionen</h3>
                 <mat-card-content>
                     <section class="profil-slider">
-                        <mat-slide-toggle class="example-margin" [color]="color" [checked]="checked"
-                            [disabled]="disabled">
+                        <mat-slide-toggle class="example-margin" [color]="color" [(ngModel)]="isChecked"
+                            name="play_check">
                             Automatische Wiedergabe
                         </mat-slide-toggle>
                     </section>
@@ -23,26 +30,41 @@
                 <h3 class="profil-h3">Sprache</h3>
                 <mat-form-field>
                     <mat-label>Sprache</mat-label>
-                    <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl"
-                        [matAutocomplete]="auto">
-                    <mat-autocomplete #auto="matAutocomplete">
-                        @for (option of options; track option) {
-                        <mat-option [value]="option">{{option}}</mat-option>
-                        }
-                    </mat-autocomplete>
+                    <mat-select [(value)]="selected_language">
+                        <mat-option value="Deutsch">Deutsch</mat-option>
+                        <mat-option value="Englisch">Englisch</mat-option>
+                    </mat-select>
                 </mat-form-field>
                 <h3 class="profil-h3">Freigabe</h3>
                 <mat-chip-listbox aria-label="Fish selection">
-                    <mat-chip-option>Keine Altersfreigabe</mat-chip-option>
-                    <mat-chip-option>Altersfreigabe ab 6</mat-chip-option>
-                    <mat-chip-option>Altersfreigabe ab 12</mat-chip-option>
-                    <mat-chip-option>Altersfreigabe ab 18</mat-chip-option>
+                    <mat-chip-option [selected]="selectedAge === 0" (selectionChange)="changeSelected(0)">Keine
+                        Altersfreigabe</mat-chip-option>
+                    <mat-chip-option [selected]="selectedAge === 6" (selectionChange)="changeSelected(6)">Altersfreigabe
+                        ab 6</mat-chip-option>
+                    <mat-chip-option [selected]="selectedAge === 12"
+                        (selectionChange)="changeSelected(12)">Altersfreigabe ab 12</mat-chip-option>
+                    <mat-chip-option [selected]="selectedAge === 16"
+                        (selectionChange)="changeSelected(16)">Altersfreigabe ab 18</mat-chip-option>
                 </mat-chip-listbox>
+                <mat-card-content class="upload-button">
+                    <h3 class="profil-h3">Profielbild</h3>
+                    <input style="display: none;" type="file" class="file-input" [accept]="requiredFileType"
+                        (change)="onFileSelected($event)" #fileUpload>
+                    <div class="file-upload">
+                        <button mat-raised-button color="primary" class="upload-btn"
+                            (click)="fileUpload.click()">Profile Bild
+                            <mat-icon>attach_file</mat-icon>
+                        </button>
+                        <p>{{fileName || "No file uploaded yet."}}</p>
+                    </div>
+                    <i>{{avatar_info}}</i>
+                </mat-card-content>
             </form>
         </div>
     </div>
     <div mat-dialog-actions align="center">
         <button mat-button mat-dialog-close>Schließen</button>
-        <button mat-raised-button color="primary">Speichern</button>
+        <button mat-raised-button color="primary" (click)="saveProfil()" mat-dialog-close
+            cdkFocusInitial>Speichern</button>
     </div>
 </div>

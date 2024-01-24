@@ -1,76 +1,83 @@
 <app-header></app-header>
 
 <div class="content">
-    <form>
+    <form onsubmit="submitUpload()">
         <h2>Upload</h2>
         <mat-form-field class="full-width">
             <mat-label>Film Name</mat-label>
-            <input matInput>
+            <input matInput [(ngModel)]="movie_name" name="name">
         </mat-form-field>
         <mat-form-field class="full-width">
             <mat-label>Beschreibung Kurz</mat-label>
-            <input matInput>
+            <input matInput [(ngModel)]="description_short" name="description_short">
         </mat-form-field>
         <mat-form-field class="full-width">
             <mat-label>Beschreibung lang</mat-label>
-            <textarea matInput></textarea>
+            <textarea matInput [(ngModel)]="description" name="description"></textarea>
         </mat-form-field>
-
         <div class="date">
             <mat-form-field class="full-width">
                 <mat-label>Author</mat-label>
-                <input matInput>
+                <input matInput [(ngModel)]="author" name="author">
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Veröffentlichung</mat-label>
-                <input matInput [matDatepicker]="picker">
+                <input matInput [matDatepicker]="date_from">
                 <mat-hint>MM/DD/YYYY</mat-hint>
                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
         </div>
+
         <mat-card class="result">
             <mat-card-content>
                 <h3>Optionen</h3>
                 <section class="section-option">
                     <mat-form-field class="full-width">
                         <mat-label>Video länge (min.)</mat-label>
-                        <input type="time" matInput>
+                        <input type="time" matInput [(ngModel)]="video_length" name="video_length">
                     </mat-form-field>
-
                 </section>
-
             </mat-card-content>
             <mat-card-content>
                 <h3 class="upload-h3">Film Typ</h3>
                 <section class="example-section">
-                    <mat-checkbox class="example-margin" [(ngModel)]="checked" name="first">Spielfilm /
+                    <mat-checkbox class="example-margin" [(ngModel)]="movie_check" name="movie_check">Spielfilm /
                         Kurzfilm</mat-checkbox>
-                    <mat-checkbox class="example-margin" [(ngModel)]="indeterminate" name="first">Serie</mat-checkbox>
+                    <mat-checkbox class="example-margin" [(ngModel)]="short_movie_check"
+                        name="short_movie_check">Serie</mat-checkbox>
                 </section>
             </mat-card-content>
             <mat-card-content>
                 <h3 class="upload-h3">Genre</h3>
                 <section class="example-section">
-                    <mat-checkbox class="example-margin" [(ngModel)]="checked" name="first">Natur</mat-checkbox>
-                    <mat-checkbox class="example-margin" [(ngModel)]="indeterminate"
-                        name="first">Lustiges</mat-checkbox>
-                    <mat-checkbox class="example-margin" [(ngModel)]="checked" name="first">Wissen</mat-checkbox>
-                    <mat-checkbox class="example-margin" [(ngModel)]="checked" name="first">Sonstiges</mat-checkbox>
+                    <mat-checkbox class="example-margin" [(ngModel)]="nature_check"
+                        name="nature_check">Natur</mat-checkbox>
+                    <mat-checkbox class="example-margin" [(ngModel)]="funny_check"
+                        name="funny_check">Lustiges</mat-checkbox>
+                    <mat-checkbox class="example-margin" [(ngModel)]="knowledge_check"
+                        name="knowledge_check">Wissen</mat-checkbox>
+                    <mat-checkbox class="example-margin" [(ngModel)]="other_check"
+                        name="other_check">Sonstiges</mat-checkbox>
                 </section>
             </mat-card-content>
             <mat-card-content>
                 <h3 class="upload-h3">Freigabe</h3>
                 <mat-chip-listbox aria-label="Fish selection">
-                    <mat-chip-option>Keine Altersfreigabe</mat-chip-option>
-                    <mat-chip-option>Altersfreigabe ab 6</mat-chip-option>
-                    <mat-chip-option>Altersfreigabe ab 12</mat-chip-option>
-                    <mat-chip-option>Altersfreigabe ab 18</mat-chip-option>
+                    <mat-chip-option [selected]="selectedAge === 0" (selectionChange)="changeSelected(0)">Keine
+                        Altersfreigabe</mat-chip-option>
+                    <mat-chip-option [selected]="selectedAge === 6" (selectionChange)="changeSelected(6)">Altersfreigabe
+                        ab 6</mat-chip-option>
+                    <mat-chip-option [selected]="selectedAge === 12"
+                        (selectionChange)="changeSelected(12)">Altersfreigabe ab 12</mat-chip-option>
+                    <mat-chip-option [selected]="selectedAge === 16"
+                        (selectionChange)="changeSelected(16)">Altersfreigabe ab 18</mat-chip-option>
                 </mat-chip-listbox>
             </mat-card-content></mat-card>
         <mat-card class="result">
+
             <mat-card-content class="upload-button">
-                <h3 class="upload-h3">Video</h3>
+                <h3 class="upload-h3">Video / Dateien</h3>
                 <input style="display: none;" type="file" class="file-input" [accept]="requiredFileType"
                     (change)="onFileSelected($event)" #fileUpload>
                 <div class="file-upload">
@@ -87,6 +94,7 @@
                         *ngIf="uploadProgress">delete_forever</mat-icon>
                 </div>
             </mat-card-content>
+
             <mat-card-content class="upload-button">
                 <input style="display: none;" type="file" class="file-input" [accept]="requiredFileType"
                     (change)="onFileSelected($event)" #fileUpload>
@@ -125,8 +133,9 @@
             </mat-card-content>
         </mat-card>
         <div class="button-row">
-            <mat-slide-toggle [color]="color" [checked]="checked" [disabled]="disabled">
-                Video für alle sichtbar?
+            <mat-slide-toggle [color]="color" [checked]="upload_visible_check" name="upload_visible_check"
+                [disabled]="disabled">
+                Upload für alle sichtbar?
             </mat-slide-toggle>
             <button mat-fab extended color="primary">
                 <mat-icon>upload</mat-icon>

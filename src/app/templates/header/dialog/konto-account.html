@@ -1,35 +1,48 @@
 <div class="konto-account">
     <h2 mat-dialog-title>Account</h2>
-    <div mat-dialog-content>
+    <div mat-dialog-content class="mat-dialog-content">
         Kontoinformationen bearbeiten
         <div class="border-dialog">
-            <form if="email.invalid" (ngSubmit)="submitForm()" method="GET">
+            <form if="email.invalid" (ngSubmit)="submitFormChangeEmail()">
+                <h3>Change E-mail</h3>
                 <mat-form-field>
                     <mat-label>Enter your email</mat-label>
-                    <input matInput [formControl]="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+                    <input matInput [formControl]="email" required>
                     @if (email.invalid) {
                     <mat-error>{{getErrorMessage()}}</mat-error>
                     }
                 </mat-form-field>
-                <button mat-button cdkFocusInitial>Speichern</button>
+                <i>{{message_mail}}</i>
+                <button mat-button cdkFocusInitial>Ändern</button>
             </form>
-        </div>
-        <div class="border-dialog">
-            <form method="GET">
+
+
+            <form>
+                <h3 style="margin-top: 15px;">Change password</h3>
                 <mat-form-field>
-                    <mat-label>Enter your password</mat-label>
-                    <input matInput [type]="hide ? 'password' : 'text'">
+                    <mat-label>Current password</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="current_password"
+                        name="current_password">
                     <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                         [attr.aria-pressed]="hide">
                         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
                 </mat-form-field>
-                <button mat-button cdkFocusInitial>Speichern</button>
+                <mat-form-field>
+                    <mat-label>Enter new password</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'" [formControl]="new_password">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+                <i>{{message_password}}</i>
+                <button mat-button cdkFocusInitial (click)="submitFormChangePassword()">Ändern</button>
             </form>
         </div>
     </div>
     <div mat-dialog-actions align="center">
-        <button mat-button mat-dialog-close>Abbrechen</button>
-        <button mat-raised-button cdkFocusInitial color="primary">Speichern</button>
+        <button class="buton-bottom" mat-raised-button cdkFocusInitial color="primary"
+            mat-dialog-close>Schlißen</button>
     </div>
 </div>

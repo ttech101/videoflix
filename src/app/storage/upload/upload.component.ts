@@ -45,20 +45,40 @@ import { CommonModule } from '@angular/common';
   ],
 })
 export class UploadComponent {
+  @Input()
+  movie_name: string = '';
+  description_short: string = '';
+  description: string = '';
+  author: string = '';
+  date_from: Date | any = '';
+  video_length: String = '';
+
+  movie_check = false;
+  short_movie_check = false;
+  nature_check = false;
+  funny_check = false;
+  knowledge_check = false;
+  other_check = false;
+  selectedAge?: number | any;
+  upload_visible_check = false;
+
   valueText: string = '';
   color: ThemePalette = 'accent';
   checked = false;
   disabled = false;
   indeterminate = false;
-
-  @Input()
   requiredFileType: string | undefined;
-
   fileName = '';
   uploadProgress: number | any;
   uploadSub: Subscription | any;
 
   constructor(private http: HttpClient) {}
+
+  submitUpload() {}
+
+  changeSelected(age: number) {
+    this.selectedAge = age;
+  }
 
   onFileSelected(event: any) {
     // Das muss später noch kopiert werden für das video

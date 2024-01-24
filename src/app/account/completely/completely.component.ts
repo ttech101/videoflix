@@ -23,7 +23,7 @@ export class CompletelyComponent {
     const formData = this.dataService.getFormData();
     this.formData = formData;
     console.log(formData);
-    if (formData && formData.email) {
+    if (formData) {
       this.set_headline = formData.headline;
       this.set_header = formData.header;
       this.set_text = formData.text;

@@ -12,6 +12,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../../service/auth.service';
+import { DataService } from '../../service/data.service';
 
 @Component({
   selector: 'app-landing-reset-password',
@@ -30,13 +32,12 @@ import { Router } from '@angular/router';
   styleUrl: './landing-reset-password.component.scss',
 })
 export class LandingResetPasswordComponent {
-  set_headline: string = '3. SCHRITT';
-  set_header: string = 'Bestätige deine E-Mail';
-  set_text: string =
-    'Bitte prüfe dein E-Mail Postfach und bestätige den darinenhaltenen Link.';
+  set_headline: string = 'Passwortänderung';
+  set_header: string = 'Passwort erfolgreiche geändert';
+  set_text: string = 'Du kannst dich nun wieder Einloggen';
   hide = true;
   confirm_email: Boolean = false;
-  confirm_passwort: boolean = false;
+  confirm_password: boolean = false;
   email!: string;
   password_correct: boolean = false;
   password_incorrect: string = '';
@@ -46,13 +47,13 @@ export class LandingResetPasswordComponent {
       /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     ),
   ]);
-  passwort1 = new FormControl('', [
+  password1 = new FormControl('', [
     Validators.required,
     Validators.pattern(
       /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&^_-]).{8,}/
     ),
   ]);
-  passwort2 = new FormControl('', [
+  password2 = new FormControl('', [
     Validators.required,
     Validators.pattern(
       /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&^_-]).{8,}/
@@ -60,43 +61,47 @@ export class LandingResetPasswordComponent {
   ]);
   formData: any;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private as: AuthService,
+    private dataService: DataService
+  ) {}
 
-  getErrorMessagePasswort1() {
-    if (this.passwort1.hasError('required')) {
-      return 'You must enter a value passwort ';
+  getErrorMessagepassword1() {
+    if (this.password1.hasError('required')) {
+      return 'You must enter a value password ';
     }
     // Überprüfe, ob die E-Mail-Adresse gültig ist
-    if (this.passwort1.hasError('pattern')) {
-      return 'Not a valid passwort';
+    if (this.password1.hasError('pattern')) {
+      return 'Not a valid password';
     }
     return '';
   }
 
-  getErrorMessagePasswort2() {
-    if (this.passwort2.hasError('required')) {
-      return 'You must enter a value passwort';
+  getErrorMessagepassword2() {
+    if (this.password2.hasError('required')) {
+      return 'You must enter a value password';
     }
     // Überprüfe, ob die E-Mail-Adresse gültig ist
-    if (this.passwort2.hasError('pattern')) {
-      return 'Not a valid passwort';
+    if (this.password2.hasError('pattern')) {
+      return 'Not a valid password';
     }
     return '';
   }
 
-  passwortConfirm() {
+  passwordConfirm() {
     if (
-      this.passwort1.valid == true &&
-      this.passwort2.valid == true &&
-      this.passwort1.value == this.passwort2.value
+      this.password1.valid == true &&
+      this.password2.valid == true &&
+      this.password1.value == this.password2.value
     ) {
       this.password_incorrect = '';
       return true;
     }
     if (
-      this.passwort1.valid == true &&
-      this.passwort2.valid == true &&
-      this.passwort1.value != this.passwort2.value
+      this.password1.valid == true &&
+      this.password2.valid == true &&
+      this.password1.value != this.password2.value
     ) {
       this.password_incorrect = 'Passwords are ok but don`t match';
       return false;
@@ -106,9 +111,22 @@ export class LandingResetPasswordComponent {
   }
 
   submitForm() {
-    this.password_correct = this.passwortConfirm();
-    if (this.emailerror.valid == true && this.password_correct == true) {
+    this.password_correct = this.passwordConfirm();
+    if (this.password_correct == true) {
+      this.dataService.setFormData({
+        headline: this.set_headline,
+        header: this.set_header,
+        text: this.set_text,
+      });
+      let token: string | any = this.extractTokenFromURL();
+      let password: string | any = this.password1.value;
+      this.as.resetPasswordSave(password, token);
       this.router.navigate(['/completely']);
     }
+  }
+
+  extractTokenFromURL() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('token');
   }
 }
