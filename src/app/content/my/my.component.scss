@@ -1,4 +1,5 @@
 .content {
+  flex: 1;
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
@@ -81,4 +82,10 @@
     border-radius: 10px;
     border: 3px solid transparent;
   }
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Mindesthöhe des Containers auf 100% der Bildschirmhöhe setzen */
 }

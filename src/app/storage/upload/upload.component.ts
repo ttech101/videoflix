@@ -52,7 +52,6 @@ export class UploadComponent {
   author: string = '';
   date_from: Date | any = '';
   video_length: String = '';
-
   movie_check = false;
   short_movie_check = false;
   nature_check = false;
@@ -62,11 +61,6 @@ export class UploadComponent {
   selectedAge?: number | any;
   upload_visible_check = false;
 
-  valueText: string = '';
-  color: ThemePalette = 'accent';
-  checked = false;
-  disabled = false;
-  indeterminate = false;
   requiredFileType: string | undefined;
   fileName = '';
   uploadProgress: number | any;
@@ -81,7 +75,6 @@ export class UploadComponent {
   }
 
   onFileSelected(event: any) {
-    // Das muss später noch kopiert werden für das video
     const file: File = event.target.files[0];
 
     if (file) {

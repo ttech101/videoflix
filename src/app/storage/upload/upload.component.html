@@ -42,23 +42,30 @@
             <mat-card-content>
                 <h3 class="upload-h3">Film Typ</h3>
                 <section class="example-section">
-                    <mat-checkbox class="example-margin" [(ngModel)]="movie_check" name="movie_check">Spielfilm /
-                        Kurzfilm</mat-checkbox>
-                    <mat-checkbox class="example-margin" [(ngModel)]="short_movie_check"
-                        name="short_movie_check">Serie</mat-checkbox>
+                    <mat-radio-group>
+                        <mat-radio-button class="example-margin" [(ngModel)]="movie_check" name="movie_check">Spielfilm
+                            / Kurzfilm
+                        </mat-radio-button>
+                        <mat-radio-button class="example-margin" [(ngModel)]="short_movie_check"
+                            name="short_movie_check">Serie
+                        </mat-radio-button>
+                    </mat-radio-group>
                 </section>
             </mat-card-content>
             <mat-card-content>
                 <h3 class="upload-h3">Genre</h3>
                 <section class="example-section">
-                    <mat-checkbox class="example-margin" [(ngModel)]="nature_check"
-                        name="nature_check">Natur</mat-checkbox>
-                    <mat-checkbox class="example-margin" [(ngModel)]="funny_check"
-                        name="funny_check">Lustiges</mat-checkbox>
-                    <mat-checkbox class="example-margin" [(ngModel)]="knowledge_check"
-                        name="knowledge_check">Wissen</mat-checkbox>
-                    <mat-checkbox class="example-margin" [(ngModel)]="other_check"
-                        name="other_check">Sonstiges</mat-checkbox>
+                    <mat-radio-group>
+                        <mat-radio-button class="example-margin" [(ngModel)]="nature_check" name="nature_check">Natur
+                        </mat-radio-button>
+                        <mat-radio-button class="example-margin" [(ngModel)]="funny_check" name="funny_check">Lustiges
+                        </mat-radio-button>
+                        <mat-radio-button class="example-margin" [(ngModel)]="knowledge_check"
+                            name="knowledge_check">Wissen
+                        </mat-radio-button>
+                        <mat-radio-button class="example-margin" [(ngModel)]="other_check" name="other_check">Sonstiges
+                        </mat-radio-button>
+                    </mat-radio-group>
                 </section>
             </mat-card-content>
             <mat-card-content>
@@ -133,8 +140,7 @@
             </mat-card-content>
         </mat-card>
         <div class="button-row">
-            <mat-slide-toggle [color]="color" [checked]="upload_visible_check" name="upload_visible_check"
-                [disabled]="disabled">
+            <mat-slide-toggle [checked]="upload_visible_check" name="upload_visible_check">
                 Upload für alle sichtbar?
             </mat-slide-toggle>
             <button mat-fab extended color="primary">

@@ -1,4 +1,10 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Inject,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { HeaderComponent } from '../../templates/header/header.component';
 import { FooterComponent } from '../../templates/footer/footer.component';
 import { MatChipsModule } from '@angular/material/chips';
@@ -14,6 +20,8 @@ import {
 } from '@angular/material/dialog';
 import { NewMoviesComponent } from '../../landing/new-movies/new-movies.component';
 import { AuthService } from '../../service/auth.service';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-single-view',
@@ -48,6 +56,10 @@ export class SingleViewComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private as: AuthService) {}
 
+  @ViewChild('videoPlayer', { static: false })
+  videoplayer!: ElementRef;
+  isPlay: boolean = false;
+
   async ngOnInit() {
     let paramsUrl = new URLSearchParams(document.location.search);
     let key: string | any = paramsUrl.get('select');
@@ -67,6 +79,20 @@ export class SingleViewComponent implements OnInit {
       // Optional: Hier kannst du auf das Schließen des Dialogs reagieren
       console.log('Dialog geschlossen', result);
     });
+  }
+
+  toggleVideo() {
+    const video: any = document.getElementById('video');
+    if (video.requestFullscreen) {
+      video.requestFullscreen();
+    } else if (video.mozRequestFullScreen) {
+      video.mozRequestFullScreen();
+    } else if (video.webkitRequestFullscreen) {
+      video.webkitRequestFullscreen();
+    } else if (video.msRequestFullscreen) {
+      video.msRequestFullscreen();
+    }
+    this.videoplayer.nativeElement.play();
   }
 }
 

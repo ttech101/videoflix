@@ -1,27 +1,25 @@
-<app-header></app-header>
-
-<form class="example-form">
-    <mat-form-field class="example-full-width">
-        <mat-label>Title, Charakter oder Genre suchen</mat-label>
-        <input matInput placeholder="Title, Charakter oder Genre suchen" [(ngModel)]="key" name="search"
-            (input)="filterData()">
-    </mat-form-field>
-</form>
-
-<div *ngIf="filteredData.length > 0; else noResults" class="content">
-    <div class="content-boxing ">
-        <div class="content-draggable" id="content-box">
+<div class="wrapper">
+    <app-header></app-header>
+    <form class="example-form">
+        <mat-form-field class="example-full-width">
+            <mat-label>Film suchen</mat-label>
+            <input matInput placeholder="Title, Charakter oder Genre suchen" [(ngModel)]="key" name="search"
+                (input)="filterData()">
+        </mat-form-field>
+    </form>
+    <div *ngIf="filteredData.length > 0; else noResults" class="content">
+        <div class="content-boxing ">
             <div class="content-draggable" id="content-box">
-                <div *ngFor="let single of filteredData" class="content-box">
-                    <a href="/single-view/?select={{single.random_key}}"><img src="{{single.cover}}" alt=""></a>
+                <div class="content-draggable" id="content-box">
+                    <div *ngFor="let single of filteredData" class="content-box">
+                        <a href="/single-view/?select={{single.random_key}}"><img src="{{single.cover}}" alt=""></a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <ng-template #noResults>
+        <h2 class="noFound">Nichts gefunden.</h2>
+    </ng-template>
+    <app-footer></app-footer>
 </div>
-<ng-template #noResults>
-    <p>Nichts gefunden.</p>
-</ng-template>
-
-
-<app-footer></app-footer>

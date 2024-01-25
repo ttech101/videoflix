@@ -88,3 +88,27 @@ app-category-for-you {
   display: flex;
   padding-left: 30px;
 }
+
+.header-line {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap-reverse;
+  @media (max-width: 700px) {
+    h1 {
+      margin-top: 25px;
+      margin-bottom: 25px;
+    }
+  }
+}
+
+.video-box {
+  max-width: 500px;
+}
+.video {
+  display: flex;
+  justify-content: center;
+
+  border-radius: 20px;
+
+  width: 100%;
+}
