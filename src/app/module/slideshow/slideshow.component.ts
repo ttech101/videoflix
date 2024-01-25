@@ -46,7 +46,6 @@ export class SlideshowComponent implements OnInit {
   async loadData() {
     this.startSlides();
     this.data = await this.as.loadPreview('newHeader');
-
     this.updateSlides();
   }
 

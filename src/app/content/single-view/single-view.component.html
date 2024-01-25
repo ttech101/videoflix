@@ -5,15 +5,14 @@
 
         <div class="header-line">
             <h1>{{data.movie_name}}</h1>
+
             <div class="video-box">
-                <video id="video" class="video" controls #videoPlayer>
-                    <source src="{{data.video}}" type="video/mp4" />
-                    Browser not supported
+
+                <video class="video dn" #media id="video" preload="auto" controls (canplay)="onCanPlay($event)">
+                    <source src="{{video_url}}" type="video/mp4">
                 </video>
             </div>
         </div>
-
-
         <div class="small-info">
             <mat-chip>
                 {{data.age_rating}}

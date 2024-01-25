@@ -1,28 +1,28 @@
 <app-header></app-header>
 
 <div class="content">
-    <form onsubmit="submitUpload()">
+    <form (ngSubmit)="submitUpload()">
         <h2>Upload</h2>
         <mat-form-field class="full-width">
             <mat-label>Film Name</mat-label>
-            <input matInput [(ngModel)]="movie_name" name="name">
+            <input matInput formControlName="movie_name" name="name" required>
         </mat-form-field>
         <mat-form-field class="full-width">
             <mat-label>Beschreibung Kurz</mat-label>
-            <input matInput [(ngModel)]="description_short" name="description_short">
+            <input matInput formControlName="description_short" name="description_short" required>
         </mat-form-field>
         <mat-form-field class="full-width">
             <mat-label>Beschreibung lang</mat-label>
-            <textarea matInput [(ngModel)]="description" name="description"></textarea>
+            <textarea matInput formControlName="description" name="description"></textarea>
         </mat-form-field>
         <div class="date">
             <mat-form-field class="full-width">
                 <mat-label>Author</mat-label>
-                <input matInput [(ngModel)]="author" name="author">
+                <input matInput formControlName="author" name="author" required>
             </mat-form-field>
             <mat-form-field>
-                <mat-label>Veröffentlichung</mat-label>
-                <input matInput [matDatepicker]="date_from">
+                <mat-label>Choose a date</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="date_from" name="date_from" required>
                 <mat-hint>MM/DD/YYYY</mat-hint>
                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
@@ -35,19 +35,18 @@
                 <section class="section-option">
                     <mat-form-field class="full-width">
                         <mat-label>Video länge (min.)</mat-label>
-                        <input type="time" matInput [(ngModel)]="video_length" name="video_length">
+                        <input type="time" matInput formControlName="video_length" name="video_length" required>
                     </mat-form-field>
                 </section>
             </mat-card-content>
             <mat-card-content>
                 <h3 class="upload-h3">Film Typ</h3>
                 <section class="example-section">
-                    <mat-radio-group>
-                        <mat-radio-button class="example-margin" [(ngModel)]="movie_check" name="movie_check">Spielfilm
+                    <mat-radio-group formControlName="movie_check" name="movie_check" required>
+                        <mat-radio-button value="movie">Spielfilm
                             / Kurzfilm
                         </mat-radio-button>
-                        <mat-radio-button class="example-margin" [(ngModel)]="short_movie_check"
-                            name="short_movie_check">Serie
+                        <mat-radio-button value="serie">Serie
                         </mat-radio-button>
                     </mat-radio-group>
                 </section>
@@ -55,92 +54,79 @@
             <mat-card-content>
                 <h3 class="upload-h3">Genre</h3>
                 <section class="example-section">
-                    <mat-radio-group>
-                        <mat-radio-button class="example-margin" [(ngModel)]="nature_check" name="nature_check">Natur
+                    <mat-radio-group formControlName="genre" name="genre" required>
+                        <mat-radio-button value="nature">Natur
                         </mat-radio-button>
-                        <mat-radio-button class="example-margin" [(ngModel)]="funny_check" name="funny_check">Lustiges
+                        <mat-radio-button value="funny">Lustiges
                         </mat-radio-button>
-                        <mat-radio-button class="example-margin" [(ngModel)]="knowledge_check"
-                            name="knowledge_check">Wissen
+                        <mat-radio-button value="knowledge">Wissen
                         </mat-radio-button>
-                        <mat-radio-button class="example-margin" [(ngModel)]="other_check" name="other_check">Sonstiges
+                        <mat-radio-button value="other">Sonstiges
                         </mat-radio-button>
                     </mat-radio-group>
                 </section>
             </mat-card-content>
             <mat-card-content>
                 <h3 class="upload-h3">Freigabe</h3>
-                <mat-chip-listbox aria-label="Fish selection">
-                    <mat-chip-option [selected]="selectedAge === 0" (selectionChange)="changeSelected(0)">Keine
+                <mat-chip-listbox aria-label="Fish selection" formControlName="selectedAge" name="selectedAge"
+                    value="0">
+                    <mat-chip-option value="0">Keine
                         Altersfreigabe</mat-chip-option>
-                    <mat-chip-option [selected]="selectedAge === 6" (selectionChange)="changeSelected(6)">Altersfreigabe
+                    <mat-chip-option value="6">Altersfreigabe
                         ab 6</mat-chip-option>
-                    <mat-chip-option [selected]="selectedAge === 12"
-                        (selectionChange)="changeSelected(12)">Altersfreigabe ab 12</mat-chip-option>
-                    <mat-chip-option [selected]="selectedAge === 16"
-                        (selectionChange)="changeSelected(16)">Altersfreigabe ab 18</mat-chip-option>
+                    <mat-chip-option value="12">Altersfreigabe ab 12</mat-chip-option>
+                    <mat-chip-option value="16">Altersfreigabe ab 18</mat-chip-option>
                 </mat-chip-listbox>
             </mat-card-content></mat-card>
-        <mat-card class="result">
 
+
+        <mat-card class="result">
             <mat-card-content class="upload-button">
                 <h3 class="upload-h3">Video / Dateien</h3>
-                <input style="display: none;" type="file" class="file-input" [accept]="requiredFileType"
-                    (change)="onFileSelected($event)" #fileUpload>
-                <div class="file-upload">
-                    <button mat-raised-button color="primary" class="upload-btn" (click)="fileUpload.click()">Cover
-                        <mat-icon>attach_file</mat-icon>
-                    </button>
-                    <p>{{fileName || "No file uploaded yet."}}</p>
+                <div class="button_right">
+                    <input style="display: none;" type="file" class="file-input" accept="image/png, image/jpeg"
+                        (change)="onFileSelectedThumbnail($event)" #fileUpload>
+                    <div class="file-upload">
+                        <button mat-raised-button color="primary" class="upload-btn" (click)="fileUpload.click()">Cover
+                            <mat-icon>attach_file</mat-icon>
+                        </button>
+                        <p>{{fileName || "No file uploaded yet."}}</p>
+                    </div>
+                    <mat-icon class="cancel-upload" (click)="cancelUpload()"
+                        *ngIf="uploadProgress">delete_forever</mat-icon>
+                    <mat-icon id="check_thumbnail" style="color: green;" class="cancel-upload dn">done</mat-icon>
+                    <mat-icon id="nocheck_thumbnail" style="color: red;" class="cancel-upload dn">close</mat-icon>
                 </div>
                 <div class="progress dn" id="thumbnail-progress">
                     <mat-progress-bar class="progress-bar" mode="determinate" [value]="uploadProgress"
                         *ngIf="uploadProgress">
                     </mat-progress-bar>
-                    <mat-icon class="cancel-upload" (click)="cancelUpload()"
-                        *ngIf="uploadProgress">delete_forever</mat-icon>
                 </div>
             </mat-card-content>
 
-            <mat-card-content class="upload-button">
-                <input style="display: none;" type="file" class="file-input" [accept]="requiredFileType"
-                    (change)="onFileSelected($event)" #fileUpload>
-                <div class="file-upload">
-                    <button mat-raised-button color="primary" class="upload-btn" (click)="fileUpload.click()">Big
-                        picture
-                        <mat-icon>attach_file</mat-icon>
-                    </button>
-                    <p>{{fileName || "No file uploaded yet."}}</p>
-                </div>
-                <div class="progress dn" id="video-progress">
-                    <mat-progress-bar class="progress-bar" mode="determinate" [value]="uploadProgress"
-                        *ngIf="uploadProgress">
-                    </mat-progress-bar>
-                    <mat-icon class="cancel-upload" (click)="cancelUpload()"
-                        *ngIf="uploadProgress">delete_forever</mat-icon>
-                </div>
-            </mat-card-content>
 
-            <mat-card-content class="upload-button">
-                <input style="display: none;" type="file" class="file-input" [accept]="requiredFileType"
-                    (change)="onFileSelected($event)" #fileUpload>
-                <div class="file-upload">
-                    <button mat-raised-button color="primary" class="upload-btn" (click)="fileUpload.click()">Video
-                        <mat-icon>attach_file</mat-icon>
-                    </button>
-                    <p>{{fileName || "No file uploaded yet."}}</p>
-                </div>
-                <div class="progress dn" id="video-progress">
-                    <mat-progress-bar class="progress-bar" mode="determinate" [value]="uploadProgress"
-                        *ngIf="uploadProgress">
-                    </mat-progress-bar>
-                    <mat-icon class="cancel-upload" (click)="cancelUpload()"
-                        *ngIf="uploadProgress">delete_forever</mat-icon>
-                </div>
-            </mat-card-content>
+
+
+
+
+
+
         </mat-card>
+
+
+
+
+
+
+
+
+
+
+
+
+
         <div class="button-row">
-            <mat-slide-toggle [checked]="upload_visible_check" name="upload_visible_check">
+            <mat-slide-toggle formControlName="upload_visible_check" name="upload_visible_check" [checked]="false">
                 Upload für alle sichtbar?
             </mat-slide-toggle>
             <button mat-fab extended color="primary">

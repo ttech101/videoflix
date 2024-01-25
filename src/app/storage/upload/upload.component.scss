@@ -112,3 +112,13 @@ mat-card {
     margin-left: 20px;
   }
 }
+
+.button_right {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.progress {
+  height: auto;
+}

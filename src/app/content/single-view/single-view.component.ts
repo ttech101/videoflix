@@ -2,6 +2,7 @@ import {
   Component,
   ElementRef,
   Inject,
+  NgZone,
   OnInit,
   ViewChild,
 } from '@angular/core';
@@ -20,8 +21,9 @@ import {
 } from '@angular/material/dialog';
 import { NewMoviesComponent } from '../../landing/new-movies/new-movies.component';
 import { AuthService } from '../../service/auth.service';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { VideoPlayerComponent } from '../../module/video-player/video-player.component';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @Component({
   selector: 'app-single-view',
@@ -35,6 +37,9 @@ import { FormsModule } from '@angular/forms';
     MatIconModule,
     MatButtonModule,
     NewMoviesComponent,
+    CommonModule,
+    VideoPlayerComponent,
+    MatBadgeModule,
   ],
 })
 export class SingleViewComponent implements OnInit {
@@ -53,10 +58,15 @@ export class SingleViewComponent implements OnInit {
   background_image: string = '/assets/img/test_poster/background-movie.jpeg';
   thumbnail_image: string = '/assets/img/test_poster/badging.jpeg';
   age_rating: number = 0;
+  video_url: string = '';
 
-  constructor(public dialog: MatDialog, private as: AuthService) {}
+  constructor(
+    public dialog: MatDialog,
+    private as: AuthService,
+    private zone: NgZone
+  ) {}
 
-  @ViewChild('videoPlayer', { static: false })
+  @ViewChild('media') media: ElementRef | any;
   videoplayer!: ElementRef;
   isPlay: boolean = false;
 
@@ -65,6 +75,7 @@ export class SingleViewComponent implements OnInit {
     let key: string | any = paramsUrl.get('select');
     let datas: any = await this.as.loadMovies(key);
     this.data = datas[0];
+    this.media.nativeElement.src = this.data.video;
   }
 
   openDialogDescription() {
@@ -76,13 +87,14 @@ export class SingleViewComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result: any) => {
-      // Optional: Hier kannst du auf das Schließen des Dialogs reagieren
       console.log('Dialog geschlossen', result);
     });
   }
 
   toggleVideo() {
     const video: any = document.getElementById('video');
+    video.classList.remove('dn');
+    this.media.nativeElement.play();
     if (video.requestFullscreen) {
       video.requestFullscreen();
     } else if (video.mozRequestFullScreen) {
@@ -92,7 +104,11 @@ export class SingleViewComponent implements OnInit {
     } else if (video.msRequestFullscreen) {
       video.msRequestFullscreen();
     }
-    this.videoplayer.nativeElement.play();
+  }
+
+  onCanPlay(event: Event) {
+    // Hier können Sie das Video abspielen, wenn es geladen ist
+    this.media.nativeElement.pause();
   }
 }
 
