@@ -122,3 +122,16 @@ mat-card {
 .progress {
   height: auto;
 }
+
+.info-datei {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  i {
+    margin-left: 25px;
+    font-size: 12px;
+  }
+  h3 {
+    margin: 0;
+  }
+}

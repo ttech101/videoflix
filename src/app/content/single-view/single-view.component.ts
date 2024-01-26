@@ -24,6 +24,7 @@ import { AuthService } from '../../service/auth.service';
 import { CommonModule } from '@angular/common';
 import { VideoPlayerComponent } from '../../module/video-player/video-player.component';
 import { MatBadgeModule } from '@angular/material/badge';
+import { CategoryNewMoviesComponent } from '../../module/category/category-new-movies/category-new-movies.component';
 
 @Component({
   selector: 'app-single-view',
@@ -40,6 +41,7 @@ import { MatBadgeModule } from '@angular/material/badge';
     CommonModule,
     VideoPlayerComponent,
     MatBadgeModule,
+    CategoryNewMoviesComponent,
   ],
 })
 export class SingleViewComponent implements OnInit {
