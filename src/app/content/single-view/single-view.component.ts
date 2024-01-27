@@ -61,6 +61,8 @@ export class SingleViewComponent implements OnInit {
   thumbnail_image: string = '/assets/img/test_poster/badging.jpeg';
   age_rating: number = 0;
   video_url: string = '';
+  key: string | any = '';
+  wachtlist: boolean | any;
 
   constructor(
     public dialog: MatDialog,
@@ -74,10 +76,13 @@ export class SingleViewComponent implements OnInit {
 
   async ngOnInit() {
     let paramsUrl = new URLSearchParams(document.location.search);
-    let key: string | any = paramsUrl.get('select');
-    let datas: any = await this.as.loadMovies(key);
+    this.key = paramsUrl.get('select');
+    let datas: any = await this.as.loadMovies(this.key);
     this.data = datas[0];
+    console.log(this.data);
     this.media.nativeElement.src = this.data.video;
+    this.wachtlist = await this.as.checkwachlist(this.key);
+    console.log(this.wachtlist);
   }
 
   openDialogDescription() {
@@ -111,6 +116,17 @@ export class SingleViewComponent implements OnInit {
   onCanPlay(event: Event) {
     // Hier können Sie das Video abspielen, wenn es geladen ist
     this.media.nativeElement.pause();
+  }
+
+  async setWatchlist() {
+    if (!this.wachtlist) {
+      await this.as.setWatchlist(this.key);
+      this.wachtlist = await this.as.checkwachlist(this.key);
+    } else {
+      console.log(this.key);
+      await this.as.deleteWatchlist(this.key);
+      this.wachtlist = await this.as.checkwachlist(this.key);
+    }
   }
 }
 

@@ -65,9 +65,15 @@ h2 {
     margin-top: 25px;
   }
 }
+
+.profil-form {
+  overflow: hidden;
+}
+
 .mat-dialog-content {
   padding: 0;
   margin: 0;
+  overflow: hidden !important;
 }
 .konto-account {
   padding: 25px;

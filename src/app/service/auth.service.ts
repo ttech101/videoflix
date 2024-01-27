@@ -215,4 +215,32 @@ export class AuthService {
       return 'False';
     }
   }
+
+  public setWatchlist(key: string) {
+    const url = environment.apiUrl + '/watchlist/';
+    var formdata = new FormData();
+    formdata.append('key', key);
+    return lastValueFrom(this.http.post(url, formdata));
+  }
+
+  public getWatchlist() {
+    const url = environment.apiUrl + '/watchlist/';
+    return lastValueFrom(this.http.get(url));
+  }
+
+  public deleteWatchlist(key: string) {
+    const url = `${environment.apiUrl}/watchlist/`;
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: { key: key }, // Send key in the request body
+    };
+    return lastValueFrom(this.http.delete(url, options));
+  }
+
+  public checkwachlist(key: string) {
+    const url = environment.apiUrl + '/checkwachlist/?select=' + key;
+    return lastValueFrom(this.http.get(url));
+  }
 }

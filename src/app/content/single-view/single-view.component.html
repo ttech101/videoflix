@@ -29,8 +29,10 @@
                 Abspielen
 
             </button>
-            <button mat-fab matTooltip="Primary" color="primary" aria-label="Example fab with a heart icon">
-                <mat-icon>add</mat-icon>
+            <button (click)="setWatchlist()" mat-fab matTooltip="Primary" color="primary"
+                aria-label="Example fab with a heart icon">
+                <mat-icon *ngIf="!wachtlist">add</mat-icon>
+                <mat-icon *ngIf="wachtlist">close</mat-icon>
             </button>
             <button class="info-button" mat-fab matTooltip="Accent" color="accent"
                 aria-label="Example fab with a heart icon" (click)="openDialogDescription()">

@@ -98,7 +98,7 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Mindesthöhe des Containers auf 100% der Bildschirmhöhe setzen */
+  min-height: calc(100vh - 72px);
 }
 
 .noFound {

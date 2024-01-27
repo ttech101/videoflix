@@ -113,6 +113,10 @@ export class HeaderComponent implements OnInit {
     localStorage.clear();
     this.router.navigateByUrl('/');
   }
+
+  openMyUploads() {
+    this.router.navigateByUrl('/my-uploads');
+  }
 }
 
 @Component({
