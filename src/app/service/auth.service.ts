@@ -243,4 +243,15 @@ export class AuthService {
     const url = environment.apiUrl + '/checkwachlist/?select=' + key;
     return lastValueFrom(this.http.get(url));
   }
+
+  public deleteVideo(key: string) {
+    const url = `${environment.apiUrl}/delete_movie/`;
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: { random_key: key }, // Send key in the request body
+    };
+    return lastValueFrom(this.http.delete(url, options));
+  }
 }

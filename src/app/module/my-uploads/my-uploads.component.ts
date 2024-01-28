@@ -4,16 +4,24 @@ import { FooterComponent } from '../../templates/footer/footer.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { DecimalPipe } from '@angular/common';
 import { AuthService } from '../../service/auth.service';
 import { CommonModule } from '@angular/common';
+import {
+  MatDialog,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle,
+} from '@angular/material/dialog';
 
 export interface PeriodicElement {
   cover: string;
   movie_name: string;
   created_at: string;
   genre: string;
-  // button: string;
+  change: string;
+  delete: string;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
@@ -22,17 +30,9 @@ const ELEMENT_DATA: PeriodicElement[] = [
     cover: 'Hydrogen',
     created_at: '1.0079',
     genre: 'H',
-    // button: 'Hier drücken',
+    change: 'Hier drücken',
+    delete: 'Und hier',
   },
-  { movie_name: '2', cover: 'Helium', created_at: '4.0026', genre: 'He' },
-  // { movie_name: '3', cover: 'Lithium', created_at: 6.941, genre: 'Li' },
-  // { movie_name: '4', cover: 'Beryllium', created_at: 9.0122, genre: 'Be' },
-  // { movie_name: '5', cover: 'Boron', created_at: 10.811, genre: 'B' },
-  // { movie_name: '6', cover: 'Carbon', created_at: 12.0107, genre: 'C' },
-  // { movie_name: '7', cover: 'Nitrogen', created_at: 14.0067, genre: 'N' },
-  // { movie_name: '8', cover: 'Oxygen', created_at: 15.9994, genre: 'O' },
-  // { movie_name: '9', cover: 'Fluorine', created_at: 18.9984, genre: 'F' },
-  // { movie_name: '10', cover: 'Neon', created_at: 20.1797, genre: 'Ne' },
 ];
 
 @Component({
@@ -50,16 +50,62 @@ const ELEMENT_DATA: PeriodicElement[] = [
   ],
 })
 export class MyUploadsComponent implements OnInit {
-  constructor(private as: AuthService) {}
+  constructor(private as: AuthService, public dialog: MatDialog) {}
   data: any = [];
   key: string = '';
-  displayedColumns: string[] = ['movie_name', 'cover', 'created_at', 'genre'];
+  displayedColumns: string[] = [
+    'movie_name',
+    'cover',
+    'created_at',
+    'genre',
+    'change',
+    'delete',
+  ];
   dataSource = this.data;
 
   async ngOnInit() {
     this.data = await this.as.loadPreview('my');
     console.log('this.data:', this.data);
-    console.log('Elementdata:', ELEMENT_DATA);
     this.dataSource = this.data;
+    this.displayedColumns = [
+      'movie_name',
+      'cover',
+      'created_at',
+      'genre',
+      'change',
+      'delete',
+    ];
   }
+
+  changeMovie(element: any) {
+    console.log('change:', element);
+  }
+
+  deleteMovie(key: string): void {
+    this.dialog.open(DialogAnimationsExampleDialog, {
+      width: '250px',
+    });
+  }
+
+  // async deleteMovie(element: any) {
+
+  //   await this.as.deleteVideo(element);
+  //   this.ngOnInit();
+  // }
+}
+
+@Component({
+  selector: 'dialog-animations-example-dialog',
+  templateUrl: 'dialog-delete.html',
+  standalone: true,
+  imports: [
+    MatButtonModule,
+    MatDialogActions,
+    MatDialogClose,
+    MatDialogTitle,
+    MatDialogContent,
+  ],
+})
+export class DialogAnimationsExampleDialog {
+  constructor(public dialogRef: MatDialogRef<DialogAnimationsExampleDialog>) {}
 }
