@@ -22,6 +22,7 @@ import { NatureComponent } from './content/nature/nature.component';
 import { FunnyComponent } from './content/funny/funny.component';
 import { KnowledgeComponent } from './content/knowledge/knowledge.component';
 import { MyUploadsComponent } from './module/my-uploads/my-uploads.component';
+import { EditVideoComponent } from './storage/edit-video/edit-video.component';
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -78,6 +79,11 @@ export const routes: Routes = [
   {
     path: 'my-uploads',
     component: MyUploadsComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'edit-video',
+    component: EditVideoComponent,
     canActivate: [authGuard],
   },
 ];

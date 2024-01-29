@@ -3,7 +3,12 @@
     <div class="content-boxing ">
         <div class="content-draggable" id="content-box">
             <div *ngFor="let single of data" class="content-box">
-                <a href="/single-view/?select={{single.random_key}}"><img src="{{single.cover}}" alt=""></a>
+                <div class="progress-div" *ngIf="loading"><mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                </div>
+                <a *ngIf="!loading" href="/single-view/?select={{single.random_key}}"><img src="{{single.cover}}"
+                        alt="{{single.movie_name}}">
+                    <p>{{single.movie_name}}</p>
+                </a>
             </div>
 
         </div>

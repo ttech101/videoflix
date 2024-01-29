@@ -86,3 +86,14 @@ p {
     background-color: #e4e4e4;
   }
 }
+
+.progress-div {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+
+  mat-progress-bar {
+    height: 20px;
+  }
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { HeaderComponent } from '../../templates/header/header.component';
 import { FooterComponent } from '../../templates/footer/footer.component';
 import { MatTableModule } from '@angular/material/table';
@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from '../../service/auth.service';
 import { CommonModule } from '@angular/common';
 import {
+  MAT_DIALOG_DATA,
   MatDialog,
   MatDialogActions,
   MatDialogClose,
@@ -14,6 +15,9 @@ import {
   MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Location } from '@angular/common';
 
 export interface PeriodicElement {
   cover: string;
@@ -26,12 +30,12 @@ export interface PeriodicElement {
 
 const ELEMENT_DATA: PeriodicElement[] = [
   {
-    movie_name: '1',
-    cover: 'Hydrogen',
-    created_at: '1.0079',
-    genre: 'H',
-    change: 'Hier drücken',
-    delete: 'Und hier',
+    movie_name: '',
+    cover: '',
+    created_at: '',
+    genre: '',
+    change: '',
+    delete: '',
   },
 ];
 
@@ -50,7 +54,11 @@ const ELEMENT_DATA: PeriodicElement[] = [
   ],
 })
 export class MyUploadsComponent implements OnInit {
-  constructor(private as: AuthService, public dialog: MatDialog) {}
+  constructor(
+    private as: AuthService,
+    public dialog: MatDialog,
+    private router: Router
+  ) {}
   data: any = [];
   key: string = '';
   displayedColumns: string[] = [
@@ -65,7 +73,6 @@ export class MyUploadsComponent implements OnInit {
 
   async ngOnInit() {
     this.data = await this.as.loadPreview('my');
-    console.log('this.data:', this.data);
     this.dataSource = this.data;
     this.displayedColumns = [
       'movie_name',
@@ -78,20 +85,19 @@ export class MyUploadsComponent implements OnInit {
   }
 
   changeMovie(element: any) {
-    console.log('change:', element);
-  }
-
-  deleteMovie(key: string): void {
-    this.dialog.open(DialogAnimationsExampleDialog, {
-      width: '250px',
+    this.router.navigate(['/edit-video'], {
+      queryParams: { select: element },
     });
   }
 
-  // async deleteMovie(element: any) {
-
-  //   await this.as.deleteVideo(element);
-  //   this.ngOnInit();
-  // }
+  deleteMovie(key: string, movie_name: string): void {
+    const dialogRef = this.dialog.open(DialogAnimationsExampleDialog, {
+      data: { key: key, movie_name: movie_name },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      this.ngOnInit();
+    });
+  }
 }
 
 @Component({
@@ -104,8 +110,22 @@ export class MyUploadsComponent implements OnInit {
     MatDialogClose,
     MatDialogTitle,
     MatDialogContent,
+    HttpClientModule,
   ],
+  providers: [AuthService],
 })
 export class DialogAnimationsExampleDialog {
-  constructor(public dialogRef: MatDialogRef<DialogAnimationsExampleDialog>) {}
+  constructor(
+    public dialogRef: MatDialogRef<DialogAnimationsExampleDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private as: AuthService,
+    private location: Location
+  ) {}
+
+  key = this.data.key;
+  movie_name = this.data.movie_name;
+
+  async deleteMovie() {
+    await this.as.deleteVideo(this.key);
+  }
 }

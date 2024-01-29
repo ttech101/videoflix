@@ -12,15 +12,23 @@
         <div class="content-boxing ">
             <div class="content-draggable" id="content-box">
                 <div class="content-draggable" id="content-box">
-                    <div *ngFor="let single of filteredData" class="content-box">
-                        <a href="/single-view/?select={{single.random_key}}"><img src="{{single.cover}}" alt=""></a>
+                    <div class="progress-div" *ngIf="loading"><mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                    </div>
+                    <div style="display: contents;" *ngIf="!loading">
+                        <div *ngFor="let single of filteredData" class="content-box">
+                            <a href="/single-view/?select={{single.random_key}}"><img src="{{single.cover}}"
+                                    alt="{{single.movie_name}}">
+                                <p>{{single.movie_name}}</p>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <h2 *ngIf="key.length == 0" class="noFound">Bitte geben Sie einen Suchbegriff ein.</h2>
     <ng-template #noResults>
-        <h2 class="noFound">Nichts gefunden.</h2>
+        <h2 *ngIf="key.length >= 1" class="noFound">Nichts gefunden.</h2>
     </ng-template>
     <app-footer></app-footer>
 </div>

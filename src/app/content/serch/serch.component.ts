@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { AuthService } from '../../service/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @Component({
   selector: 'app-serch',
@@ -21,17 +22,20 @@ import { FormsModule } from '@angular/forms';
     MatInputModule,
     CommonModule,
     FormsModule,
+    MatProgressBarModule,
   ],
 })
 export class SerchComponent {
   constructor(private as: AuthService) {}
+  loading = true;
   data: any = [];
   key: string = '';
   filteredData: any = [];
 
   async ngOnInit() {
     this.data = await this.as.loadPreview('all');
-    this.filteredData = this.data;
+    this.loading = false;
+    this.filteredData = '';
   }
 
   filterData() {
@@ -41,7 +45,7 @@ export class SerchComponent {
       );
     } else {
       // Wenn das Suchfeld leer ist, zeige alle Daten an
-      this.filteredData = this.data;
+      this.filteredData = '';
     }
   }
 }

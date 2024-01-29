@@ -160,6 +160,37 @@ export class AuthService {
     return lastValueFrom(this.http.post(url, formdata));
   }
 
+  public changeVideoData(form: any, key: string) {
+    console.log(form);
+    const url = environment.apiUrl + '/create_movie/';
+    var formdata = new FormData();
+    formdata.append('author', form.author);
+    formdata.append('description', form.description);
+    formdata.append('description_short', form.description_short);
+    formdata.append('nature_check', this.resolutionGenreNature(form.genre));
+    formdata.append('funny_check', this.resolutionGenreFunny(form.genre));
+    formdata.append(
+      'knowledge_check',
+      this.resolutionGenreKnowledge(form.genre)
+    );
+    formdata.append('other_check', this.resolutionGenreOther(form.genre));
+    formdata.append('movie_check', this.resolutionMovie(form.movie_check));
+    formdata.append(
+      'short_movie_check',
+      this.resolutionSerie(form.movie_check)
+    );
+    formdata.append('genre', form.genre);
+    formdata.append('movie_name', form.movie_name);
+    formdata.append('selectedAge', form.selectedAge);
+    formdata.append(
+      'upload_visible_check',
+      this.resolutionRightWrong(form.upload_visible_check)
+    );
+    formdata.append('video_length', form.video_length);
+    formdata.append('upload_key', key);
+    return lastValueFrom(this.http.put(url, formdata));
+  }
+
   resolutionGenreOther(genre: string) {
     if (genre == 'other') {
       return 'True';

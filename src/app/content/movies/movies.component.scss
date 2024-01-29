@@ -36,17 +36,38 @@
   justify-content: start;
   max-width: 250px;
   min-width: 150px;
-  height: fit-content;
+  height: -webkit-fill-available;
   border-radius: 10px;
   aspect-ratio: 16 / 9;
   box-shadow: 0px 6px 10px 5px #000000;
   @media (max-width: 600px) {
     margin: 10px;
   }
+  a {
+    text-decoration: none;
+    color: white;
+    z-index: 10;
+  }
+  p {
+    font-size: calc(18px + 1vw) !important;
+    margin-left: 10px;
+    margin: 0;
+    padding: 10px;
+    position: relative;
+    bottom: 50px;
+    transform: rotate(-10deg);
+    pointer-events: none;
+    text-shadow: 1px 1px 1px black, 1px -1px 1px black, -1px 1px 1px black,
+      -1px -1px 1px black;
+    max-width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
   img {
     transition: all 0.2s ease-out;
     width: 100%;
-    object-fit: fill;
+    object-fit: cover;
     border-radius: 10px;
     height: -webkit-fill-available;
 
@@ -63,7 +84,7 @@
 .content-draggable {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: start;
   width: 100%;
 
   padding: 15px;

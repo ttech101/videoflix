@@ -32,7 +32,7 @@
             <button (click)="setWatchlist()" mat-fab matTooltip="Primary" color="primary"
                 aria-label="Example fab with a heart icon">
                 <mat-icon *ngIf="!wachtlist">add</mat-icon>
-                <mat-icon *ngIf="wachtlist">close</mat-icon>
+                <mat-icon style="color: rgb(3, 216, 3);" *ngIf="wachtlist">check</mat-icon>
             </button>
             <button class="info-button" mat-fab matTooltip="Accent" color="accent"
                 aria-label="Example fab with a heart icon" (click)="openDialogDescription()">
