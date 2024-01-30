@@ -32,6 +32,7 @@ import {
 } from '@angular/material/dialog';
 import { DataService } from '../../service/data.service';
 import { Router } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-upload',
@@ -55,16 +56,22 @@ import { Router } from '@angular/router';
     MatProgressBarModule,
     ReactiveFormsModule,
     CommonModule,
+    TranslateModule,
   ],
   providers: [AuthService],
 })
-export class UploadComponent {
+export class UploadComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private as: AuthService,
     public dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    public translate: TranslateService
   ) {}
+  ngOnInit(): void {
+    let language: any = localStorage.getItem('language');
+    this.translate.use(language);
+  }
   uploadForm = new FormGroup({
     movie_name: new FormControl<string>('', [Validators.required]),
     description_short: new FormControl<string>('', [Validators.required]),

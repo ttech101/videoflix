@@ -8,6 +8,7 @@ import { AuthService } from '../../service/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-serch',
@@ -23,10 +24,11 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     CommonModule,
     FormsModule,
     MatProgressBarModule,
+    TranslateModule,
   ],
 })
 export class SerchComponent {
-  constructor(private as: AuthService) {}
+  constructor(private as: AuthService, public translate: TranslateService) {}
   loading = true;
   data: any = [];
   key: string = '';
@@ -34,6 +36,8 @@ export class SerchComponent {
 
   async ngOnInit() {
     this.data = await this.as.loadPreview('all');
+    let language: any = localStorage.getItem('language');
+    this.translate.use(language);
     this.loading = false;
     this.filteredData = '';
   }

@@ -5,23 +5,23 @@
     <div class="menu">
         <a mat-button href="home">
             <mat-icon>home</mat-icon>
-            STARTSEITE
+            <p translate>HOME</p>
         </a>
         <a mat-button href="serch">
             <mat-icon>search</mat-icon>
-            SUCHEN
+            <p translate>SEARCH</p>
         </a>
         <a mat-button href="watchlist">
             <mat-icon>add</mat-icon>
-            MEINE LISTE
+            <p translate>MY WATCHLIST</p>
         </a>
         <a mat-button href="movies">
             <mat-icon>movie</mat-icon>
-            FILME
+            <p translate>MOVIES</p>
         </a>
         <a mat-button href="series">
             <mat-icon>smart_display</mat-icon>
-            SERIEN
+            <p translate>SERIES</p>
         </a>
     </div>
     <div class="menu-small">
@@ -31,23 +31,23 @@
         <mat-menu #menu="matMenu">
             <button (click)="btnUpload('home')" mat-menu-item>
                 <mat-icon>home</mat-icon>
-                <span>STARTSEITE</span>
+                <span translate>HOME</span>
             </button>
             <button (click)="btnUpload('serch')" mat-menu-item>
                 <mat-icon>search</mat-icon>
-                <span>SUCHEN</span>
+                <span translate>SEARCH</span>
             </button>
             <button (click)="btnUpload('watchlist')" mat-menu-item>
                 <mat-icon>add</mat-icon>
-                <span>MEINE LISTE</span>
+                <span translate>MY WATCHLIST</span>
             </button>
             <button (click)="btnUpload('movies')" mat-menu-item>
                 <mat-icon>movie</mat-icon>
-                <span>FILME</span>
+                <span translate>MOVIES</span>
             </button>
             <button (click)="btnUpload('series')" mat-menu-item>
                 <mat-icon>smart_display</mat-icon>
-                <span>SERIEN</span>
+                <span translate>SERIES</span>
             </button>
         </mat-menu>
     </div>
@@ -59,11 +59,15 @@
             <div class="profil-name">
                 <p><b>{{name}}</b></p>
             </div>
-            <button mat-menu-item (click)="openMyUploads()">Meine Uploads</button>
-            <button mat-menu-item (click)="openDialogProfil('0ms', '0ms')"> Profil bearbeiten</button>
-            <button mat-menu-item (click)="openDialogKonto('0ms', '0ms')">Konto</button>
-            <button mat-menu-item (click)="menuLogout()">Logout</button>
-            <button mat-menu-item (click)="openDialogDelete('0ms', '0ms')">Konto Löschen</button>
+            <button mat-menu-item (click)="openMyUploads()">
+                <span translate>My uploads</span>
+            </button>
+            <button mat-menu-item (click)="openDialogProfil('0ms', '0ms')"> <span translate>Edit profile</span>
+            </button>
+            <button mat-menu-item (click)="openDialogKonto('0ms', '0ms')"><span translate>Account</span></button>
+            <button mat-menu-item (click)="menuLogout()"><span translate>Logout</span></button>
+            <button mat-menu-item (click)="openDialogDelete('0ms', '0ms')"><span translate>Deleting Account
+                </span></button>
         </mat-menu>
     </div>
 </div>

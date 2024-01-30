@@ -22,6 +22,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-edit-video',
@@ -43,6 +44,7 @@ import { MatButtonModule } from '@angular/material/button';
     CommonModule,
     MatInputModule,
     MatButtonModule,
+    TranslateModule,
   ],
   providers: [AuthService],
 })
@@ -50,7 +52,8 @@ export class EditVideoComponent implements OnInit {
   constructor(
     private as: AuthService,
     public dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    public translate: TranslateService
   ) {}
 
   uploadForm = new FormGroup({
@@ -73,6 +76,8 @@ export class EditVideoComponent implements OnInit {
   async ngOnInit() {
     let paramsUrl = new URLSearchParams(document.location.search);
     this.key = paramsUrl.get('select');
+    let language: any = localStorage.getItem('language');
+    this.translate.use(language);
     let datas: any = await this.as.loadMovies(this.key);
     this.setUploadForm(datas);
   }

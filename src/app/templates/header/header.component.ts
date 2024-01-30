@@ -41,11 +41,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { Subscription, finalize } from 'rxjs';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { environment } from '../../../environments/environment';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MatIconModule, MatButtonModule, MatMenuModule],
+  imports: [MatIconModule, MatButtonModule, MatMenuModule, TranslateModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
@@ -56,10 +57,13 @@ export class HeaderComponent implements OnInit {
   constructor(
     private router: Router,
     public dialog: MatDialog,
-    private dataService: DataService
+    private dataService: DataService,
+    public translate: TranslateService
   ) {}
 
   ngOnInit() {
+    let language: any = localStorage.getItem('language');
+    this.translate.use(language);
     let path: any = localStorage.getItem('avatar');
     if (path.length >= 5) {
       this.avatar_path = localStorage.getItem('avatar');
@@ -130,15 +134,21 @@ export class HeaderComponent implements OnInit {
     MatDialogTitle,
     MatDialogContent,
     HttpClientModule,
+    TranslateModule,
   ],
   providers: [AuthService],
 })
-export class DialogAnimationsDeleteDialog {
+export class DialogAnimationsDeleteDialog implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<DialogAnimationsDeleteDialog>,
     private as: AuthService,
-    private router: Router
+    private router: Router,
+    public translate: TranslateService
   ) {}
+  ngOnInit(): void {
+    let language: any = localStorage.getItem('language');
+    this.translate.use(language);
+  }
 
   async deleteAccount() {
     let token: string | any = localStorage.getItem('authToken');
@@ -176,6 +186,7 @@ export class DialogAnimationsDeleteDialog {
     _MatSlideToggleRequiredValidatorModule,
     MatIconModule,
     MatProgressBarModule,
+    TranslateModule,
   ],
   providers: [AuthService],
   styleUrl: './dialog/dialog.style.scss',
@@ -185,7 +196,8 @@ export class DialogAnimationsProfilDialog implements OnInit {
     public dialogRef: MatDialogRef<DialogAnimationsProfilDialog>,
     private as: AuthService,
     private http: HttpClient,
-    private dataService: DataService
+    private dataService: DataService,
+    public translate: TranslateService
   ) {}
 
   @Input()
@@ -202,12 +214,16 @@ export class DialogAnimationsProfilDialog implements OnInit {
   avatar_info: string = '';
 
   async ngOnInit() {
+    console.log(await this.as.loadProfilData());
     let data: string | any = await this.as.loadProfilData();
     this.name = data.name;
     this.selected_language = data.language;
     this.isChecked = data.automatic_playback;
     this.selectedAge = data.age_rating;
     localStorage.setItem('name', data.name);
+    localStorage.setItem('language', this.selected_language);
+    let language: any = localStorage.getItem('language');
+    this.translate.use(language);
   }
 
   changeSelected(age: number) {
@@ -227,7 +243,9 @@ export class DialogAnimationsProfilDialog implements OnInit {
     );
     localStorage.setItem('name', this.name);
     localStorage.setItem('autoplay', checked);
+    localStorage.setItem('language', this.selected_language);
     this.dialogRef.close();
+    this.translate.use(this.selected_language);
   }
 
   onFileSelected(event: any) {
@@ -293,6 +311,7 @@ export class DialogAnimationsProfilDialog implements OnInit {
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    TranslateModule,
   ],
   providers: [AuthService],
   styleUrl: './dialog/dialog.style.scss',
@@ -300,7 +319,8 @@ export class DialogAnimationsProfilDialog implements OnInit {
 export class DialogAnimationsKontoDialog implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<DialogAnimationsKontoDialog>,
-    private as: AuthService
+    private as: AuthService,
+    public translate: TranslateService
   ) {}
 
   hide = true;
@@ -326,6 +346,8 @@ export class DialogAnimationsKontoDialog implements OnInit {
   async ngOnInit() {
     let email: string | any = await this.as.loadEmail();
     this.your_email = email.email;
+    let language: any = localStorage.getItem('language');
+    this.translate.use(language);
     this.email = new FormControl(this.your_email, [
       Validators.required,
       Validators.pattern(
@@ -336,7 +358,6 @@ export class DialogAnimationsKontoDialog implements OnInit {
 
   async submitFormChangeEmail() {
     this.getErrorMessage();
-    console.log(this.email);
     if (this.email.status == 'VALID') {
       let messsage: any = await this.as.resetMailAcc(this.email.value);
       this.message_mail = messsage.success;

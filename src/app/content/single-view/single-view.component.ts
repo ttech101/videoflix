@@ -22,9 +22,9 @@ import {
 import { NewMoviesComponent } from '../../landing/new-movies/new-movies.component';
 import { AuthService } from '../../service/auth.service';
 import { CommonModule } from '@angular/common';
-import { VideoPlayerComponent } from '../../module/video-player/video-player.component';
 import { MatBadgeModule } from '@angular/material/badge';
 import { CategoryNewMoviesComponent } from '../../module/category/category-new-movies/category-new-movies.component';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-single-view',
@@ -39,9 +39,9 @@ import { CategoryNewMoviesComponent } from '../../module/category/category-new-m
     MatButtonModule,
     NewMoviesComponent,
     CommonModule,
-    VideoPlayerComponent,
     MatBadgeModule,
     CategoryNewMoviesComponent,
+    TranslateModule,
   ],
 })
 export class SingleViewComponent implements OnInit {
@@ -67,7 +67,8 @@ export class SingleViewComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private as: AuthService,
-    private zone: NgZone
+    private zone: NgZone,
+    public translate: TranslateService
   ) {}
 
   @ViewChild('media') media: ElementRef | any;
@@ -78,6 +79,8 @@ export class SingleViewComponent implements OnInit {
     let paramsUrl = new URLSearchParams(document.location.search);
     this.key = paramsUrl.get('select');
     let datas: any = await this.as.loadMovies(this.key);
+    let language: any = localStorage.getItem('language');
+    this.translate.use(language);
     this.data = datas[0];
     this.media.nativeElement.src = this.data.video;
     this.wachtlist = await this.as.checkwachlist(this.key);
@@ -143,12 +146,18 @@ export class SingleViewComponent implements OnInit {
     MatDialogActions,
     MatDialogClose,
     MatButtonModule,
+    TranslateModule,
   ],
   styleUrl: './single-view.component.scss',
 })
-export class DialogElementsDescriptionDialog {
+export class DialogElementsDescriptionDialog implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA)
-    public data: { descriptionLong: string; author: string }
+    public data: { descriptionLong: string; author: string },
+    public translate: TranslateService
   ) {}
+  ngOnInit(): void {
+    let language: any = localStorage.getItem('language');
+    this.translate.use(language);
+  }
 }

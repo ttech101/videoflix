@@ -18,6 +18,7 @@ import {
 import { Router } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Location } from '@angular/common';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 export interface PeriodicElement {
   cover: string;
@@ -51,13 +52,15 @@ const ELEMENT_DATA: PeriodicElement[] = [
     MatIconModule,
     MatButtonModule,
     CommonModule,
+    TranslateModule,
   ],
 })
 export class MyUploadsComponent implements OnInit {
   constructor(
     private as: AuthService,
     public dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    public translate: TranslateService
   ) {}
   data: any = [];
   key: string = '';
@@ -73,6 +76,8 @@ export class MyUploadsComponent implements OnInit {
 
   async ngOnInit() {
     this.data = await this.as.loadPreview('my');
+    let language: any = localStorage.getItem('language');
+    this.translate.use(language);
     this.dataSource = this.data;
     this.displayedColumns = [
       'movie_name',
@@ -111,16 +116,22 @@ export class MyUploadsComponent implements OnInit {
     MatDialogTitle,
     MatDialogContent,
     HttpClientModule,
+    TranslateModule,
   ],
   providers: [AuthService],
 })
-export class DialogAnimationsExampleDialog {
+export class DialogAnimationsExampleDialog implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<DialogAnimationsExampleDialog>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private as: AuthService,
-    private location: Location
+    private location: Location,
+    public translate: TranslateService
   ) {}
+  ngOnInit(): void {
+    let language: any = localStorage.getItem('language');
+    this.translate.use(language);
+  }
 
   key = this.data.key;
   movie_name = this.data.movie_name;

@@ -68,12 +68,18 @@ export class AuthService {
 
   public loadProfilData() {
     const url = environment.apiUrl + '/profile/';
-    return lastValueFrom(this.http.get(url));
+    const headers = new HttpHeaders({
+      Authorization: 'token ' + localStorage.getItem('authToken'),
+    });
+    return lastValueFrom(this.http.get(url, { headers }));
   }
 
   public loadEmail() {
     const url = environment.apiUrl + '/account_change_mail/';
-    return lastValueFrom(this.http.get(url));
+    const headers = new HttpHeaders({
+      Authorization: 'token ' + localStorage.getItem('authToken'),
+    });
+    return lastValueFrom(this.http.get(url, { headers }));
   }
 
   public saveProfilData(
@@ -82,32 +88,41 @@ export class AuthService {
     checked: boolean,
     selectedAge: number
   ) {
+    const headers = new HttpHeaders({
+      Authorization: 'token ' + localStorage.getItem('authToken'),
+    });
     var formdata: any = new FormData();
     formdata.append('age_rating', selectedAge);
     formdata.append('automatic_playback', checked);
     formdata.append('language', selected_language);
     formdata.append('name', name);
     const url = environment.apiUrl + '/profile/';
-    return lastValueFrom(this.http.put(url, formdata));
+    return lastValueFrom(this.http.put(url, formdata, { headers }));
   }
 
   public resetPasswordAcc(
     current_password: string,
     new_password: string | any
   ) {
+    const headers = new HttpHeaders({
+      Authorization: 'token ' + localStorage.getItem('authToken'),
+    });
     const url = environment.apiUrl + '/change_password_acc/';
     var formdata: any = new FormData();
     formdata.append('current_password', current_password);
     formdata.append('new_password', new_password);
-    return lastValueFrom(this.http.put(url, formdata));
+    return lastValueFrom(this.http.put(url, formdata, { headers }));
   }
 
   public resetMailAcc(new_email: any) {
+    const headers = new HttpHeaders({
+      Authorization: 'token ' + localStorage.getItem('authToken'),
+    });
     const url = environment.apiUrl + '/account_change_mail/';
     var formdata: any = new FormData();
     formdata.append('new_email', new_email);
     formdata.append('new_username', new_email);
-    return lastValueFrom(this.http.put(url, formdata));
+    return lastValueFrom(this.http.put(url, formdata, { headers }));
   }
 
   public loadMovies(key: String) {

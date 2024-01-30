@@ -8,8 +8,8 @@ import { FaqComponent } from './landing/faq/faq.component';
 import { NewMoviesComponent } from './landing/new-movies/new-movies.component';
 import { HeroComponent } from './landing/hero/hero.component';
 import { AuthService } from './service/auth.service';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { AuthInterceptorService } from './service/auth-interceptor.service';
+import { HttpClientModule } from '@angular/common/http';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
