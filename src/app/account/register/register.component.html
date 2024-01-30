@@ -2,24 +2,25 @@
     <div class="register">
         <mat-card class="register-card">
             <mat-card-header>
-                <mat-card-subtitle>2. SCHRITT</mat-card-subtitle>
+                <mat-card-subtitle translate>2. STEP</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
-                <h2>Erstelle ein Konto, um fortzufahren</h2>
-                <h3>Mit dieser Kombination aus E-Mail-Adresse und Passwort kannst du dich bei Videoflix einloggen.
+                <h2 translate>Create an account to continue</h2>
+                <h3 translate>You can log in to Videoflix with this combination of e-mail address and password.
                 </h3>
-                <span id="email-input-none">Gib ein Passwort ein, um ein Konto für <i>{{email}}</i> zu erstellen
-                    <a class="change-email" (click)="changeEmail()">
-                        (bearbeiten)</a>
+                <span id="email-input-none"> <span translate>Enter a password to create an account
+                        for</span><i>{{email}}</i> <span translate>to create</span>
+                    <a class="change-email" (click)="changeEmail()" translate>
+                        (edit)</a>
                 </span>
             </mat-card-content>
             <form class="register-form" (ngSubmit)="submitForm()">
                 <mat-form-field>
-                    <mat-label>Your Name</mat-label>
+                    <mat-label translate>Your Name</mat-label>
                     <input matInput [formControl]="name">
                 </mat-form-field>
                 <mat-form-field id="email-input" class="dn">
-                    <mat-label>Enter your email</mat-label>
+                    <mat-label translate>Enter your email</mat-label>
                     <input matInput placeholder="yourMail@example.com" [formControl]="emailerror" required>
                     @if (emailerror.invalid) {
                     <mat-error>{{getErrorMessageEmail()}}</mat-error>
@@ -28,33 +29,32 @@
 
                 </mat-form-field>
                 <mat-form-field>
-                    <mat-label>Enter your password</mat-label>
+                    <mat-label translate>Enter your password</mat-label>
                     <input matInput [type]="hide ? 'password' : 'text'" required [formControl]="password1">
                     @if (password1.invalid) {<mat-error>{{getErrorMessagepassword1()}}</mat-error>}
                     @if (password1.valid) { <mat-icon matSuffix>check</mat-icon>}
                     <mat-hint>{{password_incorrect}}</mat-hint>
                 </mat-form-field>
                 <mat-form-field>
-                    <mat-label>Enter your password again</mat-label>
+                    <mat-label translate>Enter your password again</mat-label>
                     <input matInput [type]="hide ? 'password' : 'text'" required [formControl]="password2">
                     @if (password2.invalid) {<mat-error>{{getErrorMessagepassword2()}}</mat-error>}
                     @if (password2.valid) { <mat-icon matSuffix>check</mat-icon>}
                     <mat-hint>{{password_incorrect}}</mat-hint>
                 </mat-form-field>
-                <p>Verwende mindestens acht Zeichen (Groß- und Kleinschreibung beachten) mit mindestens einer Zahl sowie
-                    einem Sonderzeichen.</p>
-                <span>Videoflix verwendet deine Daten, um dein Erlebnis im Rahmen von Videoflix zu personalisieren und
-                    zu
-                    verbessern. Du kannst deine
-                    Kommunikationseinstellungen jederzeit ändern. Wir können deine Daten wie in unserer
-                    <i><a href="">Datenschutzerklärung</a></i> beschrieben verwenden. Indem du auf „Weiter“ klickst,
-                    bestätigst
-                    du, dass du
-                    unsere <i><a href="">Datenschutzerklärung</a></i> und <i><a href="">Cookie-Richtlinie</a></i>
-                    gelesen hast.
+                <p translate>Use at least eight characters (case sensitive) with at least one number and one special
+                    character. one special character.</p>
+                <span> <span translate>Videoflix uses your data to personalise and customise your Videoflix experience.
+                        to improve it. You can change your change your communication settings at any time. We may use
+                        your data as described in our</span>
+                    <i><a href="/privacy-policy" translate>Privacy policy</a></i> <span translate>as described above. By
+                        clicking on "Continue", confirm that you accept our </span><i><a href="/privacy-policy"
+                            translate>Privacy policy</a></i> <span translate>and</span> <i><a href="/cookie-policy"
+                            translate>Cookie Policy</a></i>
+                    <span translate>have read.</span>
                 </span>
                 <button class="next-button" mat-fab extended color="primary">
-                    Weiter
+                    <p translate>Next</p>
                 </button>
             </form>
         </mat-card>

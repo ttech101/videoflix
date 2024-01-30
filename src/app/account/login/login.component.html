@@ -2,12 +2,12 @@
     <div class="login">
         <mat-card class="login-card">
             <mat-card-header>
-                <mat-card-subtitle>1. SCHRITT</mat-card-subtitle>
+                <mat-card-subtitle translate>1. STEP</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
-                <h2>Gib deine E-mail-Adresse ein, um fortzufahren</h2>
-                <h3>Logge dich in dein Konto ein. Falls du noch kein Konto hast, wirst du aufgefordert, eines zu
-                    erstellen.
+                <h2 translate>Enter your e-mail address to continue</h2>
+                <h3 translate>Log in to your account. If you don't have an account yet, you will be asked to create one.
+                    create one.
                 </h3>
             </mat-card-content>
             <form class="login-form" (ngSubmit)="submitForm()">
@@ -15,18 +15,18 @@
                     <mat-label>Email</mat-label>
                     <input type="email" matInput [formControl]="emailFormControl">
                     @if (emailFormControl.hasError('pattern') && !emailFormControl.hasError('required')) {
-                    <mat-error>Please enter a valid email address</mat-error>
+                    <mat-error translate>Please enter a valid email address</mat-error>
                     }
                     @if (emailFormControl.hasError('required')) {
-                    <mat-error>Email is <strong>required</strong></mat-error>
+                    <mat-error translate>Email is <strong translate>required</strong></mat-error>
                     }
                 </mat-form-field>
                 <button mat-fab extended color="primary">
-                    Weiter
+                    <p translate>Next</p>
                 </button>
             </form>
             <button style="margin-left: 16px;margin-right: 16px;" (click)="goBack()" mat-fab extended color="">
-                zurück
+                <p translate>back</p>
             </button>
         </mat-card>
     </div>

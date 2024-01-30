@@ -2,33 +2,33 @@
     <div class="enter-passwort">
         <mat-card class="enter-passwort-card">
             <mat-card-header>
-                <mat-card-subtitle>2. SCHRITT</mat-card-subtitle>
+                <mat-card-subtitle translate>2. STEP</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
-                <h2 translate>Passwort eingeben</h2>
-                <h3>Logge dich mit deiner E-Mail-Adresse in dein Konto ein: <i class="email-change">{{email}}</i> <span
-                        (click)="changeMail()">(bearbeiten)</span>
+                <h2 translate>Enter password</h2>
+                <h3 translate>Log in to your account with your e-mail address: <i class="email-change">{{email}}</i>
+                    <span (click)="changeMail()" translate>(edit)</span>
                 </h3>
             </mat-card-content>
             <form class="enter-passwort-form" (ngSubmit)="login()">
                 <mat-form-field>
-                    <mat-label>Enter your password</mat-label>
+                    <mat-label translate>Enter your password</mat-label>
                     <input [formControl]="passwordForm" matInput [type]="hide ? 'password' : 'text'">
                     <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                         [attr.aria-pressed]="hide">
                         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
                 </mat-form-field>
-                <p><i>(Groß- und Kleinschreibung beachten)</i></p>
+                <p><i translate>(Note upper and lower case)</i></p>
                 <button class="button-login" mat-fab extended color="primary">
-                    Einloggen
+                    <p translate>Log in</p>
                 </button>
             </form>
             <button style="margin-left: 16px;margin-right: 16px;" (click)="goBack()" mat-fab extended color="">
-                zurück
+                <p>back</p>
             </button>
-            <span class="reset-passwort" (click)="resetPasswort()">Probleme beim Einloggen? Setze hier dein Passwort
-                zurück</span>
+            <span class="reset-passwort" (click)="resetPasswort()" translate>Forgotten your password? Reset your
+                password here</span>
         </mat-card>
 
     </div>

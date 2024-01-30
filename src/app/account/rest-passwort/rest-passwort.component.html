@@ -2,12 +2,12 @@
     <div class="reset-passwort">
         <mat-card class="reset-passwort-card">
             <mat-card-header>
-                <mat-card-subtitle>Passwort zurücksetzen</mat-card-subtitle>
+                <mat-card-subtitle translate>Reset password</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
-                <h2>Gib deine E-mail-Adresse ein, um fortzufahren</h2>
-                <h3>Wir werden dir eine E-Mail zusenden in der weiter Anweisungen stehen. Bitte prüfe auch dein Spam
-                    Ordner im E-mail Postfach.
+                <h2 translate>Enter your e-mail address to continue</h2>
+                <h3 translate>We will send you an e-mail with further instructions. Please also check your spam folder
+                    in your e-mail inbox.
                 </h3>
             </mat-card-content>
             <form class="reset-passwort-form" (ngSubmit)="submitForm()">
@@ -15,19 +15,19 @@
                     <mat-label>Email</mat-label>
                     <input type="email" matInput [formControl]="emailFormControl">
                     @if (emailFormControl.hasError('pattern') && !emailFormControl.hasError('required')) {
-                    <mat-error>Please enter a valid email address</mat-error>
+                    <mat-error translate>Please enter a valid email address</mat-error>
                     }
                     @if (emailFormControl.hasError('required')) {
-                    <mat-error>Email is <strong>required</strong></mat-error>
+                    <mat-error translate>Email is <strong translate>required</strong></mat-error>
                     }
                 </mat-form-field>
                 <mat-error>{{error_message}}</mat-error>
                 <button mat-fab extended color="primary">
-                    Passwort zurücksetzen
+                    <p translate>Reset password</p>
                 </button>
             </form>
             <button style="margin: 16px;" mat-fab extended color="" (click)="goBack()">
-                Zurück
+                <p translate>back</p>
             </button>
         </mat-card>
     </div>

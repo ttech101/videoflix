@@ -1,41 +1,39 @@
 <div class="landing_background"></div>
 
 <div class="center_landing">
-  <a href="login"><button mat-raised-button color="accent" class="landing-login">
-      EINLOGGEN
+  <a href="login"><button mat-raised-button color="accent" class="landing-login" translate>
+      LOGIN
     </button></a>
-  <h2 style="font-size: 38px">
-    Genieße brandneue Originale, Blockbuster, Serien mit Suchtfaktor und vieles
-    mehr im Streaming
+  <h2 style="font-size: 38px" translate>
+    Enjoy brand new originals, blockbusters, addictive series and much more more in streaming
   </h2>
-  <h3>
-    Um die Vielfalt von Videoflix vollständig zu erkunden oder neu zu beginnen,
-    trage bitte deine E-Mail-Adresse ein.
+  <h3 translate>
+    To fully explore the variety of Videoflix or to start again, please enter your e-mail address.
   </h3>
-
   <form class="landing-form" if="email.invalid" (ngSubmit)="submitForm()" method="GET">
     <mat-form-field>
-      <mat-label>Enter your email</mat-label>
+      <mat-label translate>Enter your email</mat-label>
       <input matInput placeholder="yourMail@example.com" [formControl]="email" required>
       @if (email.invalid) {
       <mat-error>{{getErrorMessage()}}</mat-error>
       }
     </mat-form-field>
-    <button mat-raised-button color="primary">Jetzt Registrieren</button>
+    <button mat-raised-button color="primary">
+      <p translate>Register now</p>
+    </button>
   </form>
 
 
   <div class="landing-buttons">
     <button (click)="loginGuest()" mat-raised-button color="accent" class="landing-login-guest">
-      Gast Login
+      <p translate>Guest Login</p>
     </button>
     <button (click)="loginUser()" mat-raised-button color="accent" class="landing-login-smart">
-      EINLOGGEN
+      <p translate>LOGIN</p>
     </button>
   </div>
-  <h2>
-    Ergreife noch heute diese großartige Gelegenheit und sichere dir jetzt unser
-    exklusives kostenloses Angebot.
+  <h2 translate>
+    Seize this great opportunity today and secure our exclusive free offer now. exclusive free offer now.
   </h2>
 </div>
 <a href="#new-movies"><mat-icon class="landing-arrow" fontIcon="keyboard_arrow_down"></mat-icon></a>
