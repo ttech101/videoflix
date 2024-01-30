@@ -226,6 +226,7 @@ export class DialogAnimationsProfilDialog implements OnInit {
       this.selectedAge
     );
     localStorage.setItem('name', this.name);
+    localStorage.setItem('autoplay', checked);
     this.dialogRef.close();
   }
 

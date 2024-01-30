@@ -81,6 +81,7 @@ export class EnterPasswortComponent {
       );
       localStorage.setItem('authToken', resp.token);
       localStorage.setItem('name', resp.name);
+      localStorage.setItem('autoplay', resp.autoplay);
       sessionStorage.setItem('account', 'true');
       localStorage.setItem('avatar', environment.apiUrl + resp.avatar_path);
       this.router.navigateByUrl('/home');

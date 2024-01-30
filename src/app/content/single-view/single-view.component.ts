@@ -79,10 +79,8 @@ export class SingleViewComponent implements OnInit {
     this.key = paramsUrl.get('select');
     let datas: any = await this.as.loadMovies(this.key);
     this.data = datas[0];
-    console.log(this.data);
     this.media.nativeElement.src = this.data.video;
     this.wachtlist = await this.as.checkwachlist(this.key);
-    console.log(this.wachtlist);
   }
 
   openDialogDescription() {
@@ -114,8 +112,13 @@ export class SingleViewComponent implements OnInit {
   }
 
   onCanPlay(event: Event) {
-    // Hier können Sie das Video abspielen, wenn es geladen ist
-    this.media.nativeElement.pause();
+    const video: any = document.getElementById('video');
+    if (localStorage.getItem('autoplay') == 'False') {
+      this.media.nativeElement.pause();
+    } else {
+      video.classList.remove('dn');
+      this.media.nativeElement.play();
+    }
   }
 
   async setWatchlist() {
