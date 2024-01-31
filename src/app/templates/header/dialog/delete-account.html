@@ -2,10 +2,14 @@
   <h2 mat-dialog-title translate>
     Delete account</h2>
   <div mat-dialog-content>
-    Bist du sicher das dein Account gelöscht werden soll??
+    <span translate>Are you sure you want your account to be deleted?</span>
   </div>
   <div mat-dialog-actions align="center">
-    <button mat-button mat-dialog-close>Abbrechen</button>
-    <button mat-button (click)="deleteAccount()" mat-dialog-close>Löschen</button>
+    <button mat-button mat-dialog-close>
+      <p translate>Cancel</p>
+    </button>
+    <button [disabled]="guest" mat-button (click)="deleteAccount()" mat-dialog-close>
+      <p translate>Delete</p>
+    </button>
   </div>
 </div>

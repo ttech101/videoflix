@@ -4,9 +4,13 @@
         <span>VideoFlix</span>
     </div>
     <div class="footer-links">
-        <a href="privacy-policy">Datenschutzerklärung</a>
-        <a href="imprint">Impressum</a>
-        <a href="cookie-policy">Cookie-Richtlinie</a>
+        <button mat-button [matMenuTriggerFor]="menu"><mat-icon>language</mat-icon>{{language_button}}</button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="changeLanguage('en')"><span translate>English</span></button>
+            <button mat-menu-item (click)="changeLanguage('de')"><span translate>German</span></button>
+        </mat-menu>
+        <a href="privacy-policy" translate>Datenschutzerklärung</a>
+        <a href="imprint" translate>Impressum</a>
     </div>
     <p>© Tony Tech 2023</p>
 </div>

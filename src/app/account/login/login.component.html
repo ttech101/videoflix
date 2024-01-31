@@ -2,7 +2,9 @@
     <div class="login">
         <mat-card class="login-card">
             <mat-card-header>
-                <mat-card-subtitle translate>1. STEP</mat-card-subtitle>
+                <mat-card-subtitle>
+                    <p translate>1. STEP</p>
+                </mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
                 <h2 translate>Enter your e-mail address to continue</h2>
@@ -12,13 +14,19 @@
             </mat-card-content>
             <form class="login-form" (ngSubmit)="submitForm()">
                 <mat-form-field class="login-full-width">
-                    <mat-label>Email</mat-label>
+                    <mat-label>
+                        <span translate>Email</span>
+                    </mat-label>
                     <input type="email" matInput [formControl]="emailFormControl">
                     @if (emailFormControl.hasError('pattern') && !emailFormControl.hasError('required')) {
-                    <mat-error translate>Please enter a valid email address</mat-error>
+                    <mat-error>
+                        <span style="color: red;" translate>Please enter a valid email address</span>
+                    </mat-error>
                     }
                     @if (emailFormControl.hasError('required')) {
-                    <mat-error translate>Email is <strong translate>required</strong></mat-error>
+                    <mat-error>
+                        <span style="color: red;" translate>Email is</span> <strong translate>required</strong>
+                    </mat-error>
                     }
                 </mat-form-field>
                 <button mat-fab extended color="primary">

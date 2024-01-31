@@ -2,17 +2,21 @@
     <div class="enter-passwort">
         <mat-card class="enter-passwort-card">
             <mat-card-header>
-                <mat-card-subtitle translate>2. STEP</mat-card-subtitle>
+                <mat-card-subtitle>
+                    <p translate>2. STEP</p>
+                </mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
                 <h2 translate>Enter password</h2>
                 <h3 translate>Log in to your account with your e-mail address: <i class="email-change">{{email}}</i>
-                    <span (click)="changeMail()" translate>(edit)</span>
+                    <span (click)="changeMail()" translate> (edit)</span>
                 </h3>
             </mat-card-content>
             <form class="enter-passwort-form" (ngSubmit)="login()">
                 <mat-form-field>
-                    <mat-label translate>Enter your password</mat-label>
+                    <mat-label>
+                        <span translate>Enter your password</span>
+                    </mat-label>
                     <input [formControl]="passwordForm" matInput [type]="hide ? 'password' : 'text'">
                     <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                         [attr.aria-pressed]="hide">
@@ -25,7 +29,7 @@
                 </button>
             </form>
             <button style="margin-left: 16px;margin-right: 16px;" (click)="goBack()" mat-fab extended color="">
-                <p>back</p>
+                <p translate>back</p>
             </button>
             <span class="reset-passwort" (click)="resetPasswort()" translate>Forgotten your password? Reset your
                 password here</span>

@@ -2,7 +2,9 @@
     <div class="reset-passwort">
         <mat-card class="reset-passwort-card">
             <mat-card-header>
-                <mat-card-subtitle translate>Reset password</mat-card-subtitle>
+                <mat-card-subtitle>
+                    <p translate>Reset password</p>
+                </mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
                 <h2 translate>Enter your e-mail address to continue</h2>
@@ -15,10 +17,13 @@
                     <mat-label>Email</mat-label>
                     <input type="email" matInput [formControl]="emailFormControl">
                     @if (emailFormControl.hasError('pattern') && !emailFormControl.hasError('required')) {
-                    <mat-error translate>Please enter a valid email address</mat-error>
+                    <mat-error> <span style="color: red;" translate>Please enter a valid email
+                            address</span></mat-error>
                     }
                     @if (emailFormControl.hasError('required')) {
-                    <mat-error translate>Email is <strong translate>required</strong></mat-error>
+                    <mat-error>
+                        <span style="color: red;" translate>Email is </span><strong translate>required</strong>
+                    </mat-error>
                     }
                 </mat-form-field>
                 <mat-error>{{error_message}}</mat-error>

@@ -35,6 +35,7 @@ import {
   HttpClient,
   HttpClientModule,
   HttpEventType,
+  HttpHeaders,
   HttpResponse,
 } from '@angular/common/http';
 import { MatSelectModule } from '@angular/material/select';
@@ -65,10 +66,12 @@ export class HeaderComponent implements OnInit {
     let language: any = localStorage.getItem('language');
     this.translate.use(language);
     let path: any = localStorage.getItem('avatar');
-    if (path.length >= 5) {
+    let avatar_null = path.match('null');
+    console.log(path, '<>', avatar_null);
+    if (avatar_null != 'null') {
       this.avatar_path = localStorage.getItem('avatar');
     } else {
-      this.avatar_path = '/assets/img/logo/logo.png';
+      this.avatar_path = '/assets/img/woman-995164_640.png';
     }
     this.name = localStorage.getItem('name');
   }
@@ -81,7 +84,6 @@ export class HeaderComponent implements OnInit {
     exitAnimationDuration: string
   ): void {
     this.dialog.open(DialogAnimationsDeleteDialog, {
-      width: '250px',
       enterAnimationDuration,
       exitAnimationDuration,
     });
@@ -145,9 +147,11 @@ export class DialogAnimationsDeleteDialog implements OnInit {
     private router: Router,
     public translate: TranslateService
   ) {}
+  guest: boolean = false;
   ngOnInit(): void {
     let language: any = localStorage.getItem('language');
     this.translate.use(language);
+    this.checkGuest();
   }
 
   async deleteAccount() {
@@ -156,6 +160,16 @@ export class DialogAnimationsDeleteDialog implements OnInit {
     sessionStorage.clear();
     localStorage.clear();
     this.router.navigateByUrl('/');
+  }
+
+  checkGuest() {
+    let name = localStorage.getItem('name');
+    if (name == 'Guest') {
+      this.guest = true;
+    } else {
+      this.guest = false;
+    }
+    console.log(this.guest);
   }
 }
 
@@ -212,6 +226,7 @@ export class DialogAnimationsProfilDialog implements OnInit {
   uploadSub: Subscription | any;
   avatar_path: string | any = localStorage.getItem('avatar');
   avatar_info: string = '';
+  guest: boolean = false;
 
   async ngOnInit() {
     console.log(await this.as.loadProfilData());
@@ -224,6 +239,7 @@ export class DialogAnimationsProfilDialog implements OnInit {
     localStorage.setItem('language', this.selected_language);
     let language: any = localStorage.getItem('language');
     this.translate.use(language);
+    this.checkGuest();
   }
 
   changeSelected(age: number) {
@@ -255,10 +271,14 @@ export class DialogAnimationsProfilDialog implements OnInit {
       this.fileName = file.name;
       const formData = new FormData();
       formData.append('avatar', file);
+      const headers = new HttpHeaders({
+        Authorization: 'token ' + localStorage.getItem('authToken'),
+      });
       const upload$ = this.http
         .post(environment.apiUrl + '/profile/', formData, {
           reportProgress: true,
           observe: 'events',
+          headers,
         })
         .pipe(finalize(() => this.reset()));
       upload$.subscribe(
@@ -290,6 +310,16 @@ export class DialogAnimationsProfilDialog implements OnInit {
   reset() {
     this.uploadProgress = null;
     this.uploadSub = null;
+  }
+
+  checkGuest() {
+    let name = localStorage.getItem('name');
+    if (name == 'Guest') {
+      this.guest = true;
+    } else {
+      this.guest = false;
+    }
+    console.log(this.guest);
   }
 }
 
@@ -326,6 +356,7 @@ export class DialogAnimationsKontoDialog implements OnInit {
   hide = true;
   your_email: string | any = '';
   message_mail: string | any;
+  guest: boolean = false;
 
   message_password: string | any;
   current_password: string = '';
@@ -348,6 +379,7 @@ export class DialogAnimationsKontoDialog implements OnInit {
     this.your_email = email.email;
     let language: any = localStorage.getItem('language');
     this.translate.use(language);
+    this.checkGuest();
     this.email = new FormControl(this.your_email, [
       Validators.required,
       Validators.pattern(
@@ -391,5 +423,15 @@ export class DialogAnimationsKontoDialog implements OnInit {
       return 'Not a valid email';
     }
     return '';
+  }
+
+  checkGuest() {
+    let name = localStorage.getItem('name');
+    if (name == 'Guest') {
+      this.guest = true;
+    } else {
+      this.guest = false;
+    }
+    console.log(this.guest);
   }
 }

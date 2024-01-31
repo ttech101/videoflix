@@ -1,9 +1,10 @@
 <app-header></app-header>
 <div class="wrapper">
-
     <form class="example-form">
         <mat-form-field class="example-full-width">
-            <mat-label>Film suchen</mat-label>
+            <mat-label>
+                <p translate>Search movie</p>
+            </mat-label>
             <input matInput placeholder="Title, Charakter oder Genre suchen" [(ngModel)]="key" name="search"
                 (input)="filterData()">
         </mat-form-field>
@@ -26,9 +27,9 @@
             </div>
         </div>
     </div>
-    <h2 *ngIf="key.length == 0" class="noFound">Bitte geben Sie einen Suchbegriff ein.</h2>
+    <h2 *ngIf="key.length == 0" class="noFound" translate>Please enter a search term.</h2>
     <ng-template #noResults>
-        <h2 *ngIf="key.length >= 1" class="noFound">Nichts gefunden.</h2>
+        <h2 *ngIf="key.length >= 1" class="noFound" translate>Nothing found.</h2>
     </ng-template>
     <app-footer></app-footer>
 </div>

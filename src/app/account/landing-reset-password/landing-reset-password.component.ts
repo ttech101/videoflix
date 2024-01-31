@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FooterComponent } from '../../templates/footer/footer.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,6 +14,7 @@ import {
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
 import { DataService } from '../../service/data.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-landing-reset-password',
@@ -27,11 +28,12 @@ import { DataService } from '../../service/data.service';
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
+    TranslateModule,
   ],
   templateUrl: './landing-reset-password.component.html',
   styleUrl: './landing-reset-password.component.scss',
 })
-export class LandingResetPasswordComponent {
+export class LandingResetPasswordComponent implements OnInit {
   set_headline: string = 'Passwortänderung';
   set_header: string = 'Passwort erfolgreiche geändert';
   set_text: string = 'Du kannst dich nun wieder Einloggen';
@@ -64,8 +66,13 @@ export class LandingResetPasswordComponent {
   constructor(
     private router: Router,
     private as: AuthService,
-    private dataService: DataService
+    private dataService: DataService,
+    public translate: TranslateService
   ) {}
+  ngOnInit(): void {
+    let language: any = localStorage.getItem('language');
+    this.translate.use(language);
+  }
 
   getErrorMessagepassword1() {
     if (this.password1.hasError('required')) {

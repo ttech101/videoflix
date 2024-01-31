@@ -17,6 +17,7 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../../service/auth.service';
 import { environment } from '../../../environments/environment';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-enter-passwort',
@@ -33,6 +34,7 @@ import { environment } from '../../../environments/environment';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    TranslateModule,
   ],
   providers: [AuthService],
 })
@@ -47,7 +49,8 @@ export class EnterPasswortComponent {
     private router: Router,
     private dataService: DataService,
     private location: Location,
-    private as: AuthService
+    private as: AuthService,
+    public translate: TranslateService
   ) {}
 
   ngOnInit() {
@@ -56,6 +59,8 @@ export class EnterPasswortComponent {
     if (formData && formData.email) {
       this.email = formData.email;
     }
+    let language: any = localStorage.getItem('language');
+    this.translate.use(language);
   }
 
   changeMail() {

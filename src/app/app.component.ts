@@ -35,6 +35,9 @@ export class AppComponent implements OnInit {
   constructor(private router: Router, private as: AuthService) {}
 
   async ngOnInit() {
+    if (!localStorage.getItem('language')) {
+      localStorage.setItem('language', 'en');
+    }
     if (localStorage.getItem('authToken')) {
       let resp: any = await this.as.checkToken(
         localStorage.getItem('authToken')

@@ -2,26 +2,26 @@
 <div *ngIf="loadKey()"></div>
 <div class="content">
     <form [formGroup]="uploadForm" (submit)="onFormSubmit($event)">
-        <h2>Upload</h2>
+        <h2 translate>Upload</h2>
         <mat-form-field class="full-width">
-            <mat-label>Film Name</mat-label>
+            <mat-label> <span translate>Movie Name</span></mat-label>
             <input matInput type="text" [formControl]="uploadForm.controls.movie_name">
         </mat-form-field>
         <mat-form-field class="full-width">
-            <mat-label>Beschreibung Kurz</mat-label>
+            <mat-label><span translate>Description Short</span></mat-label>
             <input matInput [formControl]="uploadForm.controls.description_short" name="description_short" required>
         </mat-form-field>
         <mat-form-field class="full-width">
-            <mat-label>Beschreibung lang</mat-label>
+            <mat-label><span translate>Description</span></mat-label>
             <textarea matInput [formControl]="uploadForm.controls.description" name="description"></textarea>
         </mat-form-field>
         <div class="date">
             <mat-form-field class="full-width">
-                <mat-label>Author</mat-label>
+                <mat-label><span translate>Author</span></mat-label>
                 <input matInput [formControl]="uploadForm.controls.author" name="author" required>
             </mat-form-field>
             <mat-form-field>
-                <mat-label>Choose a date</mat-label>
+                <mat-label> <span translate>Creation date</span></mat-label>
                 <input matInput [matDatepicker]="picker" [formControl]="uploadForm.controls.date_from" name="date_from"
                     required>
                 <mat-hint>MM/DD/YYYY</mat-hint>
@@ -32,23 +32,26 @@
 
         <mat-card class="result">
             <mat-card-content>
-                <h3>Optionen</h3>
+                <h3 translate>Options</h3>
                 <section class="section-option">
                     <mat-form-field class="full-width">
-                        <mat-label>Video länge (min.)</mat-label>
+                        <mat-label>
+                            <p translate>Video length (min.)</p>
+                        </mat-label>
                         <input type="time" matInput [formControl]="uploadForm.controls.video_length"
                             name="video_length">
                     </mat-form-field>
                 </section>
             </mat-card-content>
             <mat-card-content>
-                <h3 class="upload-h3">Film Typ</h3>
+                <h3 class="upload-h3" translate>Movie type</h3>
                 <section class="example-section">
                     <mat-radio-group [formControl]="uploadForm.controls.movie_check" name="movie_check" required>
-                        <mat-radio-button value="movie">Spielfilm
-                            / Kurzfilm
+                        <mat-radio-button value="movie">
+                            <p>Movie / Short movie</p>
                         </mat-radio-button>
-                        <mat-radio-button value="serie">Serie
+                        <mat-radio-button value="serie">
+                            <p translate>Series</p>
                         </mat-radio-button>
                     </mat-radio-group>
                 </section>
@@ -57,33 +60,45 @@
                 <h3 class="upload-h3">Genre</h3>
                 <section class="example-section">
                     <mat-radio-group [formControl]="uploadForm.controls.genre" name="genre" required>
-                        <mat-radio-button value="nature">Natur
+                        <mat-radio-button value="nature">
+                            <p translate>Nature</p>
                         </mat-radio-button>
-                        <mat-radio-button value="funny">Lustiges
+                        <mat-radio-button value="funny">
+                            <p translate>Funny</p>
                         </mat-radio-button>
-                        <mat-radio-button value="knowledge">Wissen
+                        <mat-radio-button value="knowledge">
+                            <p translate>Knowledge</p>
                         </mat-radio-button>
-                        <mat-radio-button value="other">Sonstiges
+                        <mat-radio-button value="other">
+                            <p translate>Other</p>
                         </mat-radio-button>
                     </mat-radio-group>
                 </section>
             </mat-card-content>
             <mat-card-content>
-                <h3 class="upload-h3">Freigabe</h3>
+                <h3 class="upload-h3" translate>Age rating</h3>
                 <mat-chip-listbox aria-label="Fish selection" [formControl]="uploadForm.controls.selectedAge"
                     name="selectedAge" value="uploadForm.controls.selectedAge">
-                    <mat-chip-option value="0">KeineAltersfreigabe</mat-chip-option>
-                    <mat-chip-option value="6">Altersfreigabeab 6</mat-chip-option>
-                    <mat-chip-option value="12">Altersfreigabe ab 12</mat-chip-option>
-                    <mat-chip-option value="16">Altersfreigabe ab 18</mat-chip-option>
+                    <mat-chip-option value='0'>
+                        <p translate>No age rating</p>
+                    </mat-chip-option>
+                    <mat-chip-option value='6'>
+                        <p translate>Age rating from 6</p>
+                    </mat-chip-option>
+                    <mat-chip-option value='12'>
+                        <p translate>Age rating from 12</p>
+                    </mat-chip-option>
+                    <mat-chip-option value='16'>
+                        <p translate>Age rating from 16</p>
+                    </mat-chip-option>
                 </mat-chip-listbox>
             </mat-card-content>
         </mat-card>
         <mat-card class="result">
             <mat-card-content class="upload-button">
                 <div class="info-datei">
-                    <h3 class="upload-h3">Video / Dateien</h3>
-                    <i *ngIf="!uploadForm.valid">(Bitte erst alle Felder oben ausfüllen)</i>
+                    <h3 class="upload-h3" translate>Video / Files</h3>
+                    <i *ngIf="!uploadForm.valid" translate>(Please fill in all fields above first)</i>
                 </div>
                 <div>
                     <div class="button_right">
@@ -91,10 +106,11 @@
                             (change)="onFileSelectedThumbnail($event)" #fileUploadThumbnail>
                         <div class="file-upload">
                             <button [disabled]="!uploadForm.valid" mat-raised-button type="button" color="primary"
-                                class="upload-btn" (click)="fileUploadThumbnail.click()">Cover
+                                class="upload-btn" (click)="fileUploadThumbnail.click()">
+                                <p translate>Cover</p>
                                 <mat-icon>attach_file</mat-icon>
                             </button>
-                            <p>{{fileNameThumbnail || "No file uploaded yet."}}</p>
+                            <p translate>{{fileNameThumbnail || "No file uploaded yet."}}</p>
                         </div>
                         <mat-icon class="cancel-upload" (click)="cancelUploadThumbnail()"
                             *ngIf="uploadProgressThumbnail">delete_forever</mat-icon>
@@ -114,10 +130,11 @@
                             (change)="onFileSelectedImage($event)" #fileUploadImage>
                         <div class="file-upload">
                             <button [disabled]="!uploadForm.valid" mat-raised-button type="button" color="primary"
-                                class="upload-btn" (click)="fileUploadImage.click()">Image
+                                class="upload-btn" (click)="fileUploadImage.click()">
+                                <p translate>Image</p>
                                 <mat-icon>attach_file</mat-icon>
                             </button>
-                            <p>{{fileNameImage || "No file uploaded yet."}}</p>
+                            <p translate>{{fileNameImage || "No file uploaded yet."}}</p>
                         </div>
                         <mat-icon class="cancel-upload" (click)="cancelUploadImage()"
                             *ngIf="uploadProgressImage">delete_forever</mat-icon>
@@ -137,10 +154,11 @@
                             (change)="onFileSelectedVideo($event)" #fileUploadVideo>
                         <div class="file-upload">
                             <button [disabled]="!uploadForm.valid" mat-raised-button type="button" color="primary"
-                                class="upload-btn" (click)="fileUploadVideo.click()">Video
+                                class="upload-btn" (click)="fileUploadVideo.click()">
+                                <p translate>Video</p>
                                 <mat-icon>attach_file</mat-icon>
                             </button>
-                            <p>{{fileNameVideo || "No file uploaded yet."}}</p>
+                            <p translate>{{fileNameVideo || "No file uploaded yet."}}</p>
                         </div>
                         <mat-icon class="cancel-upload" (click)="cancelUploadVideo()"
                             *ngIf="uploadProgressVideo">delete_forever</mat-icon>
@@ -158,11 +176,11 @@
         <div class="button-row">
             <mat-slide-toggle [formControl]="uploadForm.controls.upload_visible_check" name="upload_visible_check"
                 [checked]="false">
-                Upload für alle sichtbar?
+                <p translate>Upload visible to all?</p>
             </mat-slide-toggle>
             <button mat-fab extended color="primary" type="submit">
                 <mat-icon>upload</mat-icon>
-                Veröffentlichen
+                <p translate>Publish</p>
             </button>
         </div>
     </form>

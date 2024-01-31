@@ -1,8 +1,9 @@
 <div class="profil-account">
     <div class="headline-profil">
         <div mat-dialog-content>
-            <h2 mat-dialog-title>Profil</h2>
-            Das ist dein Profil. Ändere hier die Einstellungen.
+            <h2 mat-dialog-title translate>Profil</h2>
+            <p translate>This is your profile. Change the settings here.</p>
+
         </div>
 
 
@@ -12,50 +13,62 @@
     <div mat-dialog-content>
         <div class="border-dialog">
             <form class="profil-form">
-                <h3 class="profil-h3">Profil Name</h3>
+                <h3 class="profil-h3" translate>Profil Name</h3>
                 <mat-form-field class="example-full-width">
-                    <mat-label>Profil Name</mat-label>
-                    <input matInput placeholder="Gebe dein Profilnamen ein" value="{{name}}" [(ngModel)]="name"
-                        name="name">
+                    <mat-label>
+                        <p translate>Name</p>
+                    </mat-label>
+                    <input matInput [disabled]="guest" placeholder="Gebe dein Profilnamen ein" value="{{name}}"
+                        [(ngModel)]="name" name="name">
                 </mat-form-field>
-                <h3 class="profil-h3">Optionen</h3>
+                <h3 class="profil-h3" translate>Optionen</h3>
                 <mat-card-content>
                     <section class="profil-slider">
                         <mat-slide-toggle class="example-margin" [color]="color" [(ngModel)]="isChecked"
                             name="play_check">
-                            Automatische Wiedergabe
+                            <p translate>Autoplay</p>
                         </mat-slide-toggle>
                     </section>
                 </mat-card-content>
-                <h3 class="profil-h3">Sprache</h3>
+                <h3 class="profil-h3" translate>Language</h3>
                 <mat-form-field>
-                    <mat-label>Sprache</mat-label>
+                    <mat-label>
+                        <p translate>Language</p>
+                    </mat-label>
                     <mat-select [(value)]="selected_language">
-                        <mat-option value="de">Deutsch</mat-option>
-                        <mat-option value="en">Englisch</mat-option>
+                        <mat-option value="de">
+                            <p translate>German</p>
+                        </mat-option>
+                        <mat-option value="en">
+                            <p translate>English</p>
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
-                <h3 class="profil-h3">Freigabe</h3>
+                <h3 class="profil-h3">Age rating</h3>
                 <mat-chip-listbox aria-label="Fish selection">
-                    <mat-chip-option [selected]="selectedAge === 0" (selectionChange)="changeSelected(0)">Keine
-                        Altersfreigabe</mat-chip-option>
-                    <mat-chip-option [selected]="selectedAge === 6" (selectionChange)="changeSelected(6)">Altersfreigabe
-                        ab 6</mat-chip-option>
-                    <mat-chip-option [selected]="selectedAge === 12"
-                        (selectionChange)="changeSelected(12)">Altersfreigabe ab 12</mat-chip-option>
-                    <mat-chip-option [selected]="selectedAge === 16"
-                        (selectionChange)="changeSelected(16)">Altersfreigabe ab 18</mat-chip-option>
+                    <mat-chip-option [selected]="selectedAge === 0" (selectionChange)="changeSelected(0)">
+                        <p translate>None Age rating</p>
+                    </mat-chip-option>
+                    <mat-chip-option [selected]="selectedAge === 6" (selectionChange)="changeSelected(6)">
+                        <p translate>Age rating from 6</p>
+                    </mat-chip-option>
+                    <mat-chip-option [selected]="selectedAge === 12" (selectionChange)="changeSelected(12)">
+                        <p translate>Age rating from 12</p>
+                    </mat-chip-option>
+                    <mat-chip-option [selected]="selectedAge === 16" (selectionChange)="changeSelected(16)">
+                        <p translate>Age rating from 16</p>
+                    </mat-chip-option>
                 </mat-chip-listbox>
                 <mat-card-content class="upload-button">
-                    <h3 class="profil-h3">Profielbild</h3>
+                    <h3 class="profil-h3" translate>Profile image</h3>
                     <input style="display: none;" type="file" class="file-input" [accept]="requiredFileType"
                         (change)="onFileSelected($event)" #fileUpload>
                     <div class="file-upload">
-                        <button mat-raised-button color="primary" class="upload-btn"
-                            (click)="fileUpload.click()">Profile Bild
+                        <button mat-raised-button color="primary" class="upload-btn" (click)="fileUpload.click()">
+                            <p translate>Image</p>
                             <mat-icon>attach_file</mat-icon>
                         </button>
-                        <p>{{fileName || "No file uploaded yet."}}</p>
+                        <p translate>{{fileName || "No file uploaded yet."}}</p>
                     </div>
                     <i>{{avatar_info}}</i>
                 </mat-card-content>
@@ -63,8 +76,11 @@
         </div>
     </div>
     <div mat-dialog-actions align="center">
-        <button mat-button mat-dialog-close>Schließen</button>
-        <button mat-raised-button color="primary" (click)="saveProfil()" mat-dialog-close
-            cdkFocusInitial>Speichern</button>
+        <button mat-button mat-dialog-close>
+            <p translate>Close</p>
+        </button>
+        <button mat-raised-button color="primary" (click)="saveProfil()" mat-dialog-close cdkFocusInitial>
+            <span translate>Save</span>
+        </button>
     </div>
 </div>

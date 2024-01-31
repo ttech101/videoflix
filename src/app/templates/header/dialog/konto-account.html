@@ -1,26 +1,32 @@
 <div class="konto-account">
-    <h2 mat-dialog-title>Account</h2>
+    <h2 mat-dialog-title translate>Account</h2>
     <div mat-dialog-content class="mat-dialog-content">
-        Kontoinformationen bearbeiten
+        <p translate>Edit account information</p>
         <div class="border-dialog">
             <form if="email.invalid" (ngSubmit)="submitFormChangeEmail()">
-                <h3>Change E-mail</h3>
+                <h3 translate>Change E-mail</h3>
                 <mat-form-field>
-                    <mat-label>Enter your email</mat-label>
+                    <mat-label>
+                        <span translate>Enter your email</span>
+                    </mat-label>
                     <input matInput [formControl]="email" required>
                     @if (email.invalid) {
                     <mat-error>{{getErrorMessage()}}</mat-error>
                     }
                 </mat-form-field>
                 <i>{{message_mail}}</i>
-                <button mat-button cdkFocusInitial>Ändern</button>
+                <button [disabled]="guest" mat-button cdkFocusInitial>
+                    <p translate>Change</p>
+                </button>
             </form>
 
 
             <form>
-                <h3 style="margin-top: 15px;">Change password</h3>
+                <h3 style="margin-top: 15px;" translate>Change password</h3>
                 <mat-form-field>
-                    <mat-label>Current password</mat-label>
+                    <mat-label>
+                        <span translate>Current password</span>
+                    </mat-label>
                     <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="current_password"
                         name="current_password">
                     <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
@@ -29,7 +35,9 @@
                     </button>
                 </mat-form-field>
                 <mat-form-field>
-                    <mat-label>Enter new password</mat-label>
+                    <mat-label>
+                        <span translate>Enter new password</span>
+                    </mat-label>
                     <input matInput [type]="hide ? 'password' : 'text'" [formControl]="new_password">
                     <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                         [attr.aria-pressed]="hide">
@@ -37,12 +45,15 @@
                     </button>
                 </mat-form-field>
                 <i>{{message_password}}</i>
-                <button mat-button cdkFocusInitial (click)="submitFormChangePassword()">Ändern</button>
+                <button [disabled]="guest" mat-button cdkFocusInitial (click)="submitFormChangePassword()">
+                    <p translate>Change</p>
+                </button>
             </form>
         </div>
     </div>
     <div mat-dialog-actions align="center">
-        <button class="buton-bottom" mat-raised-button cdkFocusInitial color="primary"
-            mat-dialog-close>Schlißen</button>
+        <button class="buton-bottom" mat-raised-button cdkFocusInitial color="primary" mat-dialog-close>
+            <p translate>Close</p>
+        </button>
     </div>
 </div>

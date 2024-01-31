@@ -15,6 +15,7 @@ import {
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
 import { HttpClientModule } from '@angular/common/http';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-register',
@@ -31,6 +32,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    TranslateModule,
   ],
   providers: [AuthService],
 })
@@ -69,7 +71,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private router: Router,
     private dataService: DataService,
-    private as: AuthService
+    private as: AuthService,
+    public translate: TranslateService
   ) {}
 
   ngOnInit() {
@@ -81,6 +84,8 @@ export class RegisterComponent implements OnInit {
     } else {
       this.changeEmail();
     }
+    let language: any = localStorage.getItem('language');
+    this.translate.use(language);
   }
 
   changeEmail() {

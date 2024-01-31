@@ -13,6 +13,7 @@ import {
 } from '@angular/forms';
 import { Location } from '@angular/common';
 import { AuthService } from '../../service/auth.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-rest-passwort',
@@ -26,6 +27,7 @@ import { AuthService } from '../../service/auth.service';
     FooterComponent,
     FormsModule,
     ReactiveFormsModule,
+    TranslateModule,
   ],
 })
 export class RestPasswortComponent {
@@ -47,7 +49,8 @@ export class RestPasswortComponent {
     private router: Router,
     private dataService: DataService,
     private location: Location,
-    private as: AuthService
+    private as: AuthService,
+    public translate: TranslateService
   ) {}
 
   ngOnInit() {
@@ -57,6 +60,8 @@ export class RestPasswortComponent {
       this.email = formData.email;
       this.emailFormControl.setValue(this.email);
     }
+    let language: any = localStorage.getItem('language');
+    this.translate.use(language);
   }
 
   async submitForm() {

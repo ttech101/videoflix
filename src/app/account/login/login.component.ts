@@ -14,6 +14,7 @@ import { FooterComponent } from '../../templates/footer/footer.component';
 import { Router } from '@angular/router';
 import { DataService } from '../../service/data.service';
 import { Location } from '@angular/common';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -29,6 +30,7 @@ import { Location } from '@angular/common';
     ReactiveFormsModule,
     MatIconModule,
     FooterComponent,
+    TranslateModule,
   ],
 })
 export class LoginComponent {
@@ -44,7 +46,8 @@ export class LoginComponent {
   constructor(
     private router: Router,
     private dataService: DataService,
-    private location: Location
+    private location: Location,
+    public translate: TranslateService
   ) {}
 
   ngOnInit() {
@@ -54,6 +57,8 @@ export class LoginComponent {
       this.email = formData.email;
       this.emailFormControl.setValue(this.email);
     }
+    let language: any = localStorage.getItem('language');
+    this.translate.use(language);
   }
 
   submitForm() {

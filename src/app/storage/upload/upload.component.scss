@@ -107,9 +107,15 @@ mat-card {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+
   p {
     margin: 0;
-    margin-left: 20px;
+    margin-left: 20px !important;
+  }
+  button {
+    p {
+      margin: 0 !important;
+    }
   }
 }
 
