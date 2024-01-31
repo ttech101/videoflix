@@ -10,12 +10,14 @@ import { HeroComponent } from './landing/hero/hero.component';
 import { AuthService } from './service/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { TranslateModule } from '@ngx-translate/core';
+import { CookieBannerComponent } from './module/cookie-banner/cookie-banner.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  providers: [AuthService],
   imports: [
     CommonModule,
     RouterOutlet,
@@ -26,8 +28,8 @@ import { TranslateModule } from '@ngx-translate/core';
     NewMoviesComponent,
     HeroComponent,
     HttpClientModule,
+    CookieBannerComponent,
   ],
-  providers: [AuthService],
 })
 export class AppComponent implements OnInit {
   title = 'videoflix';
@@ -47,6 +49,10 @@ export class AppComponent implements OnInit {
       } else {
         sessionStorage.setItem('account', 'false');
       }
+    }
+    if (!localStorage.getItem('cookieAccepted')) {
+      // Zeige den Cookie-Banner, wenn er noch nicht akzeptiert wurde
+      // Du kannst hier die Logik für das Einblenden des Banners implementieren
     }
   }
 }

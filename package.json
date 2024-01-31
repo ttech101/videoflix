@@ -30,6 +30,8 @@
     "@ngx-translate/http-loader": "^8.0.0",
     "@videogular/ngx-videogular": "^8.0.0",
     "bootstrap": "^5.3.2",
+    "cookieconsent": "^3.1.1",
+    "ngx-cookieconsent": "^6.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.2"

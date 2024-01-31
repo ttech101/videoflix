@@ -115,9 +115,12 @@ export class HeaderComponent implements OnInit {
     });
   }
   menuLogout() {
+    let language: string | any = localStorage.getItem('language');
     sessionStorage.clear();
     localStorage.clear();
     this.router.navigateByUrl('/');
+    localStorage.setItem('language', language);
+    localStorage.setItem('cookie_accept', 'true');
   }
 
   openMyUploads() {

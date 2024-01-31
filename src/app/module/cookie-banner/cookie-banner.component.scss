@@ -1,0 +1,31 @@
+.cookie-banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+
+  left: 0;
+  top: 0px;
+  position: fixed;
+  background-color: #4b4b4b;
+  max-width: 100%;
+  width: fit-content;
+  margin: 15px;
+  border-radius: 15px;
+  padding: 15px;
+  z-index: 100;
+  -webkit-box-shadow: 5px 5px 15px 5px #333333;
+  box-shadow: 5px 5px 15px 5px #333333;
+  a {
+    text-decoration: underline;
+  }
+  button {
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+  span {
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}

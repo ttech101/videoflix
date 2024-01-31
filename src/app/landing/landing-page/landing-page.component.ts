@@ -17,6 +17,7 @@ import { FooterComponent } from '../../templates/footer/footer.component';
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
 import { HttpClientModule } from '@angular/common/http';
+import { CookieBannerComponent } from '../../module/cookie-banner/cookie-banner.component';
 
 @Component({
   selector: 'app-landing-page',
@@ -36,6 +37,7 @@ import { HttpClientModule } from '@angular/common/http';
     HeroComponent,
     FaqComponent,
     FooterComponent,
+    CookieBannerComponent,
   ],
 })
 export class LandingPageComponent implements OnInit {
