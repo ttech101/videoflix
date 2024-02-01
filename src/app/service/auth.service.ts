@@ -62,7 +62,6 @@ export class AuthService {
     const headers = new HttpHeaders({
       Authorization: 'token ' + token,
     });
-    console.log(body, headers);
     return lastValueFrom(this.http.post(url, body, { headers }));
   }
 
@@ -292,9 +291,11 @@ export class AuthService {
 
   public deleteVideo(key: string) {
     const url = `${environment.apiUrl}/delete_movie/`;
+
     const options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
+        Authorization: 'token ' + localStorage.getItem('authToken'),
       }),
       body: { random_key: key }, // Send key in the request body
     };

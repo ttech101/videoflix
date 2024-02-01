@@ -52,8 +52,6 @@ export class AppComponent implements OnInit {
       }
     }
     if (!localStorage.getItem('cookieAccepted')) {
-      // Zeige den Cookie-Banner, wenn er noch nicht akzeptiert wurde
-      // Du kannst hier die Logik für das Einblenden des Banners implementieren
     }
   }
 }

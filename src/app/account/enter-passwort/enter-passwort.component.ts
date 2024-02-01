@@ -79,14 +79,20 @@ export class EnterPasswortComponent {
 
   async login() {
     let password = this.passwordForm.value;
+    let autoplay: any;
     try {
       let resp: any = await this.as.loginWithEmailAndPassword(
         this.email,
         password
       );
+      if (resp.autoplay == 'true') {
+        autoplay = 'True';
+      } else {
+        autoplay = 'False';
+      }
       localStorage.setItem('authToken', resp.token);
       localStorage.setItem('name', resp.name);
-      localStorage.setItem('autoplay', resp.autoplay);
+      localStorage.setItem('autoplay', autoplay);
       localStorage.setItem('language', resp.language);
       sessionStorage.setItem('account', 'true');
       localStorage.setItem('avatar', environment.apiUrl + resp.avatar_path);

@@ -41,3 +41,27 @@ td {
     border-radius: 5px;
   }
 }
+
+@media (max-width: 650px) {
+  .dn-small {
+    display: none;
+  }
+
+  tr {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: fit-content;
+    align-items: center;
+    margin-bottom: 25px;
+    border: 1px solid white;
+  }
+  td {
+    border: none;
+    margin-bottom: 10px;
+  }
+  table {
+    background-color: transparent;
+    box-shadow: none;
+  }
+}

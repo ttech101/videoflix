@@ -68,7 +68,8 @@
                             <p translate>Image</p>
                             <mat-icon>attach_file</mat-icon>
                         </button>
-                        <p translate>{{fileName || "No file uploaded yet."}}</p>
+                        <p *ngIf="!fileName" translate>No file uploaded yet.</p>
+                        <p *ngIf="fileName">{{fileName}}</p>
                     </div>
                     <i>{{avatar_info}}</i>
                 </mat-card-content>

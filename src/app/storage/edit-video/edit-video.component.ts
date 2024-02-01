@@ -96,7 +96,7 @@ export class EditVideoComponent implements OnInit {
       date_from: datas[0].date_from || new Date(),
       video_length: datas[0].video_length || '00:00',
       movie_check: this.check_video,
-      genre: (datas[0].genre || '').toLowerCase(),
+      genre: datas[0].genre || '',
       selectedAge: (datas[0].age_rating || '0').toString(),
       upload_visible_check: datas[0].upload_visible_check || false,
     });
