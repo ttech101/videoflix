@@ -44,7 +44,7 @@ export class LoginComponent {
   email!: string | any;
 
   constructor(
-    private router: Router,
+    public router: Router,
     private dataService: DataService,
     private location: Location,
     public translate: TranslateService

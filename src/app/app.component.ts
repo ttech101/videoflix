@@ -33,6 +33,7 @@ import { CookieBannerComponent } from './module/cookie-banner/cookie-banner.comp
 })
 export class AppComponent implements OnInit {
   title = 'videoflix';
+  http: any;
 
   constructor(private router: Router, private as: AuthService) {}
 

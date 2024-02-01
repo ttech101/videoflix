@@ -59,7 +59,6 @@ export class HeroComponent implements OnInit {
   }
   submitForm() {
     if (this.email.status == 'VALID') {
-      // Daten an den Service übergeben
       this.dataService.setFormData({ email: this.email.value });
       this.router.navigate(['/register']);
     }

@@ -275,13 +275,13 @@ export class DialogAnimationsProfilDialog implements OnInit {
       const formData = new FormData();
       formData.append('avatar', file);
       const headers = new HttpHeaders({
-        Authorization: 'token ' + localStorage.getItem('authToken'),
-      });
+       Authorization: 'token ' + localStorage.getItem('authToken'),
+       });
       const upload$ = this.http
         .post(environment.apiUrl + '/profile/', formData, {
           reportProgress: true,
           observe: 'events',
-          headers,
+          // headers,
         })
         .pipe(finalize(() => this.reset()));
       upload$.subscribe(
