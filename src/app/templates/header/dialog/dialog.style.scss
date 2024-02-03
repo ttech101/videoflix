@@ -8,6 +8,20 @@ form {
   align-items: center;
   flex-direction: column;
 }
+.mat-mdc-dialog-content::-webkit-scrollbar {
+  width: 12px;
+}
+
+.mat-mdc-dialog-content::-webkit-scrollbar-track {
+  background: #424242;
+}
+
+.mat-mdc-dialog-content::-webkit-scrollbar-thumb {
+  background-color: #c2185b;
+  border-radius: 10px;
+  border: 3px solid transparent;
+}
+
 mat-form-field {
   width: 100%;
 }
@@ -45,10 +59,10 @@ h2 {
   align-items: center;
   flex-wrap: wrap;
   p {
-    margin: 0;
-    margin-left: 20px !important;
+    margin: 20;
   }
   button {
+    margin-right: 20px;
     p {
       margin: 0 !important;
     }
@@ -75,13 +89,18 @@ h2 {
   overflow: hidden;
 }
 
-.mat-dialog-content {
+mat-dialog-content {
   padding: 0;
   margin: 0;
   overflow: hidden !important;
 }
+
 .konto-account {
   padding: 25px;
+  padding-bottom: 0;
+  h2 {
+    margin: 0;
+  }
   h3 {
     width: 100%;
     text-align: left;
@@ -91,7 +110,14 @@ h2 {
     color: #c2185b;
   }
 }
+.mat-dialog-content {
+  padding: 0 !important;
+}
 
-.buton-bottom {
-  margin-top: 25px;
+.mat-dialog-content-profil {
+  padding-bottom: 0 !important;
+}
+
+.upload-button {
+  margin-top: 20px;
 }

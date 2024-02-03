@@ -34,9 +34,13 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
   styleUrl: './landing-reset-password.component.scss',
 })
 export class LandingResetPasswordComponent implements OnInit {
-  set_headline: string = 'Passwortänderung';
-  set_header: string = 'Passwort erfolgreiche geändert';
-  set_text: string = 'Du kannst dich nun wieder Einloggen';
+  set_headline_de: string = 'Passwortänderung';
+  set_header_de: string = 'Passwort erfolgreiche geändert';
+  set_text_de: string = 'Du kannst dich nun wieder Einloggen';
+  set_headline_en: string = 'Password change';
+  set_header_en: string = 'Password successfully changed';
+  set_text_en: string = 'You can now log in again';
+
   hide = true;
   confirm_email: Boolean = false;
   confirm_password: boolean = false;
@@ -120,11 +124,19 @@ export class LandingResetPasswordComponent implements OnInit {
   submitForm() {
     this.password_correct = this.passwordConfirm();
     if (this.password_correct == true) {
-      this.dataService.setFormData({
-        headline: this.set_headline,
-        header: this.set_header,
-        text: this.set_text,
-      });
+      if (localStorage.getItem('language') == 'de') {
+        this.dataService.setFormData({
+          headline: this.set_headline_de,
+          header: this.set_header_de,
+          text: this.set_text_de,
+        });
+      } else {
+        this.dataService.setFormData({
+          headline: this.set_headline_en,
+          header: this.set_header_en,
+          text: this.set_text_en,
+        });
+      }
       let token: string | any = this.extractTokenFromURL();
       let password: string | any = this.password1.value;
       this.as.resetPasswordSave(password, token);

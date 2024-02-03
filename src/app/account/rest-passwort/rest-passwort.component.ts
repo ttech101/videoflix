@@ -31,10 +31,14 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
   ],
 })
 export class RestPasswortComponent {
-  set_headline: string = '';
-  set_header: string = 'Bestätigungs E-Mail gesendet';
-  set_text: string =
+  set_headline_de: string = '';
+  set_header_de: string = 'Bestätigungs-E-Mail gesendet';
+  set_text_de: string =
     'Bitte prüfe dein E-Mail Postfach. Der Link zum Passwort zurücksetzen wurde gesendet.';
+  set_headline_en: string = '';
+  set_header_en: string = 'Confirmation e-mail sent';
+  set_text_en: string =
+    'Please check your e-mail inbox. The link to reset your password has been sent.';
   formData: any;
   error_message: string = '';
   email!: string | any;
@@ -66,15 +70,25 @@ export class RestPasswortComponent {
 
   async submitForm() {
     if (this.emailFormControl.valid) {
-      this.dataService.setFormData({
-        email: this.emailFormControl.value,
-        headline: this.set_headline,
-        header: this.set_header,
-        text: this.set_text,
-      });
+      if (localStorage.getItem('language') == 'de') {
+        this.dataService.setFormData({
+          email: this.emailFormControl.value,
+          headline: this.set_headline_de,
+          header: this.set_header_de,
+          text: this.set_text_de,
+        });
+      } else {
+        this.dataService.setFormData({
+          email: this.emailFormControl.value,
+          headline: this.set_headline_en,
+          header: this.set_header_en,
+          text: this.set_text_en,
+        });
+      }
       let email: string | any = this.emailFormControl.value;
       try {
         await this.as.resetPassword(email);
+        this.router.navigate(['/completely']);
       } catch (e: any) {
         this.error_message = e.error.error;
         console.log(this.error_message);

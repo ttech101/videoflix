@@ -37,10 +37,14 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
   providers: [AuthService],
 })
 export class RegisterComponent implements OnInit {
-  set_headline: string = '3. SCHRITT';
-  set_header: string = 'Bestätige deine E-Mail';
-  set_text: string =
+  set_headline_de: string = '3. SCHRITT';
+  set_header_de: string = 'Bestätige deine E-Mail';
+  set_text_de: string =
     'Bitte prüfe dein E-Mail Postfach und bestätige den darinenhaltenen Link.';
+  set_headline_en: string = '3. STEP';
+  set_header_en: string = 'Confirm your e-mail';
+  set_text_en: string =
+    'Please check your e-mail inbox and confirm the link contained therein.';
   hide = true;
   confirm_email: Boolean = false;
   confirm_password: boolean = false;
@@ -149,12 +153,21 @@ export class RegisterComponent implements OnInit {
   async submitForm() {
     this.password_correct = this.passwordConfirm();
     if (this.emailerror.valid == true && this.password_correct == true) {
-      this.dataService.setFormData({
-        email: this.email,
-        headline: this.set_headline,
-        header: this.set_header,
-        text: this.set_text,
-      });
+      if (localStorage.getItem('language') == 'de') {
+        this.dataService.setFormData({
+          email: this.email,
+          headline: this.set_headline_de,
+          header: this.set_header_de,
+          text: this.set_text_de,
+        });
+      } else {
+        this.dataService.setFormData({
+          email: this.email,
+          headline: this.set_headline_en,
+          header: this.set_header_en,
+          text: this.set_text_en,
+        });
+      }
       await this.register();
       this.router.navigate(['/completely']);
     }
@@ -168,9 +181,7 @@ export class RegisterComponent implements OnInit {
         this.password2.value,
         this.name.value
       );
-      localStorage.setItem('authToken', resp.token);
-      localStorage.setItem('name', resp.name);
-      this.router.navigateByUrl('/home');
+      localStorage.setItem('cookie_accept', 'true');
     } catch (e) {
       console.log(e);
     }

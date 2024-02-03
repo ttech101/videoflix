@@ -110,18 +110,22 @@
                                 <p translate>Cover</p>
                                 <mat-icon>attach_file</mat-icon>
                             </button>
-                            <p translate>{{fileNameThumbnail || "No file uploaded yet."}}</p>
+                            <p *ngIf="!fileNameThumbnail" translate>No file uploaded yet.</p>
+                            <p *ngIf="fileNameThumbnail">{{fileNameThumbnail}}</p>
                         </div>
                         <mat-icon class="cancel-upload" (click)="cancelUploadThumbnail()"
                             *ngIf="uploadProgressThumbnail">delete_forever</mat-icon>
                         <mat-icon id="check_thumbnail" style="color: green;" class="cancel-upload dn">done</mat-icon>
                         <mat-icon id="nocheck_thumbnail" style="color: red;" class="cancel-upload dn">close</mat-icon>
                     </div>
+                    <i class="error-files dn" id="error_thumbnail">({{errorThumbnail}})</i>
                     <div class="progress dn" id="thumbnail-progress">
                         <mat-progress-bar class="progress-bar" mode="determinate" [value]="uploadProgressThumbnail"
                             *ngIf="uploadProgressThumbnail">
                         </mat-progress-bar>
+
                     </div>
+
                 </div>
 
                 <div>
@@ -134,13 +138,15 @@
                                 <p translate>Image</p>
                                 <mat-icon>attach_file</mat-icon>
                             </button>
-                            <p translate>{{fileNameImage || "No file uploaded yet."}}</p>
+                            <p *ngIf="!fileNameImage" translate>No file uploaded yet.</p>
+                            <p *ngIf="fileNameImage">{{fileNameImage}}</p>
                         </div>
                         <mat-icon class="cancel-upload" (click)="cancelUploadImage()"
                             *ngIf="uploadProgressImage">delete_forever</mat-icon>
                         <mat-icon id="check_image" style="color: green;" class="cancel-upload dn">done</mat-icon>
                         <mat-icon id="nocheck_image" style="color: red;" class="cancel-upload dn">close</mat-icon>
                     </div>
+                    <i class="error-files dn" id="error_image">{{errorImage}}</i>
                     <div class="progress dn" id="image-progress">
                         <mat-progress-bar class="progress-bar" mode="determinate" [value]="uploadProgressImage"
                             *ngIf="uploadProgressImage">
@@ -150,7 +156,7 @@
 
                 <div>
                     <div class="button_right">
-                        <input style="display: none;" type="file" class="file-input" accept="video/mp4"
+                        <input style="display: none;" type="file" class="file-input" accept="video/*"
                             (change)="onFileSelectedVideo($event)" #fileUploadVideo>
                         <div class="file-upload">
                             <button [disabled]="!uploadForm.valid" mat-raised-button type="button" color="primary"
@@ -158,13 +164,15 @@
                                 <p translate>Video</p>
                                 <mat-icon>attach_file</mat-icon>
                             </button>
-                            <p translate>{{fileNameVideo || "No file uploaded yet."}}</p>
+                            <p *ngIf="!fileNameVideo" translate>No file uploaded yet.</p>
+                            <p *ngIf="fileNameVideo">{{fileNameVideo}}</p>
                         </div>
                         <mat-icon class="cancel-upload" (click)="cancelUploadVideo()"
                             *ngIf="uploadProgressVideo">delete_forever</mat-icon>
                         <mat-icon id="check_video" style="color: green;" class="cancel-upload dn">done</mat-icon>
                         <mat-icon id="nocheck_video" style="color: red;" class="cancel-upload dn">close</mat-icon>
                     </div>
+                    <i class="error-files dn" id="error_video">{{errorVideo}}</i>
                     <div class="progress dn" id="video-progress">
                         <mat-progress-bar class="progress-bar" mode="determinate" [value]="uploadProgressVideo"
                             *ngIf="uploadProgressVideo">

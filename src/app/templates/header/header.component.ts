@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -21,10 +21,7 @@ import {
 } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatChipsModule } from '@angular/material/chips';
-import {
-  MatSlideToggleModule,
-  _MatSlideToggleRequiredValidatorModule,
-} from '@angular/material/slide-toggle';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { ThemePalette } from '@angular/material/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -36,7 +33,6 @@ import {
   HttpClientModule,
   HttpEventType,
   HttpHeaders,
-  HttpResponse,
 } from '@angular/common/http';
 import { MatSelectModule } from '@angular/material/select';
 import { Subscription, finalize } from 'rxjs';
@@ -67,7 +63,6 @@ export class HeaderComponent implements OnInit {
     this.translate.use(language);
     let path: any = localStorage.getItem('avatar');
     let avatar_null = path.match('null');
-    console.log(path, '<>', avatar_null);
     if (avatar_null != 'null') {
       this.avatar_path = localStorage.getItem('avatar');
     } else {
@@ -200,7 +195,6 @@ export class DialogAnimationsDeleteDialog implements OnInit {
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    _MatSlideToggleRequiredValidatorModule,
     MatIconModule,
     MatProgressBarModule,
     TranslateModule,
@@ -243,6 +237,17 @@ export class DialogAnimationsProfilDialog implements OnInit {
     let language: any = localStorage.getItem('language');
     this.translate.use(language);
     this.checkGuest();
+    this.checkAvatar();
+  }
+
+  checkAvatar() {
+    let avatar: any = localStorage.getItem('avatar');
+    let avatar_null: any = avatar.match('null');
+    if (avatar_null != 'null') {
+      this.avatar_path = localStorage.getItem('avatar');
+    } else {
+      this.avatar_path = '/assets/img/woman-995164_640.png';
+    }
   }
 
   changeSelected(age: number) {
@@ -289,19 +294,18 @@ export class DialogAnimationsProfilDialog implements OnInit {
           if (event.type === HttpEventType.Response) {
             const response = event.body;
             setTimeout(() => {
+              localStorage.setItem('avatar', newUrl);
               this.avatar_path = newUrl;
               this.avatar_info = response.message;
-            }, 1500);
+            }, 1000);
           }
         },
         (error: any) => {
           this.avatar_info = error.error.message;
-          this.avatar_path = '/assets/img/woman-995164_640.png';
+          // this.avatar_path = '/assets/img/woman-995164_640.png';
         }
       );
       let newUrl = environment.apiUrl + '/media/avatars/' + file.name;
-
-      localStorage.setItem('avatar', newUrl);
     }
   }
 

@@ -100,27 +100,41 @@ export class SingleViewComponent implements OnInit {
   }
 
   toggleVideo() {
-    const video: any = document.getElementById('video');
-    video.classList.remove('dn');
-    this.media.nativeElement.play();
-    if (video.requestFullscreen) {
-      video.requestFullscreen();
-    } else if (video.mozRequestFullScreen) {
-      video.mozRequestFullScreen();
-    } else if (video.webkitRequestFullscreen) {
-      video.webkitRequestFullscreen();
-    } else if (video.msRequestFullscreen) {
-      video.msRequestFullscreen();
+    if (this.checkConvert()) {
+      const video: any = document.getElementById('video');
+      video.classList.remove('dn');
+      this.media.nativeElement.play();
+      if (video.requestFullscreen) {
+        video.requestFullscreen();
+      } else if (video.mozRequestFullScreen) {
+        video.mozRequestFullScreen();
+      } else if (video.webkitRequestFullscreen) {
+        video.webkitRequestFullscreen();
+      } else if (video.msRequestFullscreen) {
+        video.msRequestFullscreen();
+      }
+    } else {
+      this.dialog.open(DialogElementsConvertDialog);
     }
   }
 
-  onCanPlay(event: Event) {
-    const video: any = document.getElementById('video');
-    if (localStorage.getItem('autoplay') == 'False') {
-      this.media.nativeElement.pause();
+  checkConvert() {
+    let convert_OK: any = this.data.video.match('_480p.mp4');
+    if (convert_OK == '_480p.mp4') {
+      return true;
     } else {
-      video.classList.remove('dn');
-      this.media.nativeElement.play();
+      return false;
+    }
+  }
+  onCanPlay(event: Event) {
+    if (this.checkConvert() && localStorage.getItem('autoplay') == 'True') {
+      const video: any = document.getElementById('video');
+      if (localStorage.getItem('autoplay') == 'False') {
+        this.media.nativeElement.pause();
+      } else {
+        video.classList.remove('dn');
+        this.media.nativeElement.play();
+      }
     }
   }
 
@@ -161,3 +175,17 @@ export class DialogElementsDescriptionDialog implements OnInit {
     this.translate.use(language);
   }
 }
+
+@Component({
+  selector: 'convert-dialog',
+  templateUrl: 'convert.dialog.html',
+  standalone: true,
+  imports: [
+    MatDialogTitle,
+    MatDialogContent,
+    MatDialogActions,
+    MatDialogClose,
+    MatButtonModule,
+  ],
+})
+export class DialogElementsConvertDialog {}

@@ -3,14 +3,11 @@
         <div mat-dialog-content>
             <h2 mat-dialog-title translate>Profil</h2>
             <p translate>This is your profile. Change the settings here.</p>
-
         </div>
-
-
         <img (click)="fileUpload.click()" src="{{avatar_path}}" alt="profil_img">
     </div>
 
-    <div mat-dialog-content>
+    <div mat-dialog-content class="mat-dialog-content-profil">
         <div class="border-dialog">
             <form class="profil-form">
                 <h3 class="profil-h3" translate>Profil Name</h3>
@@ -73,15 +70,18 @@
                     </div>
                     <i>{{avatar_info}}</i>
                 </mat-card-content>
+
             </form>
+
+        </div>
+        <div mat-dialog-actions align="center">
+            <button type="button" mat-button mat-dialog-close>
+                <p translate>Close</p>
+            </button>
+            <button mat-raised-button color="primary" (click)="saveProfil()" mat-dialog-close cdkFocusInitial>
+                <span translate>Save</span>
+            </button>
         </div>
     </div>
-    <div mat-dialog-actions align="center">
-        <button mat-button mat-dialog-close>
-            <p translate>Close</p>
-        </button>
-        <button mat-raised-button color="primary" (click)="saveProfil()" mat-dialog-close cdkFocusInitial>
-            <span translate>Save</span>
-        </button>
-    </div>
+
 </div>

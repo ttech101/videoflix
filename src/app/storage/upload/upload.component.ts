@@ -99,6 +99,9 @@ export class UploadComponent implements OnInit {
   video_ok: boolean = false;
   upload_key: boolean | any = false;
   key: any;
+  errorThumbnail: string = '';
+  errorImage: string = '';
+  errorVideo: string = '';
 
   async loadKey() {
     if (this.uploadForm.valid && !this.upload_key) {
@@ -122,14 +125,8 @@ export class UploadComponent implements OnInit {
     if (this.uploadForm.valid && this.checkAllUploads()) {
       await this.as.saveVideoData(this.uploadForm.value, this.key);
       this.router.navigateByUrl('/my');
-      console.log('Form is valid', this.uploadForm);
     } else {
       this.openDialog();
-      console.log(
-        'Form is invalid. Please fill in all required fields.',
-        this.uploadProgressThumbnail,
-        this.uploadForm
-      );
     }
   }
 
@@ -142,6 +139,7 @@ export class UploadComponent implements OnInit {
   }
 
   onFileSelectedThumbnail(event: any) {
+    document.getElementById('error_thumbnail')?.classList.add('dn');
     const file: File = event.target.files[0];
     let url = this.as.loadEnvironment() + '/upload_movie/';
     if (file) {
@@ -178,7 +176,8 @@ export class UploadComponent implements OnInit {
         (error) => {
           document.getElementById('nocheck_thumbnail')?.classList.remove('dn');
           document.getElementById('check_thumbnail')?.classList.add('dn');
-          console.error('Fehler bei der Serveranfrage:', error);
+          document.getElementById('error_thumbnail')?.classList.remove('dn');
+          this.errorThumbnail = error.error.replace(/[\[\]']/g, '');
         }
       );
     }
@@ -193,6 +192,7 @@ export class UploadComponent implements OnInit {
   }
 
   onFileSelectedImage(event: any) {
+    document.getElementById('error_image')?.classList.add('dn');
     const file: File = event.target.files[0];
     let url = this.as.loadEnvironment() + '/upload_movie/';
     if (file) {
@@ -225,7 +225,8 @@ export class UploadComponent implements OnInit {
         (error) => {
           document.getElementById('nocheck_image')?.classList.remove('dn');
           document.getElementById('check_image')?.classList.add('dn');
-          console.error('Fehler bei der Serveranfrage:', error);
+          document.getElementById('error_image')?.classList.remove('dn');
+          this.errorImage = error.error.replace(/[\[\]']/g, '');
         }
       );
     }
@@ -239,6 +240,7 @@ export class UploadComponent implements OnInit {
     this.uploadSubImage = null;
   }
   onFileSelectedVideo(event: any) {
+    document.getElementById('error_video')?.classList.add('dn');
     const file: File = event.target.files[0];
     let url = this.as.loadEnvironment() + '/upload_movie/';
     if (file) {
@@ -271,7 +273,8 @@ export class UploadComponent implements OnInit {
         (error) => {
           document.getElementById('nocheck_video')?.classList.remove('dn');
           document.getElementById('check_video')?.classList.add('dn');
-          console.error('Fehler bei der Serveranfrage:', error);
+          document.getElementById('error_video')?.classList.remove('dn');
+          this.errorVideo = error.error.replace(/[\[\]']/g, '');
         }
       );
     }
