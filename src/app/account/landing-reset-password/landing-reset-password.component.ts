@@ -40,7 +40,7 @@ export class LandingResetPasswordComponent implements OnInit {
   set_headline_en: string = 'Password change';
   set_header_en: string = 'Password successfully changed';
   set_text_en: string = 'You can now log in again';
-
+  hide2 = true;
   hide = true;
   confirm_email: Boolean = false;
   confirm_password: boolean = false;

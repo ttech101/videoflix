@@ -9,6 +9,9 @@
   justify-content: center;
   padding: 25px;
   max-width: 100%;
+  a {
+    text-decoration: none;
+  }
 }
 
 .enter-passwort-card {
@@ -32,7 +35,6 @@
   padding: 16px;
 }
 mat-form-field {
-  margin-top: 50px;
   width: 100%;
 }
 
@@ -69,6 +71,6 @@ app-footer {
   margin-top: 25px;
 }
 
-.reset-passwort{
+.reset-passwort {
   text-align: center;
 }

@@ -46,6 +46,7 @@ export class RegisterComponent implements OnInit {
   set_text_en: string =
     'Please check your e-mail inbox and confirm the link contained therein.';
   hide = true;
+  hide2 = true;
   confirm_email: Boolean = false;
   confirm_password: boolean = false;
   email!: string;
@@ -71,6 +72,7 @@ export class RegisterComponent implements OnInit {
   ]);
   formData: any;
   name: any = new FormControl('');
+  send_mail: boolean = false;
 
   constructor(
     private router: Router,
@@ -153,6 +155,7 @@ export class RegisterComponent implements OnInit {
   async submitForm() {
     this.password_correct = this.passwordConfirm();
     if (this.emailerror.valid == true && this.password_correct == true) {
+      this.send_mail = true;
       if (localStorage.getItem('language') == 'de') {
         this.dataService.setFormData({
           email: this.email,

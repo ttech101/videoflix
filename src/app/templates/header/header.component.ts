@@ -359,7 +359,7 @@ export class DialogAnimationsKontoDialog implements OnInit {
     private as: AuthService,
     public translate: TranslateService
   ) {}
-
+  hide2 = true;
   hide = true;
   your_email: string | any = '';
   message_mail: string | any;

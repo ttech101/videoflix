@@ -1,9 +1,9 @@
 <div class="landing_background"></div>
 
 <div class="center_landing">
-  <a href="login"><button mat-raised-button color="accent" class="landing-login" translate>
-      LOGIN
-    </button></a>
+  <button mat-fab extended color="primary" class="landing-login" (click)="loginUser()">
+    <span translate>LOGIN</span><mat-icon>login</mat-icon>
+  </button>
   <h2 style="font-size: 38px" translate>
     Enjoy brand new originals, blockbusters, addictive series and much more more in streaming
   </h2>
@@ -14,9 +14,11 @@
     <mat-form-field>
       <mat-label translate>Enter your email</mat-label>
       <input matInput placeholder="yourMail@example.com" [formControl]="email" required>
-      @if (email.invalid) {
+      @if (email.invalid ) {
       <mat-error>{{getErrorMessage()}}</mat-error>
       }
+      <mat-hint *ngIf="check_email" align="start"><span translate>Your Email is already registered. Please use
+          <a href="/login">login</a></span> </mat-hint>
     </mat-form-field>
     <button mat-raised-button color="primary">
       <p translate>Register now</p>
@@ -25,11 +27,11 @@
 
 
   <div class="landing-buttons">
-    <button (click)="loginGuest()" mat-raised-button color="accent" class="landing-login-guest">
+    <button (click)="loginGuest()" mat-fab extended color="accent" class="landing-login-guest">
       <p translate>Guest Login</p>
     </button>
-    <button (click)="loginUser()" mat-raised-button color="accent" class="landing-login-smart">
-      <p translate>LOGIN</p>
+    <button (click)="loginUser()" mat-fab extended color="primary" class="landing-login-smart">
+      <span translate>LOGIN</span><mat-icon>login</mat-icon>
     </button>
   </div>
   <h2 translate>

@@ -12,6 +12,8 @@ import {
 import { Router } from '@angular/router';
 import { DataService } from '../../service/data.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { AuthService } from '../../service/auth.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-hero',
@@ -25,6 +27,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
     ReactiveFormsModule,
     MatIconModule,
     TranslateModule,
+    CommonModule,
   ],
   templateUrl: './hero.component.html',
   styleUrl: './hero.component.scss',
@@ -33,14 +36,16 @@ export class HeroComponent implements OnInit {
   constructor(
     private router: Router,
     private dataService: DataService,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private as: AuthService
   ) {}
   ngOnInit(): void {
     let language: any = localStorage.getItem('language');
     this.translate.use(language);
   }
+  check_email: boolean = false;
   guest_token: string = '627e5287993530c19ca2f35604ff78c0539ee76f';
-  email = new FormControl('', [
+  email: string | any = new FormControl('', [
     Validators.required,
     Validators.pattern(
       /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -49,18 +54,31 @@ export class HeroComponent implements OnInit {
 
   getErrorMessage() {
     if (this.email.hasError('required')) {
-      return 'You must enter a value';
+      return 'You must enter a value email';
     }
-    // Überprüfe, ob die E-Mail-Adresse gültig ist
     if (this.email.hasError('pattern')) {
       return 'Not a valid email';
     }
-    return '';
+    console.log('!!!');
+    return '123';
   }
-  submitForm() {
+  async submitForm() {
     if (this.email.status == 'VALID') {
-      this.dataService.setFormData({ email: this.email.value });
-      this.router.navigate(['/register']);
+      if (!(await this.checkMail())) {
+        this.dataService.setFormData({ email: this.email.value });
+        this.router.navigate(['/register']);
+      }
+    }
+  }
+
+  async checkMail(): Promise<boolean> {
+    let checkMail: string | any = await this.as.checkEmail(this.email.value);
+    if (checkMail.user_exists == true) {
+      this.check_email = true;
+      return true;
+    } else {
+      this.check_email = false;
+      return false;
     }
   }
 

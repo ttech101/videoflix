@@ -28,7 +28,7 @@
                         <span translate>Current password</span>
                     </mat-label>
                     <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="current_password"
-                        name="current_password">
+                        name="current_password" required>
                     <button mat-icon-button matSuffix type="button" (click)="hide = !hide"
                         [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -38,10 +38,10 @@
                     <mat-label>
                         <span translate>Enter new password</span>
                     </mat-label>
-                    <input matInput [type]="hide ? 'password' : 'text'" [formControl]="new_password">
-                    <button mat-icon-button matSuffix type="button" (click)="hide = !hide"
-                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    <input matInput [type]="hide2 ? 'password' : 'text'" [formControl]="new_password" required>
+                    <button mat-icon-button matSuffix type="button" (click)="hide2 = !hide2"
+                        [attr.aria-label]="'Hide2 password'" [attr.aria-pressed]="hide2">
+                        <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
                 </mat-form-field>
                 <i>{{message_password}}</i>

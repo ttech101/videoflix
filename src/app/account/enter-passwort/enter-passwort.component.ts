@@ -7,7 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { DataService } from '../../service/data.service';
-import { Location } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import {
   FormControl,
@@ -35,6 +35,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
     ReactiveFormsModule,
     HttpClientModule,
     TranslateModule,
+    CommonModule,
   ],
   providers: [AuthService],
 })
@@ -42,7 +43,9 @@ export class EnterPasswortComponent {
   hide = true;
   formData: any;
   email!: string;
+  rest_form: boolean = false;
   password: string = '';
+  password_wrong: boolean = false;
   passwordForm = new FormControl('', [Validators.required]);
 
   constructor(
@@ -61,6 +64,12 @@ export class EnterPasswortComponent {
     }
     let language: any = localStorage.getItem('language');
     this.translate.use(language);
+    if (this.email == null) {
+      this.rest_form = true;
+    }
+    if (this.email == null) {
+      this.router.navigate(['/login']);
+    }
   }
 
   changeMail() {
@@ -80,6 +89,7 @@ export class EnterPasswortComponent {
   async login() {
     let password = this.passwordForm.value;
     let autoplay: any;
+
     try {
       let resp: any = await this.as.loginWithEmailAndPassword(
         this.email,
@@ -94,11 +104,13 @@ export class EnterPasswortComponent {
       localStorage.setItem('name', resp.name);
       localStorage.setItem('autoplay', autoplay);
       localStorage.setItem('language', resp.language);
+      localStorage.setItem('cookie_accept', 'true');
       sessionStorage.setItem('account', 'true');
       localStorage.setItem('avatar', environment.apiUrl + resp.avatar_path);
       this.router.navigateByUrl('/home');
     } catch (e) {
-      console.log(e);
+      this.password_wrong = true;
+      // console.log(e);
     }
   }
 }

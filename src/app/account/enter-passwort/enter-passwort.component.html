@@ -8,9 +8,12 @@
             </mat-card-header>
             <mat-card-content>
                 <h2 translate>Enter password</h2>
-                <h3 translate>Log in to your account with your e-mail address: <i class="email-change">{{email}}</i>
+                <h3 style="margin-bottom: 50px;" translate>Log in to your account with your e-mail address: <i
+                        class="email-change">{{email}}</i>
                     <span (click)="changeMail()" translate> (edit)</span>
                 </h3>
+
+
             </mat-card-content>
             <form class="enter-passwort-form" (ngSubmit)="login()">
                 <mat-form-field>
@@ -22,6 +25,10 @@
                         [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
+                    <mat-hint *ngIf="password_wrong" align="start"><span style="color: red;" translate>
+                            The password is incorrect please try another one or </span>
+                        <a href="reset-passwort"><span translate>reset</span></a> <span style="color: red;" translate>
+                            it.</span> </mat-hint>
                 </mat-form-field>
                 <p><i translate>(Note upper and lower case)</i></p>
                 <button class="button-login" mat-fab extended color="primary">

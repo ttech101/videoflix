@@ -9,6 +9,11 @@ import { lastValueFrom } from 'rxjs';
 export class AuthService {
   constructor(private http: HttpClient) {}
 
+  public checkEmail(email: string) {
+    const url = environment.apiUrl + '/login/' + '?email=' + email;
+    return lastValueFrom(this.http.get(url));
+  }
+
   public loginWithEmailAndPassword(email: string, passwort: any) {
     const url = environment.apiUrl + '/login/';
     const body = {
