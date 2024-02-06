@@ -23,6 +23,14 @@ export class AuthService {
     return lastValueFrom(this.http.post(url, body));
   }
 
+  public loadCSRFToken(email: string, passwort: any) {
+    const url = environment.apiUrl + '/login_session/';
+    var formdata = new FormData();
+    formdata.append('username', email);
+    formdata.append('password', passwort);
+    return lastValueFrom(this.http.post(url, formdata));
+  }
+
   public registerAccount(
     email: string,
     password1: string,

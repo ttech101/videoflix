@@ -112,5 +112,6 @@ export class EnterPasswortComponent {
       this.password_wrong = true;
       // console.log(e);
     }
+    await this.as.loadCSRFToken(this.email, password);
   }
 }
