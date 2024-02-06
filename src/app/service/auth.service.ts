@@ -16,11 +16,10 @@ export class AuthService {
 
   public loginWithEmailAndPassword(email: string, passwort: any) {
     const url = environment.apiUrl + '/login/';
-    const body = {
-      username: email,
-      password: passwort,
-    };
-    return lastValueFrom(this.http.post(url, body));
+    var formdata = new FormData();
+    formdata.append('username', email);
+    formdata.append('password', passwort);
+    return lastValueFrom(this.http.post(url, formdata));
   }
 
   public registerAccount(
