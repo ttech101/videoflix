@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-register',
@@ -78,7 +79,8 @@ export class RegisterComponent implements OnInit {
     private router: Router,
     private dataService: DataService,
     private as: AuthService,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private location: Location
   ) {}
 
   ngOnInit() {
@@ -188,5 +190,9 @@ export class RegisterComponent implements OnInit {
     } catch (e) {
       console.log(e);
     }
+  }
+
+  goBack() {
+    this.location.back();
   }
 }

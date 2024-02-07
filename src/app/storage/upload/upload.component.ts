@@ -94,8 +94,8 @@ export class UploadComponent implements OnInit {
   uploadSubThumbnail: Subscription | any;
   uploadSubImage: Subscription | any;
   uploadSubVideo: Subscription | any;
-  thumbnail_ok: boolean = false;
-  image_ok: boolean = false;
+  thumbnail_ok: boolean = true;
+  image_ok: boolean = true;
   video_ok: boolean = false;
   upload_key: boolean | any = false;
   key: any;

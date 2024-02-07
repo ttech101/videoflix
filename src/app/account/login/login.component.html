@@ -28,12 +28,12 @@
                         <span style="color: red;" translate>Email is</span> <strong translate>required</strong>
                     </mat-error>
                     }
-                    <mat-hint *ngIf="check_email" align="start"><span style="color: red;" translate>No account found
-                            with this email.
-                            Please </span><a style="text-decoration: none;" href="register"><span
-                                translate>register</span></a><span style="color: red;" translate> first.</span>
-                    </mat-hint>
                 </mat-form-field>
+
+                <a class="email-login" color="warn" *ngIf="check_email" mat-flat-button href="/register"><span
+                        translate>No
+                        account found
+                        with this email. Please register first.</span> </a>
                 <button mat-fab extended color="primary">
                     <p translate>Next</p>
                 </button>

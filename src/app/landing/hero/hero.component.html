@@ -17,14 +17,16 @@
       @if (email.invalid ) {
       <mat-error>{{getErrorMessage()}}</mat-error>
       }
-      <mat-hint *ngIf="check_email" align="start"><span translate>Your Email is already registered. Please use
-          <a href="/login">login</a></span> </mat-hint>
     </mat-form-field>
     <button mat-raised-button color="primary">
       <p translate>Register now</p>
     </button>
   </form>
 
+  <a class="email-registered" *ngIf="check_email" mat-flat-button href="/login"><span translate>Your Email is
+      already registered.
+      Please
+      use login</span> </a>
 
   <div class="landing-buttons">
     <button (click)="loginGuest()" mat-fab extended color="accent" class="landing-login-guest">
