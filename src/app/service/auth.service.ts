@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { lastValueFrom } from 'rxjs';
+import { Observable, lastValueFrom } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private cookieService: CookieService) {}
 
   public checkEmail(email: string) {
     const url = environment.apiUrl + '/login/' + '?email=' + email;
@@ -16,14 +17,6 @@ export class AuthService {
 
   public loginWithEmailAndPassword(email: string, passwort: any) {
     const url = environment.apiUrl + '/login/';
-    var formdata = new FormData();
-    formdata.append('username', email);
-    formdata.append('password', passwort);
-    return lastValueFrom(this.http.post(url, formdata));
-  }
-
-  public loadCSRFToken(email: string, passwort: any) {
-    const url = environment.apiUrl + '/login_session/';
     var formdata = new FormData();
     formdata.append('username', email);
     formdata.append('password', passwort);

@@ -8,7 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { DataService } from '../../service/data.service';
 import { CommonModule, Location } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import {
   FormControl,
   Validators,
@@ -53,7 +53,8 @@ export class EnterPasswortComponent {
     private dataService: DataService,
     private location: Location,
     private as: AuthService,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private http: HttpClient
   ) {}
 
   ngOnInit() {
@@ -112,6 +113,5 @@ export class EnterPasswortComponent {
       this.password_wrong = true;
       // console.log(e);
     }
-    await this.as.loadCSRFToken(this.email, password);
   }
 }
