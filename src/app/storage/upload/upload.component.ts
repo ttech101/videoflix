@@ -7,11 +7,19 @@ import { MatButtonModule } from '@angular/material/button';
 import {
   FormControl,
   FormGroup,
+  FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule, ThemePalette } from '@angular/material/core';
+import {
+  MAT_DATE_FORMATS,
+  MAT_DATE_LOCALE,
+  MAT_NATIVE_DATE_FORMATS,
+  MatDateFormats,
+  MatNativeDateModule,
+  ThemePalette,
+} from '@angular/material/core';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -33,6 +41,18 @@ import {
 import { DataService } from '../../service/data.service';
 import { Router } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+
+export const GRI_DATE_FORMATS: MatDateFormats = {
+  ...MAT_NATIVE_DATE_FORMATS,
+  display: {
+    ...MAT_NATIVE_DATE_FORMATS.display,
+    dateInput: {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+    } as Intl.DateTimeFormatOptions,
+  },
+};
 
 @Component({
   selector: 'app-upload',
@@ -57,8 +77,12 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
     ReactiveFormsModule,
     CommonModule,
     TranslateModule,
+    FormsModule,
   ],
-  providers: [AuthService],
+  providers: [
+    AuthService,
+    { provide: MAT_DATE_FORMATS, useValue: GRI_DATE_FORMATS },
+  ],
 })
 export class UploadComponent implements OnInit {
   constructor(
@@ -72,17 +96,21 @@ export class UploadComponent implements OnInit {
     let language: any = localStorage.getItem('language');
     this.translate.use(language);
   }
+
+  test123: any = localStorage.getItem('name');
   uploadForm = new FormGroup({
     movie_name: new FormControl<string>('', [Validators.required]),
     description_short: new FormControl<string>('', [Validators.required]),
     description: new FormControl<string>(''),
-    author: new FormControl<string>('', [Validators.required]),
+    author: new FormControl<string>(this.test123, [Validators.required]),
     date_from: new FormControl(new Date()),
     video_length: new FormControl<string>('00:00'),
     movie_check: new FormControl<boolean>(false, [Validators.required]),
     genre: new FormControl<string>('', [Validators.required]),
     selectedAge: new FormControl<string>('0', [Validators.required]),
     upload_visible_check: new FormControl<boolean>(false),
+    auto_generate_cover: new FormControl<boolean>(true),
+    auto_generate_image: new FormControl<boolean>(true),
   });
 
   fileNameThumbnail = '';
@@ -108,7 +136,6 @@ export class UploadComponent implements OnInit {
       this.upload_key = true;
       const key: any = await this.as.loadUploadKey();
       this.key = key.random_key;
-      console.log(this.upload_key, this.key);
     }
   }
 
@@ -118,13 +145,9 @@ export class UploadComponent implements OnInit {
   }
 
   async submitUpload() {
-    console.log(
-      this.thumbnail_ok && this.image_ok && this.video_ok,
-      this.checkAllUploads()
-    );
     if (this.uploadForm.valid && this.checkAllUploads()) {
       await this.as.saveVideoData(this.uploadForm.value, this.key);
-      this.router.navigateByUrl('/my');
+      this.router.navigateByUrl('/my-uploads');
     } else {
       this.openDialog();
     }
@@ -160,16 +183,13 @@ export class UploadComponent implements OnInit {
             this.uploadProgressThumbnail = Math.round(
               100 * (event.loaded / event.total)
             );
-            console.log(this.uploadProgressThumbnail);
           }
           if (event.type === HttpEventType.Response) {
             if (event.body.status === 'success') {
               document
                 .getElementById('check_thumbnail')
                 ?.classList.remove('dn');
-              console.log('Serverantwort:', event.body);
               this.thumbnail_ok = true;
-              console.log(this.uploadProgressThumbnail);
             }
           }
         },
@@ -217,7 +237,6 @@ export class UploadComponent implements OnInit {
           if (event.type === HttpEventType.Response) {
             if (event.body.status === 'success') {
               document.getElementById('check_image')?.classList.remove('dn');
-              console.log('Serverantwort:', event.body);
               this.image_ok = true;
             }
           }
@@ -265,7 +284,6 @@ export class UploadComponent implements OnInit {
           if (event.type === HttpEventType.Response) {
             if (event.body.status === 'success') {
               document.getElementById('check_video')?.classList.remove('dn');
-              console.log('Serverantwort:', event.body);
               this.video_ok = true;
             }
           }
@@ -303,6 +321,13 @@ export class UploadComponent implements OnInit {
     MatDialogActions,
     MatDialogClose,
     MatButtonModule,
+    TranslateModule,
   ],
 })
-export class DialogElementsExampleDialog {}
+export class DialogElementsExampleDialog implements OnInit {
+  constructor(public translate: TranslateService) {}
+  ngOnInit(): void {
+    let language: any = localStorage.getItem('language');
+    this.translate.use(language);
+  }
+}

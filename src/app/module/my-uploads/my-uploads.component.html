@@ -19,10 +19,24 @@
                 <td class="dn-small" mat-cell *matCellDef="let element"> {{element.genre}} </td>
             </ng-container>
 
+            <ng-container matColumnDef="convert_status">
+                <th mat-header-cell *matHeaderCellDef translate> Status </th>
+                <!-- <td class="dn-small" mat-cell *matCellDef="let element"> {{element.status}} </td> -->
+
+                <td mat-cell *matCellDef="let element"> <span *ngIf="element.convert_status == 2" translate>
+                        Conversion Done</span><span *ngIf="element.convert_status == 1" translate>Conversion in
+                        progress</span>
+                </td>
+            </ng-container>
+
             <ng-container matColumnDef="cover">
                 <th mat-header-cell *matHeaderCellDef translate class="dn-small"> Cover </th>
-                <td class="dn-small" mat-cell *matCellDef="let element"><a
-                        href="/single-view?select={{element.random_key}}"> <img [src]="element.cover" /></a> </td>
+                <td class="dn-small" mat-cell *matCellDef="let element"><a *ngIf="element.convert_status == 2"
+                        href="/single-view?select={{element.random_key}}"> <img [src]="element.cover" /></a>
+                    <a *ngIf="element.convert_status == 1" href="/my-uploads"> <img [src]="element.cover" /></a>
+
+                </td>
+
             </ng-container>
 
             <ng-container matColumnDef="change">
@@ -36,7 +50,8 @@
             <ng-container matColumnDef="delete">
                 <th mat-header-cell *matHeaderCellDef></th>
                 <td mat-cell *matCellDef="let element">
-                    <button mat-mini-fab color="primary" (click)="deleteMovie(element.random_key,element.movie_name)"
+                    <button *ngIf="element.convert_status == 2" mat-mini-fab color="primary"
+                        (click)="deleteMovie(element.random_key,element.movie_name)"
                         aria-label="Example icon button with a delete icon">
                         <mat-icon>delete</mat-icon>
                     </button>

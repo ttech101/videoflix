@@ -107,7 +107,6 @@ export class EditVideoComponent implements OnInit {
       this.upload_key = true;
       const key: any = await this.as.loadUploadKey();
       this.key = key.random_key;
-      console.log(this.upload_key, this.key);
     }
   }
 
@@ -119,8 +118,7 @@ export class EditVideoComponent implements OnInit {
   async submitUpload() {
     if (this.uploadForm.valid) {
       await this.as.changeVideoData(this.uploadForm.value, this.key);
-      this.router.navigateByUrl('/my');
-      console.log('Form is valid', this.uploadForm);
+      this.router.navigateByUrl('/my-uploads');
     }
   }
 }

@@ -94,40 +94,26 @@ export class SingleViewComponent implements OnInit {
       },
     });
 
-    dialogRef.afterClosed().subscribe((result: any) => {
-      console.log('Dialog geschlossen', result);
-    });
+    dialogRef.afterClosed().subscribe((result: any) => {});
   }
 
   toggleVideo() {
-    if (this.checkConvert()) {
-      const video: any = document.getElementById('video');
-      video.classList.remove('dn');
-      this.media.nativeElement.play();
-      if (video.requestFullscreen) {
-        video.requestFullscreen();
-      } else if (video.mozRequestFullScreen) {
-        video.mozRequestFullScreen();
-      } else if (video.webkitRequestFullscreen) {
-        video.webkitRequestFullscreen();
-      } else if (video.msRequestFullscreen) {
-        video.msRequestFullscreen();
-      }
-    } else {
-      this.dialog.open(DialogElementsConvertDialog);
+    const video: any = document.getElementById('video');
+    video.classList.remove('dn');
+    this.media.nativeElement.play();
+    if (video.requestFullscreen) {
+      video.requestFullscreen();
+    } else if (video.mozRequestFullScreen) {
+      video.mozRequestFullScreen();
+    } else if (video.webkitRequestFullscreen) {
+      video.webkitRequestFullscreen();
+    } else if (video.msRequestFullscreen) {
+      video.msRequestFullscreen();
     }
   }
 
-  checkConvert() {
-    let convert_OK: any = this.data.video.match('_480p.mp4');
-    if (convert_OK == '_480p.mp4') {
-      return true;
-    } else {
-      return false;
-    }
-  }
   onCanPlay(event: Event) {
-    if (this.checkConvert() && localStorage.getItem('autoplay') == 'True') {
+    if (localStorage.getItem('autoplay') == 'True') {
       const video: any = document.getElementById('video');
       if (localStorage.getItem('autoplay') == 'False') {
         this.media.nativeElement.pause();
@@ -143,7 +129,6 @@ export class SingleViewComponent implements OnInit {
       await this.as.setWatchlist(this.key);
       this.wachtlist = await this.as.checkwachlist(this.key);
     } else {
-      console.log(this.key);
       await this.as.deleteWatchlist(this.key);
       this.wachtlist = await this.as.checkwachlist(this.key);
     }
@@ -175,17 +160,3 @@ export class DialogElementsDescriptionDialog implements OnInit {
     this.translate.use(language);
   }
 }
-
-@Component({
-  selector: 'convert-dialog',
-  templateUrl: 'convert.dialog.html',
-  standalone: true,
-  imports: [
-    MatDialogTitle,
-    MatDialogContent,
-    MatDialogActions,
-    MatDialogClose,
-    MatButtonModule,
-  ],
-})
-export class DialogElementsConvertDialog {}

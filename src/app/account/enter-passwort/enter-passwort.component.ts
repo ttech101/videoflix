@@ -111,7 +111,7 @@ export class EnterPasswortComponent {
       this.router.navigateByUrl('/home');
     } catch (e) {
       this.password_wrong = true;
-      // console.log(e);
+      console.log(e);
     }
   }
 }

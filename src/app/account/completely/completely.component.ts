@@ -26,7 +26,6 @@ export class CompletelyComponent {
   ngOnInit() {
     const formData = this.dataService.getFormData();
     this.formData = formData;
-    console.log(formData);
     if (formData) {
       this.set_headline = formData.headline;
       this.set_header = formData.header;

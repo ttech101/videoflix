@@ -25,6 +25,7 @@ export interface PeriodicElement {
   movie_name: string;
   created_at: string;
   genre: string;
+  convert_status: string;
   change: string;
   delete: string;
 }
@@ -35,6 +36,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
     cover: '',
     created_at: '',
     genre: '',
+    convert_status: '',
     change: '',
     delete: '',
   },
@@ -69,6 +71,7 @@ export class MyUploadsComponent implements OnInit {
     'cover',
     'created_at',
     'genre',
+    'convert_status',
     'change',
     'delete',
   ];
@@ -84,6 +87,7 @@ export class MyUploadsComponent implements OnInit {
       'cover',
       'created_at',
       'genre',
+      'convert_status',
       'change',
       'delete',
     ];

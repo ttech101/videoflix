@@ -167,7 +167,6 @@ export class DialogAnimationsDeleteDialog implements OnInit {
     } else {
       this.guest = false;
     }
-    console.log(this.guest);
   }
 }
 
@@ -226,7 +225,6 @@ export class DialogAnimationsProfilDialog implements OnInit {
   guest: boolean = false;
 
   async ngOnInit() {
-    console.log(await this.as.loadProfilData());
     let data: string | any = await this.as.loadProfilData();
     this.name = data.name;
     this.selected_language = data.language;
@@ -326,7 +324,6 @@ export class DialogAnimationsProfilDialog implements OnInit {
     } else {
       this.guest = false;
     }
-    console.log(this.guest);
   }
 }
 
@@ -439,6 +436,5 @@ export class DialogAnimationsKontoDialog implements OnInit {
     } else {
       this.guest = false;
     }
-    console.log(this.guest);
   }
 }

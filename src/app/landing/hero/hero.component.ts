@@ -59,7 +59,6 @@ export class HeroComponent implements OnInit {
     if (this.email.hasError('pattern')) {
       return 'Not a valid email';
     }
-    console.log('!!!');
     return '123';
   }
   async submitForm() {

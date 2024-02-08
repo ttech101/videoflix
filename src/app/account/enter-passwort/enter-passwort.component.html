@@ -25,11 +25,12 @@
                         [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
-                    <mat-hint *ngIf="password_wrong" align="start"><span style="color: red;" translate>
-                            The password is incorrect please try another one or </span>
-                        <a href="reset-passwort"><span translate>reset</span></a> <span style="color: red;" translate>
-                            it.</span> </mat-hint>
+
                 </mat-form-field>
+                <mat-hint *ngIf="password_wrong" align="start"><span style="color: red;" translate>
+                        The password is incorrect please try another one or </span>
+                    <a href="reset-passwort"><span translate>reset</span></a> <span style="color: red;" translate>
+                        it.</span> </mat-hint>
                 <p><i translate>(Note upper and lower case)</i></p>
                 <button class="button-login" mat-fab extended color="primary">
                     <p translate>Log in</p>

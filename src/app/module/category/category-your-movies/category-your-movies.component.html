@@ -7,10 +7,15 @@
             <div *ngFor="let single of data" class="content-box">
                 <div class="progress-div" *ngIf="loading"><mat-progress-bar mode="indeterminate"></mat-progress-bar>
                 </div>
-                <a *ngIf="!loading" href="/single-view/?select={{single.random_key}}"><img src="{{single.cover}}"
+                <a *ngIf="!loading && single.convert_status == 2" href="/single-view/?select={{single.random_key}}"><img
+                        src="{{single.cover}}" alt="{{single.movie_name}}">
+                    <p>{{single.movie_name}}</p>
+                </a>
+                <a *ngIf="!loading && single.convert_status == 1" href="/my-uploads"><img src="{{single.cover}}"
                         alt="{{single.movie_name}}">
                     <p>{{single.movie_name}}</p>
                 </a>
+
             </div>
 
         </div>

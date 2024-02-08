@@ -41,17 +41,17 @@ export class AppComponent implements OnInit {
     if (!localStorage.getItem('language')) {
       localStorage.setItem('language', 'en');
     }
-    // if (localStorage.getItem('authToken')) {
-    //   let resp: any = await this.as.checkToken(
-    //     localStorage.getItem('authToken')
-    //   );
-    //   if (resp.status) {
-    //     sessionStorage.setItem('account', 'true');
-    //   } else {
-    //     sessionStorage.setItem('account', 'false');
-    //   }
-    // }
-    // if (!localStorage.getItem('cookieAccepted')) {
-    // }
+    if (localStorage.getItem('authToken')) {
+      let resp: any = await this.as.checkToken(
+        localStorage.getItem('authToken')
+      );
+      if (resp.status) {
+        sessionStorage.setItem('account', 'true');
+      } else {
+        sessionStorage.setItem('account', 'false');
+      }
+    }
+    if (!localStorage.getItem('cookieAccepted')) {
+    }
   }
 }

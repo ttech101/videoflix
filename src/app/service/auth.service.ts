@@ -149,10 +149,11 @@ export class AuthService {
   }
 
   public saveVideoData(form: any, key: string) {
-    console.log(form);
     const url = environment.apiUrl + '/create_movie/';
     var formdata = new FormData();
     formdata.append('author', form.author);
+    formdata.append('date_from', this.formatDate(form.date_from));
+
     formdata.append('description', form.description);
     formdata.append('description_short', form.description_short);
     formdata.append('nature_check', this.resolutionGenreNature(form.genre));
@@ -176,17 +177,25 @@ export class AuthService {
     );
     formdata.append('video_length', form.video_length);
     formdata.append('upload_key', key);
+    formdata.append(
+      'automatic_cover',
+      this.resolutionRightWrong(form.auto_generate_cover)
+    );
+    formdata.append(
+      'automatic_image',
+      this.resolutionRightWrong(form.auto_generate_image)
+    );
     return lastValueFrom(this.http.post(url, formdata));
   }
 
   public changeVideoData(form: any, key: string) {
-    console.log(form);
     const url = environment.apiUrl + '/create_movie/';
     var formdata = new FormData();
     formdata.append('author', form.author);
     formdata.append('description', form.description);
     formdata.append('description_short', form.description_short);
     formdata.append('nature_check', this.resolutionGenreNature(form.genre));
+    formdata.append('date_from', this.formatDate(form.date_from));
     formdata.append('funny_check', this.resolutionGenreFunny(form.genre));
     formdata.append(
       'knowledge_check',
@@ -205,9 +214,22 @@ export class AuthService {
       'upload_visible_check',
       this.resolutionRightWrong(form.upload_visible_check)
     );
+
     formdata.append('video_length', form.video_length);
     formdata.append('upload_key', key);
     return lastValueFrom(this.http.put(url, formdata));
+  }
+
+  formatDate(date: Date | any): string {
+    let date_string = String(date);
+    if (date_string.length > 11) {
+      const year = date.getFullYear();
+      const month = ('0' + (date.getMonth() + 1)).slice(-2);
+      const day = ('0' + date.getDate()).slice(-2);
+      return `${year}-${month}-${day}`;
+    } else {
+      return date;
+    }
   }
 
   resolutionGenreOther(genre: string) {
