@@ -44,7 +44,7 @@ export class HeroComponent implements OnInit {
     this.translate.use(language);
   }
   check_email: boolean = false;
-  guest_token: string = '627e5287993530c19ca2f35604ff78c0539ee76f';
+  guest_token: string = 'c4fe50022749c611a70ba54ae85b6068c93498fb';
   email: string | any = new FormControl('', [
     Validators.required,
     Validators.pattern(
