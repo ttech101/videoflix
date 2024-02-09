@@ -6,7 +6,7 @@
 
             <ng-container matColumnDef="movie_name">
                 <th mat-header-cell *matHeaderCellDef translate class="dn-small"> Name </th>
-                <td mat-cell *matCellDef="let element"> {{element.movie_name}} </td>
+                <td mat-cell *matCellDef="let element" class="movie-name"> {{element.movie_name}} </td>
             </ng-container>
 
             <ng-container matColumnDef="created_at">
@@ -31,7 +31,7 @@
 
             <ng-container matColumnDef="cover">
                 <th mat-header-cell *matHeaderCellDef translate class="dn-small"> Cover </th>
-                <td mat-cell *matCellDef="let element"><a *ngIf="element.convert_status == 2"
+                <td mat-cell *matCellDef="let element" class="cover"><a *ngIf="element.convert_status == 2"
                         href="/single-view?select={{element.random_key}}"> <img [src]="element.cover" /></a>
                     <a *ngIf="element.convert_status == 1"> <img style="cursor: pointer;" (click)="openDialogConvert()"
                             [src]="element.cover" /></a>

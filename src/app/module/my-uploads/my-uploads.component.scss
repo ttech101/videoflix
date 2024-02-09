@@ -43,6 +43,31 @@ td {
 }
 
 @media (max-width: 750px) {
+  .movie-name {
+    font-size: 25px;
+    margin: 15px;
+  }
+  span {
+    text-align: center;
+  }
+
+  td {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .cover {
+    width: 100%;
+    a {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    img {
+      border-radius: 20px;
+      max-width: 100% !important;
+    }
+  }
   .dn-small {
     display: none;
   }

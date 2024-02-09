@@ -26,6 +26,9 @@
     scale: 1.2;
     transition: all 0.2s ease;
   }
+  @media (max-width: 600px) {
+    margin-left: 15px !important;
+  }
 }
 
 .content-boxing {
