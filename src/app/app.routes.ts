@@ -49,7 +49,7 @@ export const routes: Routes = [
   {
     path: 'single-view',
     component: SingleViewComponent,
-    canActivate: [authGuard],
+    // canActivate: [authGuard],
   },
   {
     path: 'my',

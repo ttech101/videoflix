@@ -50,8 +50,8 @@ export class AppComponent implements OnInit {
       } else {
         sessionStorage.setItem('account', 'false');
       }
-    }
-    if (!localStorage.getItem('cookieAccepted')) {
+    } else {
+      sessionStorage.setItem('account', 'false');
     }
   }
 }

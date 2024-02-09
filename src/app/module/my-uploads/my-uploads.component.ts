@@ -107,6 +107,12 @@ export class MyUploadsComponent implements OnInit {
       this.ngOnInit();
     });
   }
+  openDialogConvert() {
+    const dialogRef = this.dialog.open(DialogConvert);
+    dialogRef.afterClosed().subscribe((result) => {
+      this.ngOnInit();
+    });
+  }
 }
 
 @Component({
@@ -142,5 +148,26 @@ export class DialogAnimationsExampleDialog implements OnInit {
 
   async deleteMovie() {
     await this.as.deleteVideo(this.key);
+  }
+}
+
+@Component({
+  selector: 'dialog-elements-example-dialog',
+  templateUrl: 'dialog-convert.html',
+  standalone: true,
+  imports: [
+    MatDialogTitle,
+    MatDialogContent,
+    MatDialogActions,
+    MatDialogClose,
+    MatButtonModule,
+  ],
+})
+export class DialogConvert implements OnInit {
+  constructor(public translate: TranslateService) {}
+
+  ngOnInit(): void {
+    let language: any = localStorage.getItem('language');
+    this.translate.use(language);
   }
 }

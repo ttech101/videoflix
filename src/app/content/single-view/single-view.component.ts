@@ -46,19 +46,17 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 })
 export class SingleViewComponent implements OnInit {
   data: any = [];
-  title: string = 'Vaiana';
-  description: string =
-    'Vaiana, ein abenteuerlustiges Mädchen, bricht auf zu einer mutigen Mission, um ihr Volk zu retten. Unterwegs begegnet sie dem einst mächtigen Halbgott Maui. Gemeinsam überqueren sie das Meer auf einer Reise voller Spaß und Action.';
-  description_long: string =
-    'Vor 3.000 Jahren überquerten die größten Seefahrer der Welt den Pazifik und entdeckten die Inseln Ozeaniens. Doch dann hörten die Entdeckungsreisen für ein Millenium auf – und niemand weiß warum. Von Walt Disney Animation Studios kommt Vaiana, ein episches Abenteuer über ein mutiges Mädchen, das lossegelt zu einer kühnen Mission, um sein Volk zu retten. Auf ihrer Reise trifft Vaiana auf den einst mächtigen Halbgott Maui. Gemeinsam überqueren sie das Meer auf einer Reise voller Spaß und Action, auf der sie gigantische Meerestiere und atemberaubende Unterwelten sehen und in aussichtslose Situationen geraten. Nebenbei entdeckt Vaiana das, wonach sie immer gesucht hat: Ihre eigene Identität. Einige Sequenzen enthalten Blitzlicht-Effekte, die sich auf lichtempfindliche Zuschauer auswirken können.';
-  author: string = 'Tony Tech';
-  date: string = '25.11.2012';
-  film_length: string = '17:55' + ' min.';
+  title: string = '';
+  description: string = '';
+  description_long: string = '';
+  author: string = '';
+  date: string = '';
+  film_length: string = '';
   movie: boolean = false;
   serie: boolean = false;
-  genre = 'Sonstiges';
-  background_image: string = '/assets/img/test_poster/background-movie.jpeg';
-  thumbnail_image: string = '/assets/img/test_poster/badging.jpeg';
+  genre = '';
+  background_image: string = '';
+  thumbnail_image: string = '';
   age_rating: number = 0;
   video_url: string = '';
   key: string | any = '';
