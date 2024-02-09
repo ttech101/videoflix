@@ -14,6 +14,7 @@ import { DataService } from '../../service/data.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../../service/auth.service';
 import { CommonModule } from '@angular/common';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-hero',
@@ -44,7 +45,6 @@ export class HeroComponent implements OnInit {
     this.translate.use(language);
   }
   check_email: boolean = false;
-  guest_token: string = 'c4fe50022749c611a70ba54ae85b6068c93498fb';
   email: string | any = new FormControl('', [
     Validators.required,
     Validators.pattern(
@@ -81,9 +81,29 @@ export class HeroComponent implements OnInit {
     }
   }
 
-  loginGuest() {
-    localStorage.setItem('authToken', this.guest_token);
-    this.router.navigate(['/home']);
+  async loginGuest() {
+    let autoplay: any;
+    try {
+      let resp: any = await this.as.loginWithEmailAndPassword(
+        'guest@tech-mail.eu',
+        'Leicht1234'
+      );
+      if (resp.autoplay == 'true') {
+        autoplay = 'True';
+      } else {
+        autoplay = 'False';
+      }
+      localStorage.setItem('authToken', resp.token);
+      localStorage.setItem('name', resp.name);
+      localStorage.setItem('autoplay', autoplay);
+      localStorage.setItem('language', resp.language);
+      localStorage.setItem('cookie_accept', 'true');
+      sessionStorage.setItem('account', 'true');
+      localStorage.setItem('avatar', environment.apiUrl + resp.avatar_path);
+      this.router.navigateByUrl('/home');
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   loginUser() {
