@@ -78,7 +78,7 @@ export class MyUploadsComponent implements OnInit {
   dataSource = this.data;
 
   async ngOnInit() {
-    this.data = await this.as.loadPreview('my');
+    this.data = await this.as.loadPreview('my-uploads');
     let language: any = localStorage.getItem('language');
     this.translate.use(language);
     this.dataSource = this.data;
