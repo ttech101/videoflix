@@ -2,18 +2,33 @@
   position: absolute;
   left: 0;
   right: 0;
-  background-image: url("/assets/img/landing_background.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
   height: 100vh;
-  -webkit-filter: blur(1px);
-  -moz-filter: blur(1px);
-  -o-filter: blur(1px);
-  -ms-filter: blur(1px);
-  filter: blur(1px) brightness(0.5);
-  opacity: 1;
+  overflow: hidden;
   z-index: -1;
+  filter: blur(1px) brightness(0.5);
+  border-bottom: 10px solid #232323;
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background-image: url("/assets/img/landing_background.jpg"),
+      url("/assets/img/landing_background.jpg");
+    background-repeat: repeat-x;
+    background-position: 0 0;
+    animation: slideBackground 120s linear infinite;
+  }
+
+  @keyframes slideBackground {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
 }
 
 .landing-login {
@@ -40,6 +55,10 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    flex-wrap: wrap-reverse;
+    button {
+      margin-bottom: 20px;
+    }
   }
 }
 
@@ -60,6 +79,17 @@
     line-height: 120%;
     display: flex;
     gap: 10px;
+    width: 85%;
+    font-weight: 900;
+  }
+  h4 {
+    width: 75%;
+  }
+  @media (max-width: 800px) {
+    h1,
+    h2 {
+      width: 100%;
+    }
   }
 }
 
@@ -152,4 +182,18 @@ mat-form-field {
   margin-bottom: 20px;
   height: auto;
   padding: 10px;
+}
+
+::ng-deep .mdc-text-field {
+  background-color: rgba(0, 0, 0, 0.4) !important;
+}
+
+form {
+  button {
+    margin-left: 5px;
+    border-top-left-radius: 5px !important;
+    border-bottom-left-radius: 5px !important;
+    border-top-right-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
+  }
 }

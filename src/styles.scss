@@ -110,7 +110,15 @@ body {
   position: relative;
   margin: 0;
   max-width: 100%;
-  background-color: rgba($color: #000000, $alpha: 0.8) !important;
+  background-image: radial-gradient(
+    circle,
+    #555555,
+    #4c4c4c,
+    #444444,
+    #3b3b3b,
+    #333333
+  );
+
   font-family: "Roboto" !important;
   p {
     margin: 0;

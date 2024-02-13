@@ -7,11 +7,11 @@
   <h2 style="font-size: 38px" translate>
     Enjoy brand new originals, blockbusters, addictive series and much more more in streaming
   </h2>
-  <h3 translate>
+  <h4 translate>
     To fully explore the variety of Videoflix or to start again, please enter your e-mail address.
-  </h3>
+  </h4>
   <form class="landing-form" if="email.invalid" (ngSubmit)="submitForm()" method="GET">
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label translate>Enter your email</mat-label>
       <input matInput placeholder="yourMail@example.com" [formControl]="email" required>
       @if (email.invalid ) {
@@ -36,8 +36,8 @@
       <span translate>LOGIN</span><mat-icon>login</mat-icon>
     </button>
   </div>
-  <h2 translate>
+  <h5 translate>
     Seize this great opportunity today and secure our exclusive free offer now. exclusive free offer now.
-  </h2>
+  </h5>
 </div>
 <a href="#new-movies"><mat-icon class="landing-arrow" fontIcon="keyboard_arrow_down"></mat-icon></a>

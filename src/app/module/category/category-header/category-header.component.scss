@@ -2,29 +2,35 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  flex-wrap: wrap;
+
   max-width: 100%;
-  margin-left: 6%;
-  margin-right: 6%;
+  margin-left: 9%;
+  margin-right: 9%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  @media (max-width: 600px) {
+    flex-wrap: wrap;
+  }
 }
 
 .category-box {
-  margin: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 10px;
-
-  width: 120px;
-  border-radius: 25px;
-  box-shadow: 0px 6px 15px 5px #000000;
+  margin-bottom: 10px;
+  width: 15%;
+  min-width: 90px;
+  border-radius: 5px;
+  box-shadow: 0px 6px 10px 2px #000000;
   aspect-ratio: 16 / 9;
   transition: all 0.2s ease;
   a {
+    font-family: monospace;
     text-decoration: none;
     color: white;
     margin: 0;
-    font-size: 1rem;
+    font-size: 2vw;
     text-shadow: 2px 2px 4px #9b9b9b;
   }
   background-image: linear-gradient(#414141, #202020);
@@ -37,13 +43,61 @@
   }
   @media (max-width: 600px) {
     a {
-      font-size: 1.1rem;
-      transition: all 0.2s ease;
+      font-size: 1rem;
     }
+    width: 30%;
   }
-  @media (min-width: 1200px) {
-    a {
-      font-size: 20px !important;
-    }
+}
+
+.nature {
+  background-image: url("../../../../assets/gif/landscape-4014_128.png");
+  background-size: cover;
+  &:hover {
+    background-image: url("../../../../assets/gif/landscape-4014_128.gif");
+    background-size: cover;
+  }
+}
+
+.knowledge {
+  background-image: url("../../../../assets/gif/landscape-7565_128.png");
+  background-size: cover;
+  &:hover {
+    background-image: url("../../../../assets/gif/landscape-7565_128.gif");
+    background-size: cover;
+  }
+}
+
+.series {
+  background-image: url("../../../../assets/gif/car-3474_128.png");
+  background-size: cover;
+  &:hover {
+    background-image: url("../../../../assets/gif/car-3474_128.gif");
+    background-size: cover;
+  }
+}
+
+.my {
+  background-image: url("../../../../assets/gif/halloween-7604_128.png");
+  background-size: cover;
+  &:hover {
+    background-image: url("../../../../assets/gif/halloween-7604_128.gif");
+    background-size: cover;
+  }
+}
+
+.funny {
+  background-image: url("../../../../assets/gif/cat-974_256.png");
+  background-size: cover;
+  &:hover {
+    background-image: url("../../../../assets/gif/cat-974_256.gif");
+    background-size: cover;
+  }
+}
+.movies {
+  background-image: url("../../../../assets/gif/sea-671_256.png");
+  background-size: cover;
+  &:hover {
+    background-image: url("../../../../assets/gif/sea-671_256.gif");
+    background-size: cover;
   }
 }
